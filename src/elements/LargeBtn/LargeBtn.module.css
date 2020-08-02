@@ -1,0 +1,20 @@
+.LargeBtn {
+    width: 80vw;
+    height: 45px;
+    display: flex;
+    border-radius: 10px;
+    align-items: center;
+    background-color: #303d49;
+    justify-content: center;
+    outline: none;
+    border: 1px rgba(255, 255, 255, 0.14) solid;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: #fff;
+    letter-spacing: 3px;
+}
+
+.LargeBtn img {
+    margin: 10px;
+}

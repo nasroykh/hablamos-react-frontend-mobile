@@ -1,0 +1,48 @@
+.SignUpPage {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-flow: column;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.Header {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: 0;
+    padding: 0; 
+}
+
+.Header input {
+    margin-bottom: 10px;
+}
+
+.Header h2, .Header p {
+    color: white;
+    font-weight: 400;
+    margin: 5px 0;
+}
+
+.Header p {
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.SUForm {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-flow: column;
+    width: 80vw;
+    margin-bottom: 15%;
+}
+
+.SUForm button {
+    margin-top: 45%;
+}

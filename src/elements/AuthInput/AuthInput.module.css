@@ -1,0 +1,36 @@
+.AuthInput {
+    width: 80vw;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px #495867 solid;
+}
+
+
+.AuthInput img {
+    opacity: 0.5;
+    margin: 15px;
+}
+
+.AuthInput input {
+    background: none;
+    outline: none;
+    border: none;
+    height: 100%;
+    width: 85%;
+    letter-spacing: 1.1px;
+    font-size: 0.8rem;
+    padding-left: 5px;
+    color: #ffffff;
+    transition: all 1s ease-in-out;
+}
+
+.AuthInput input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+    font-family: "Open Sans";
+}
+
+.AuthInput input:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+}
