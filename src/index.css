@@ -2,9 +2,11 @@ body {
   margin: 0;
   height: 100vh;
   width: 100vw;
-  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
+}
+
+body * {
+  font-family: 'Open Sans', sans-serif;
 }

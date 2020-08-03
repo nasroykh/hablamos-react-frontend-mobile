@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import classes from './App.module.css';
-import SignInPage from '../../components/SignInPage/SignInPage';
+/* import SignInPage from '../../components/SignInPage/SignInPage';
 import SignUpPage from '../../components/SignUpPage/SignUpPage';
-import SignedUpPage from '../../components/SignedUpPage/SignedUpPage';
+import SignedUpPage from '../../components/SignedUpPage/SignedUpPage'; */
+// import MainPage from '../MainPage/MainPage';
+import ChatPage from '../ChatPage/ChatPage';
 
 class App extends Component {
-	
+
 	state = {
 		signInForm: {
 			emailUsername: {
@@ -63,8 +65,10 @@ class App extends Component {
 		return (
 			<div className={classes.App}>
 				{/* <SignInPage signInForm={this.state.signInForm}/> */}
-				<SignUpPage signUpForm={this.state.signUpForm}/>
+				{/* <SignUpPage signUpForm={this.state.signUpForm}/> */}
 				{/* <SignedUpPage/> */}
+				{/* <MainPage /> */}
+				<ChatPage/>
 			</div>
 		  );
 		  

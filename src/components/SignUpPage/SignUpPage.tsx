@@ -26,6 +26,7 @@ const signUpPage = (props: any) => {
             <form className={classes.SUForm}>
                 {formElementsArray.map(formElement => (
                     <AuthInput 
+                        isAuth
                         key={formElement.id}
                         elementType={formElement.config.elementType}
                         elementConfig={formElement.config.elementConfig}

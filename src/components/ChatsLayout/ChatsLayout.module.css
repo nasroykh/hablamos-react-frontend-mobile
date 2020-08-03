@@ -1,0 +1,135 @@
+.ChatsLayout {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 100vw;
+    height: 90vh;
+}
+
+.Header {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    height: 22vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.Header > h2 {
+    color: #ECC8AF;
+    font-weight: 600;
+    letter-spacing: 1px;
+    align-self: flex-start;
+    margin: 0;
+    margin-left: 6vw;
+}
+
+.Contacts {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin-left: 5vw;
+}
+
+.Contact {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    margin-right: 3vw ;
+    padding: 0;
+}
+
+.Contact > h4 {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 500;
+}
+
+.ContactPicture {
+    background-color: grey;
+    width: 55px;
+    height: 55px;
+    border-radius: 100%;
+}
+
+.Chats {
+    display: flex;
+    flex-flow: column;
+    background-color: white;
+    width: 100vw;
+    height: 68vh;
+    border-radius: 50px 50px 0 0 ;
+    overflow: scroll;
+
+}
+
+.ChatsHeader {
+    display: flex;
+    align-items: center;
+    margin: 1vh 7vw;
+    justify-content: space-between;
+}
+
+.ChatsHeader > h3 {
+    letter-spacing: 1px;
+    font-weight: 400;
+    color: #495867;
+}
+
+.Convs {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-evenly;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.Conv {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: space-around;
+    width: 100vw;
+    height: 60px;
+    margin: 15px 0;
+    padding: 0;
+}
+
+.ChatPicture {
+    background-color: grey;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+}
+
+.NameAndLastMes {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.NameAndLastMes > h4, .NameAndLastMes > p {
+    margin: 0;
+    color: #495867;
+}
+
+.NameAndLastMes > p {
+    font-size: 0.9rem;
+}
+
+.Time {
+    display: flex;
+    color: #495867;
+    flex-flow: column;
+}
+    

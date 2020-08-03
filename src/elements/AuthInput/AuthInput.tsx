@@ -55,7 +55,7 @@ const authInput = (props: any) => {
     }
 
     return (
-        <div className={classes.AuthInput}>
+        <div className={props.isAuth ? classes.AuthInput : classes.ProfInput}>
             <img src={inputIcon} alt="" width="18px" />
             {inputElement} 
             {isPass ? <img src={passEye} alt="Show Password" width="18px" onClick={passShowHandler} /> : null}

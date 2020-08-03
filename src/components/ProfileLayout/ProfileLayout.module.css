@@ -1,0 +1,77 @@
+.ProfileLayout {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 100vw;
+    height: 90vh;
+}
+
+.Header {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    height: 8vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.Header > h2 {
+    color: #ECC8AF;
+    align-self: flex-start;
+    margin: 0;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-left: 6vw;
+}
+
+.Profile {
+    display: flex;
+    flex-flow: column;
+    background-color: white;
+    width: 100vw;
+    height: 82vh;
+    border-radius: 50px 50px 0 0 ;
+    overflow: scroll;
+
+}
+
+.ProfileTitle {
+    display: flex;
+    align-items: center;
+    margin: 1vh 7vw;
+    justify-content: space-between;
+}
+
+.ProfileTitle > h3 {
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #495867;
+} 
+
+.PEForm {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-flow: column;
+}
+
+.PictureUpload {
+    align-self: center;
+    align-items: center;
+    display: flex;
+    flex-flow: column;
+    color: #495867;
+    font-weight: 500;
+}
+
+.PictureUpload > span {
+    margin: 20px 0 40px 0;
+}
+
+.Footer {
+    display: flex;
+    width: 100vw;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}

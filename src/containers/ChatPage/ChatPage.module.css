@@ -1,0 +1,117 @@
+.ChatPage {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ChatLayout {
+    height: 87vh;
+    width: 100vw;
+    background-color: white;
+    border-radius: 0 0 50px 50px;
+    margin-bottom: auto;
+    overflow: scroll;
+
+}
+
+.Header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.Header > span {
+    margin-right: auto;
+}
+
+.ContactInfos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ContactInfos h2 {
+    color: #495867;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.ContactInfos > span {
+    background-color: grey;
+    width: 55px;
+    height: 55px;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+
+.Convs {
+    display: flex;
+    margin: 10px;
+    padding: 0;
+    list-style: none;
+    flex-flow: column;
+}
+
+.ConvUser {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    background-color: #495867;
+    border-radius: 10px 10px 0 10px;
+    height: auto;
+    width: auto;
+    margin-bottom: 10px;
+}
+
+.UserMes{
+    margin: 0;
+    color: white;
+    font-weight: 500;
+    font-size: 0.8rem;
+    padding: 5px;
+}
+
+.ConvContact {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    height: auto;
+    width: auto;
+    margin-bottom: 10px;
+}
+
+.ContactMes{
+    display: flex;
+    border-radius: 10px 10px 10px 0;
+    background-color: #ECC8AF;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    margin: 0;
+    padding: 5px;
+    color: #495867;
+    font-weight: 500;
+    font-size: 0.8rem;
+    padding: 5px;
+}
+
+.ContactPp{
+    background-color: grey;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    align-self: flex-end;
+    margin-right: 5px;
+}

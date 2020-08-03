@@ -1,0 +1,31 @@
+.ChatInput {
+    display: flex;
+    align-items: center ;
+    justify-content: space-around;
+    background-color: #dedede;
+    width: 85vw;
+    min-height: 52px;
+    height: 8vh;
+    border-radius: 40px;
+    margin-bottom: auto;
+    padding: 0 10px;
+    transition: all 500ms ease-in-out;
+}
+
+.ChatInput:hover {
+    height: 12vh;
+}
+
+
+.ChatInput > input {
+    outline: none;
+}
+
+.TextInput {
+    background: none;
+    border: none;
+    outline: none;
+    color: #495867;
+    font-weight: 600;
+}
+

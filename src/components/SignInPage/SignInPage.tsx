@@ -24,6 +24,7 @@ const signInPage = (props: any) => {
             <form className={classes.SIForm}>
                 {formElementsArray.map(formElement => (
                     <AuthInput 
+                        isAuth
                         key={formElement.id}
                         elementType={formElement.config.elementType}
                         elementConfig={formElement.config.elementConfig}

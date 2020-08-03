@@ -8,7 +8,7 @@
 }
 
 
-.AuthInput img {
+.AuthInput img, .ProfInput img{
     opacity: 0.5;
     margin: 15px;
 }
@@ -33,4 +33,31 @@
 
 .AuthInput input:focus {
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+.ProfInput {
+    display: flex;
+    align-items: center;
+    width: 80vw;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.ProfInput > input {
+    background: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px #495867 solid;
+    height: 100%;
+    width: 85%;
+    letter-spacing: 1.1px;
+    font-size: 0.8rem;
+    padding: 10px;
+    color: #ffffff;
+    transition: all 500ms ease-in-out;
+}
+
+.ProfInput input:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px 0 0 0;
 }
