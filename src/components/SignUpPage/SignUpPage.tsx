@@ -16,26 +16,32 @@ const signUpPage = (props: any) => {
     }
 
     return (
-        <div className={classes.SignUpPage}>
-            <div className={classes.Header}>
-                <BackBtn/>
-                <Logo width="80px"/>
-                <h2>Welcome</h2>
-                <p>Sign up to chat with your friends</p>
+        <div className={classes.Container}>
+            <div className={classes.SignUpPage}>
+                <div className={classes.Header}>
+                    <BackBtn/>
+                    <Logo width="80px"/>
+                    <h2>Welcome</h2>
+                    <p>Sign up to chat with your friends</p>
+                </div>
+                <form className={classes.SUForm}>
+                    {formElementsArray.map(formElement => (
+                        <AuthInput 
+                            isAuth
+                            key={formElement.id}
+                            elementType={formElement.config.elementType}
+                            elementConfig={formElement.config.elementConfig}
+                            value={formElement.config.value}
+                            name={formElement.config.name} />
+                    ))}
+                    <LargeBtn>Create a new account</LargeBtn>
+                </form>
             </div>
-            <form className={classes.SUForm}>
-                {formElementsArray.map(formElement => (
-                    <AuthInput 
-                        isAuth
-                        key={formElement.id}
-                        elementType={formElement.config.elementType}
-                        elementConfig={formElement.config.elementConfig}
-                        value={formElement.config.value}
-                        name={formElement.config.name} />
-                ))}
-                <LargeBtn>Create a new account</LargeBtn>
-            </form>
+            <div className={classes.SideLogo}>
+                <Logo width="80px"/>
+            </div>
         </div>
+
     )
 }
 

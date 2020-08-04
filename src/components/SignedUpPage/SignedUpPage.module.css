@@ -57,3 +57,61 @@
     width: 80vw;
     margin: 10% 0;
 }
+
+.SideLogo {
+    display: none;
+}
+
+@media (min-width: 500px) {
+    
+    .SideLogo {
+        display: flex;
+        background-color: #fff;
+        width: 20vw;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .SignedUpPage {
+        width: 80vw;
+    }
+
+    .Header > input {
+        display: none;
+    }
+
+	.Container {
+		display: flex;
+    }
+    
+    .Header {
+        margin-bottom: auto;
+    }
+
+    .Header h2{
+        margin-top: 45%;
+        font-size: 1.7rem;
+    }
+
+    
+    .PictureUpload {
+        width: 60%;
+        margin-top: auto;
+    }
+
+    .PictureUpload p {
+        font-size: 1.2rem;
+    }
+    
+    .PictureUpload button {
+        margin: 10px;
+    }
+    
+    .Footer {
+        width: 60%;
+        margin-top: auto;
+        margin-bottom: 40px;
+    }
+
+    
+}

@@ -22,3 +22,159 @@
     height: 55px;
     border-radius: 100%;
 }
+
+.MainWindow {
+    display: none;
+}
+
+@media (min-width: 500px) {
+
+    .MainPage {
+        justify-content: center;
+    }
+
+    .Header {
+        display: none;
+    }
+
+    .MainWindow {
+        background-color: white;
+        display: flex;
+        width: 95vw;
+        height: 90vh;
+    }
+
+    .Side {
+        height: 100%;
+        width: 30%;
+        border-right: 1px #495867 solid;
+    }
+
+    .SideHeader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 12%;
+        border-bottom: 1px #495867 solid;
+    }
+
+    .SideHeader > span {
+        margin: 0 15px;
+        width: 70px;
+        height: 70px;
+    }
+
+    .SideHeader h3 {
+        color: #495867;
+        font-weight: 700;
+    }
+
+    .SideHeader > input {
+        margin-left: auto; 
+        margin-right: 20px;
+    }
+
+    .ConvsLay {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        width: 100%;
+        height: 88%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .ChatsHeader {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-left: 5%;
+        width: 100%;
+        color: #495867;
+        font-size: 1.2rem;
+    }
+
+    .Convs {
+        display: flex;
+        flex-flow: column;
+        width: 100%;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .Conv {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 95%;
+        margin: 4% 0;
+    }
+
+    .ChatPicture {
+        background-color: grey;
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+    }
+
+    .NameAndLastMes {
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start; 
+        justify-content: space-evenly;
+        height: 100%;
+    }
+
+    .NameAndLastMes > h4, .NameAndLastMes > p {
+        margin: 0;
+        color: #495867;
+    }
+    
+    .NameAndLastMes > p {
+        font-size: 0.9rem;
+    }
+
+    .Time {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        height: 100%;
+        justify-content: center;
+        color: #495867;
+    }
+
+    .Chat {
+        height: 100%;
+        width: 70%;
+        border-right: 1px #495867 solid;
+    }
+
+    .ChatHeader {
+        background-color: #495867;
+        width: 100%;
+        height: 12%;
+        border-bottom: 1px #495867 solid;
+        display: flex;
+        align-items: center;
+    }
+
+    .ChatHeader > span {
+        margin: 0 3%;
+    }
+
+    .ChatHeader > h3 {
+        color: white;
+    }
+
+    .ConvLay {
+        display: flex;
+        width: 100%;
+        height: 87%;
+    }
+
+}

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import classes from './App.module.css';
-/* import SignInPage from '../../components/SignInPage/SignInPage';
+import SignInPage from '../../components/SignInPage/SignInPage';
 import SignUpPage from '../../components/SignUpPage/SignUpPage';
-import SignedUpPage from '../../components/SignedUpPage/SignedUpPage'; */
-// import MainPage from '../MainPage/MainPage';
+import SignedUpPage from '../../components/SignedUpPage/SignedUpPage';
+import MainPage from '../MainPage/MainPage';
 import ChatPage from '../ChatPage/ChatPage';
+import { Switch, Route } from 'react-router-dom';
 
 class App extends Component {
 
@@ -64,11 +65,29 @@ class App extends Component {
 
 		return (
 			<div className={classes.App}>
-				{/* <SignInPage signInForm={this.state.signInForm}/> */}
-				{/* <SignUpPage signUpForm={this.state.signUpForm}/> */}
-				{/* <SignedUpPage/> */}
-				{/* <MainPage /> */}
-				<ChatPage/>
+				<Switch>
+
+					<Route path="/chats/:id">
+						<ChatPage/>
+					</Route>
+
+					<Route path="/home" exact>
+						<MainPage />
+					</Route>
+
+					<Route path="/signedup" exact>
+						<SignedUpPage/>
+					</Route>
+
+					<Route path="/signup" exact>
+						<SignUpPage signUpForm={this.state.signUpForm}/>
+					</Route>
+
+					<Route path="/">
+						<SignInPage signInForm={this.state.signInForm}/>
+					</Route>
+
+				</Switch>
 			</div>
 		  );
 		  

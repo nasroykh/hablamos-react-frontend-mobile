@@ -19,3 +19,15 @@
 .SmallBtn img {
     margin: 5px;
 }
+
+@media (min-width: 500px) {
+    .SmallBtn {
+        width: 60%;
+        font-weight: 600;
+        font-size: 1rem;
+        background-color: #fff;
+        color: #303d49;
+        margin: 15px;
+    }
+
+}

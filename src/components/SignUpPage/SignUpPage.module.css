@@ -46,3 +46,66 @@
 .SUForm button {
     margin-top: 45%;
 }
+
+.SideLogo {
+    display: none;
+}
+
+@media (min-width: 500px) {
+    
+    .SideLogo {
+        display: flex;
+        background-color: #fff;
+        width: 20vw;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .SignUpPage {
+        width: 80vw;
+    }
+
+    .Header > input {
+        display: none;
+    }
+
+	.Container {
+		display: flex;
+	}
+
+    .Header h2, .Header p {
+        margin: 15px 0;
+        font-size: 1.7rem;
+    }
+    
+    .Header p {
+        font-size: 1.3rem;
+    }
+    
+    .SUForm {
+        width: 60%;
+    }
+    
+    .SUForm button {
+        margin-top: 10vh;
+    }
+    
+    .orLine {
+        width: 60%;
+        height: 10px;
+    }
+    
+    .orLine p {
+        font-size: 1rem;
+    }
+    
+    .Footer {
+        width: 60%;
+        margin-bottom: 20px;
+    }
+
+    .Footer p {
+        line-height: 30px;
+    }
+    
+}

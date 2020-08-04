@@ -3,7 +3,7 @@
     height: 50px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     border: 2px #495867 solid;
 }
 
@@ -18,7 +18,8 @@
     outline: none;
     border: none;
     height: 100%;
-    width: 85%;
+    margin-right: auto;
+    width: 100%;
     letter-spacing: 1.1px;
     font-size: 0.8rem;
     padding-left: 5px;
@@ -60,4 +61,22 @@
 .ProfInput input:focus {
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 10px 0 0 0;
+}
+
+@media (min-width: 500px) {
+
+    .AuthInput {
+        width: 100%;
+        border-color: #5e7791;
+    }
+
+    .AuthInput img {
+        color: #ffffff;
+        fill: aliceblue;
+    }
+
+    .AuthInput input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
 }

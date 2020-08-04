@@ -18,7 +18,7 @@
     padding: 0;
 }
 
-.Header input {
+.Header > input {
     margin-bottom: 10px;
 }
 
@@ -90,4 +90,68 @@
     color: #fff;
     font-weight: 400;
     letter-spacing: 1px;
+}
+
+.SideLogo {
+    display: none;
+}
+
+
+@media (min-width: 500px) {
+    
+    .SideLogo {
+        display: flex;
+        background-color: #fff;
+        width: 20vw;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .SignInPage {
+        width: 80vw;
+    }
+
+    .Header > input {
+        display: none;
+    }
+
+	.Container {
+		display: flex;
+	}
+
+    .Header h2, .Header p {
+        margin: 15px 0;
+        font-size: 1.7rem;
+    }
+    
+    .Header p {
+        font-size: 1.3rem;
+    }
+    
+    .SIForm {
+        width: 60%;
+    }
+    
+    .SIForm button {
+        margin-top: 30px;
+    }
+    
+    .orLine {
+        width: 60%;
+        height: 10px;
+    }
+    
+    .orLine p {
+        font-size: 1rem;
+    }
+    
+    .Footer {
+        width: 60%;
+        margin-bottom: 20px;
+    }
+
+    .Footer p {
+        line-height: 30px;
+    }
+    
 }

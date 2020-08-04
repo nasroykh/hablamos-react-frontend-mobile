@@ -7,27 +7,33 @@ import picture from '../../assets/icons/picture.svg';
 
 const signedUpPage = (props: any) => {
     return (
-        <div className={classes.SignedUpPage}>
-            <div className={classes.Header}>
+        <div className={classes.Container}>
+            <div className={classes.SignedUpPage}>
+                <div className={classes.Header}>
+                    <Logo width="80px"/>
+                    <h2>Account created !</h2>
+                </div>
+
+                <div className={classes.PictureUpload}>
+                    <p>Choose a profile picture</p>
+                    <LargeBtn>
+                        <img src={picture} alt='Upload pic' />
+                        Upload a picture
+                    </LargeBtn>
+                    <span>No file selected</span>
+                </div>
+
+                <div className={classes.Footer}>
+                    <SmallBtn>Skip</SmallBtn>
+                    <SmallBtn>Continue</SmallBtn>
+                </div>    
+
+            </div>
+            <div className={classes.SideLogo}>
                 <Logo width="80px"/>
-                <h2>Account created !</h2>
             </div>
-
-            <div className={classes.PictureUpload}>
-                <p>Choose a profile picture</p>
-                <LargeBtn>
-                    <img src={picture} alt='Upload pic' />
-                    Upload a picture
-                </LargeBtn>
-                <span>No file selected</span>
-            </div>
-
-            <div className={classes.Footer}>
-                <SmallBtn>Skip</SmallBtn>
-                <SmallBtn>Continue</SmallBtn>
-            </div>    
-
         </div>
+
     )
 }
 

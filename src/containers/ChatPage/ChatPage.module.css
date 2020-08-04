@@ -13,8 +13,7 @@
     background-color: white;
     border-radius: 0 0 50px 50px;
     margin-bottom: auto;
-    overflow: scroll;
-
+    overflow: auto;
 }
 
 .Header {
@@ -114,4 +113,21 @@
     border-radius: 100%;
     align-self: flex-end;
     margin-right: 5px;
+}
+
+@media (min-width: 500px) {
+    .Header {
+        display: none;
+    }
+
+    .ChatPage {
+        height: 100%;
+        width: 100%;
+    }
+    .ChatLayout {
+        height: 90%;
+        width: 100%;
+        border-radius: 0;
+        border-bottom: 1px #495867 solid;
+    }
 }

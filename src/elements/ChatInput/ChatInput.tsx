@@ -8,10 +8,10 @@ const chatInput = (props: any) => {
 
     return (
         <form className={classes.ChatInput}>
-            <input type="image" alt="" src={emoji}/>
+            <input type="image" alt="" src={emoji} className={classes.Emoji}/>
             <input type="text" className={classes.TextInput} placeholder='Type here'/>
-            <input type="image" alt="" src={image}/>
-            <input type="image" alt="" src={send}/>
+            <input type="image" alt="" src={image} className={classes.Image}/>
+            <input type="image" alt="" src={send} className={classes.Send}/>
         </form>
     )
 }
