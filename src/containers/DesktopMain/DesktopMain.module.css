@@ -1,0 +1,106 @@
+
+.DesktopMain {
+    display: none;
+}
+
+@media (min-width: 500px) {
+
+    .DesktopMain {
+        background-color: white;
+        display: flex;
+        width: 95vw;
+        height: 90vh;
+    }
+
+    .Side {
+        height: 100%;
+        width: 30%;
+        border-right: 1px #495867 solid;
+    }
+
+    .SideHeader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 12%;
+        border-bottom: 1px #495867 solid;
+    }
+
+    .SideHeader > span {
+        margin: 0 15px;
+        width: 70px;
+        height: 70px;
+    }
+
+    .SideHeader h3 {
+        color: #495867;
+        font-weight: 700;
+    }
+
+    .SideHeader > input {
+        margin-left: auto; 
+        margin-right: 20px;
+    }
+
+    .ConvsLay {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        width: 100%;
+        height: 88%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .ChatsHeader {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-left: 5%;
+        width: 100%;
+        color: #495867;
+        font-size: 1.2rem;
+    }
+
+    .ProfilePicture {
+        background-color: grey;
+        width: 55px;
+        height: 55px;
+        border-radius: 100%;
+    }
+
+    .Chat {
+        height: 100%;
+        width: 70%;
+        border-right: 1px #495867 solid;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ChatHeader {
+        background-color: #495867;
+        width: 100%;
+        height: 12%;
+        border-bottom: 1px #495867 solid;
+        display: flex;
+        align-items: center;
+    }
+
+    .ChatHeader > span {
+        margin: 0 3%;
+    }
+
+    .ChatHeader > h3 {
+        color: white;
+    }
+
+    .ConvLay {
+        display: flex;
+        width: 100%;
+        height: 88%;
+    }
+
+}

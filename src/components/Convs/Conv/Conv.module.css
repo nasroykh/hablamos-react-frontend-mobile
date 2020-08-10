@@ -1,0 +1,85 @@
+.Conv {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: space-around;
+    width: 100vw;
+    height: 60px;
+    margin: 15px 0;
+    padding: 0;
+}
+
+.ChatPicture {
+    background-color: grey;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+}
+
+.NameAndLastMes {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.NameAndLastMes > h4, .NameAndLastMes > p {
+    margin: 0;
+    color: #495867;
+}
+
+.NameAndLastMes > p {
+    font-size: 0.9rem;
+}
+
+.Time {
+    display: flex;
+    color: #495867;
+    flex-flow: column;
+}
+
+@media (min-width: 500px) {
+    .Conv {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 95%;
+        margin: 4% 0;
+    }
+
+    .ChatPicture {
+        background-color: grey;
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+    }
+
+    .NameAndLastMes {
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start; 
+        justify-content: space-evenly;
+        height: 100%;
+    }
+
+    .NameAndLastMes > h4, .NameAndLastMes > p {
+        margin: 0;
+        color: #495867;
+    }
+
+    .NameAndLastMes > p {
+        font-size: 0.9rem;
+    }
+
+    .Time {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        height: 100%;
+        justify-content: center;
+        color: #495867;
+    }
+}

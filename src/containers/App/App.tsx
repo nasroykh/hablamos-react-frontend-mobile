@@ -6,6 +6,9 @@ import SignedUpPage from '../../components/SignedUpPage/SignedUpPage';
 import MainPage from '../MainPage/MainPage';
 import ChatPage from '../ChatPage/ChatPage';
 import { Switch, Route } from 'react-router-dom';
+import DesktopMain from '../DesktopMain/DesktopMain';
+import Media from 'react-media';
+import Aux from '../../hoc/Aux';
 
 class App extends Component {
 
@@ -65,29 +68,58 @@ class App extends Component {
 
 		return (
 			<div className={classes.App}>
-				<Switch>
 
-					<Route path="/chats/:id">
-						<ChatPage/>
-					</Route>
+					<Media query="(min-width: 500px)">
+						{matches => matches ? (
 
-					<Route path="/home" exact>
-						<MainPage />
-					</Route>
+							<Switch>
+								<Route path="/home">
+									<DesktopMain/>
+								</Route>
 
-					<Route path="/signedup" exact>
-						<SignedUpPage/>
-					</Route>
+								<Route path="/signedup" exact>
+									<SignedUpPage/>
+								</Route>
 
-					<Route path="/signup" exact>
-						<SignUpPage signUpForm={this.state.signUpForm}/>
-					</Route>
+								<Route path="/signup" exact>
+									<SignUpPage signUpForm={this.state.signUpForm}/>
+								</Route>
 
-					<Route path="/">
-						<SignInPage signInForm={this.state.signInForm}/>
-					</Route>
+								<Route path="/">
+									<SignInPage signInForm={this.state.signInForm}/>
+								</Route>
+							</Switch>
 
-				</Switch>
+						) : (
+
+							<Switch>
+
+								<Route path="/home/chat/:id">
+									<ChatPage />
+								</Route>
+
+								<Route path="/home">
+									<MainPage />
+								</Route>
+
+								<Route path="/signedup" exact>
+									<SignedUpPage/>
+								</Route>
+
+								<Route path="/signup" exact>
+									<SignUpPage signUpForm={this.state.signUpForm}/>
+								</Route>
+
+								<Route path="/">
+									<SignInPage signInForm={this.state.signInForm}/>
+								</Route>
+							</Switch>
+							
+						)}
+						
+					</Media>
+
+
 			</div>
 		  );
 		  

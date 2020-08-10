@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './ChatsLayout.module.css';
 import addIcon from '../../assets/icons/AddIcon.svg';
+import Convs from '../Convs/Convs';
 
 const chatsLayout = (props: any) => {
     return (
@@ -23,63 +24,7 @@ const chatsLayout = (props: any) => {
                     <h3>Today</h3>
                     <input type="image" src={addIcon} alt="Add a contact"/>
                 </div>
-                <ul className={classes.Convs}>
-                    <li className={classes.Conv}>
-                        <span className={classes.ChatPicture}></span>
-                        <span className={classes.NameAndLastMes}>
-                            <h4>John Doe</h4>
-                            <p>Lorem Ipsum Dolor Sit Amet</p>
-                        </span>
-                        <span className={classes.Time}>
-                            <span>5:12PM</span>
-                            <span></span>
-                        </span>
-                    </li>
-                    <li className={classes.Conv}>
-                        <span className={classes.ChatPicture}></span>
-                        <span className={classes.NameAndLastMes}>
-                            <h4>John Doe</h4>
-                            <p>Lorem Ipsum Dolor Sit Amet</p>
-                        </span>
-                        <span className={classes.Time}>
-                            <span>5:12PM</span>
-                            <span></span>
-                        </span>
-                    </li>
-                    <li className={classes.Conv}>
-                        <span className={classes.ChatPicture}></span>
-                        <span className={classes.NameAndLastMes}>
-                            <h4>John Doe</h4>
-                            <p>Lorem Ipsum Dolor Sit Amet</p>
-                        </span>
-                        <span className={classes.Time}>
-                            <span>5:12PM</span>
-                            <span></span>
-                        </span>
-                    </li>
-                    <li className={classes.Conv}>
-                        <span className={classes.ChatPicture}></span>
-                        <span className={classes.NameAndLastMes}>
-                            <h4>John Doe</h4>
-                            <p>Lorem Ipsum Dolor Sit Amet</p>
-                        </span>
-                        <span className={classes.Time}>
-                            <span>5:12PM</span>
-                            <span></span>
-                        </span>
-                    </li>
-                    <li className={classes.Conv}>
-                        <span className={classes.ChatPicture}></span>
-                        <span className={classes.NameAndLastMes}>
-                            <h4>John Doe</h4>
-                            <p>Lorem Ipsum Dolor Sit Amet</p>
-                        </span>
-                        <span className={classes.Time}>
-                            <span>5:12PM</span>
-                            <span></span>
-                        </span>
-                    </li>
-                </ul>
+                <Convs/>
             </div>
         </div>
     )

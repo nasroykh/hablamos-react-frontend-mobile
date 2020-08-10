@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './ChatPage.module.css';
 import ChatInput from '../../elements/ChatInput/ChatInput';
 import BackBtn from '../../elements/BackBtn/BackBtn';
+import Messages from '../../components/Messages/Messages';
 
 class ChatPage extends Component {
 
@@ -51,64 +52,7 @@ class ChatPage extends Component {
                             <h2>John Doe</h2>
                         </span>
                     </div>
-                    <ul className={classes.Convs}>
-                        <li className={classes.ConvContact}>
-                            <span className={classes.ContactPp}></span>
-                            <span className={classes.ContactMes}>Lorem ipsum dolor</span>
-                        </li>
-                        <li className={classes.ConvUser}>
-                            <span className={classes.UserMes}>Lorem ipsum dolor</span>
-                        </li>
-                        <li className={classes.ConvContact}>
-                            <span className={classes.ContactPp}></span>
-                            <span className={classes.ContactMes}>Lorem ipsum dolor</span>
-                        </li>
-                        <li className={classes.ConvUser}>
-                            <span className={classes.UserMes}>Lorem ipsum dolor</span>
-                        </li>
-                        <li className={classes.ConvContact}>
-                            <span className={classes.ContactPp}></span>
-                            <span className={classes.ContactMes}>Lorem ipsum dolor</span>
-                        </li>
-                        <li className={classes.ConvUser}>
-                            <span className={classes.UserMes}>Lorem ipsum dolor</span>
-                        </li>
-                        <li className={classes.ConvContact}>
-                            <span className={classes.ContactPp}></span>
-                            <span className={classes.ContactMes}>Lorem ipsum dolor sit amet <br/> abekais heresxsxqxsl <br/>j sxjnsxjnsqx</span>
-                        </li>
-                        <li className={classes.ConvUser}>
-                            <span className={classes.UserMes}>Lorem ipsum dolor</span>
-                        </li>
-                        <li className={classes.ConvContact}>
-                            <span className={classes.ContactPp}></span>
-                            <span className={classes.ContactMes}>Lorem ipsum dolor</span>
-                        </li>
-                        <li className={classes.ConvUser}>
-                            <span className={classes.UserMes}>Lorem ipsum dolor</span>
-                        </li>
-                        <li className={classes.ConvContact}>
-                            <span className={classes.ContactPp}></span>
-                            <span className={classes.ContactMes}>Lorem ipsum dolor</span>
-                        </li>
-                        <li className={classes.ConvUser}>
-                            <span className={classes.UserMes}>Lorem ipsum dolor</span>
-                        </li>
-                        <li className={classes.ConvContact}>
-                            <span className={classes.ContactPp}></span>
-                            <span className={classes.ContactMes}>Lorem ipsum dolor</span>
-                        </li>
-                        <li className={classes.ConvUser}>
-                            <span className={classes.UserMes}>Lorem ipsum dolor</span>
-                        </li>
-                        <li className={classes.ConvContact}>
-                            <span className={classes.ContactPp}></span>
-                            <span className={classes.ContactMes}>Lorem ipsum dolor</span>
-                        </li>
-                        <li className={classes.ConvUser}>
-                            <span className={classes.UserMes}>Lorem ipsum dolor sit amet aissa el kebch</span>
-                        </li>
-                    </ul>
+                    <Messages/>
                 </div>
                 <ChatInput/>
             </div>

@@ -4,9 +4,13 @@ import ChatsLayout from '../../components/ChatsLayout/ChatsLayout';
 import ProfileLayout from '../../components/ProfileLayout/ProfileLayout';
 import Logo from '../../elements/Logo/Logo';
 import bell from '../../assets/icons/NotifBell.svg';
+import DesktopMain from '../DesktopMain/DesktopMain';
+import {Route, Switch, RouteComponentProps, withRouter} from 'react-router-dom';
 import ChatPage from '../ChatPage/ChatPage';
 
-class MainPage extends Component {
+type AppProps = RouteComponentProps;
+
+class MainPage extends Component<AppProps> {
 
     state = {
         profileEditForm : {
@@ -66,81 +70,21 @@ class MainPage extends Component {
                     <Logo width="35px"/>
                     <span className={classes.ProfilePicture}></span>
                 </div>
-				<div className={classes.MainWindow}>
-					<div className={classes.Side}>
-						<div className={classes.SideHeader}>
-							<span className={classes.ProfilePicture}></span>
-							<h3>John Doe</h3>
-							<input type="image" src={bell} alt=""/>
-						</div>
-						<div className={classes.ConvsLay}>
-							<div className={classes.ChatsHeader}>
-								<h3>Today</h3>
-							</div>
-							<ul className={classes.Convs}>
-								<li className={classes.Conv}>
-									<span className={classes.ChatPicture}></span>
-									<span className={classes.NameAndLastMes}>
-										<h4>John Doe</h4>
-										<p>Lorem Ipsum Dolor Sit Amet</p>
-									</span>
-									<span className={classes.Time}>
-										<span>5:12PM</span>
-										<span></span>
-									</span>
-								</li>
-								<li className={classes.Conv}>
-									<span className={classes.ChatPicture}></span>
-									<span className={classes.NameAndLastMes}>
-										<h4>John Doe</h4>
-										<p>Lorem Ipsum Dolor Sit Amet</p>
-									</span>
-									<span className={classes.Time}>
-										<span>5:12PM</span>
-										<span></span>
-									</span>
-								</li>
-								<li className={classes.Conv}>
-									<span className={classes.ChatPicture}></span>
-									<span className={classes.NameAndLastMes}>
-										<h4>John Doe</h4>
-										<p>Lorem Ipsum Dolor Sit Amet</p>
-									</span>
-									<span className={classes.Time}>
-										<span>5:12PM</span>
-										<span></span>
-									</span>
-								</li>
-								<li className={classes.Conv}>
-									<span className={classes.ChatPicture}></span>
-									<span className={classes.NameAndLastMes}>
-										<h4>John Doe</h4>
-										<p>Lorem Ipsum Dolor Sit Amet</p>
-									</span>
-									<span className={classes.Time}>
-										<span>5:12PM</span>
-										<span></span>
-									</span>
-								</li>
-								
-							</ul>
-						</div>
-					</div>
-					<div className={classes.Chat}>
-						<div className={classes.ChatHeader}>
-							<span className={classes.ProfilePicture}></span>
-							<h3>John Doe</h3>
-						</div>
-						<div className={classes.ConvLay}>
-							<ChatPage />
-						</div>
-					</div>
-				</div>
-                <ChatsLayout/>
-                {/* <ProfileLayout profileEditForm={this.state.profileEditForm} /> */}
+
+				<Switch>
+
+					<Route path={`${this.props.match.path}/profile`}>
+						<ProfileLayout profileEditForm={this.state.profileEditForm} />
+					</Route>
+					
+					<Route path={this.props.match.path}>
+						<ChatsLayout/>
+					</Route>
+				</Switch>
+
             </div>
         )
     }
 }
 
-export default MainPage;
+export default withRouter(MainPage);
