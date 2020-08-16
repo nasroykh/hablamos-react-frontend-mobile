@@ -4,6 +4,7 @@ import Logo from '../../elements/Logo/Logo';
 import LargeBtn from '../../elements/LargeBtn/LargeBtn';
 import AuthInput from '../../elements/AuthInput/AuthInput';
 import BackBtn from '../../elements/BackBtn/BackBtn';
+import { NavLink } from 'react-router-dom';
 
 const signUpPage = (props: any) => {
 
@@ -19,12 +20,12 @@ const signUpPage = (props: any) => {
         <div className={classes.Container}>
             <div className={classes.SignUpPage}>
                 <div className={classes.Header}>
-                    <BackBtn/>
+                    <NavLink to='/'><BackBtn/></NavLink>
                     <Logo width="80px"/>
                     <h2>Welcome</h2>
                     <p>Sign up to chat with your friends</p>
                 </div>
-                <form className={classes.SUForm}>
+                <form className={classes.SUForm} onSubmit={props.onSignUpHandler}>
                     {formElementsArray.map(formElement => (
                         <AuthInput 
                             isAuth
@@ -32,7 +33,8 @@ const signUpPage = (props: any) => {
                             elementType={formElement.config.elementType}
                             elementConfig={formElement.config.elementConfig}
                             value={formElement.config.value}
-                            name={formElement.config.name} />
+                            name={formElement.config.name}
+                            inputChange={props.inputChange} />
                     ))}
                     <LargeBtn>Create a new account</LargeBtn>
                 </form>

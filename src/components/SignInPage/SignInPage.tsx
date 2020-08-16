@@ -4,6 +4,7 @@ import classes from './SignInPage.module.css';
 import Logo from '../../elements/Logo/Logo';
 import LargeBtn from '../../elements/LargeBtn/LargeBtn';
 import AuthInput from '../../elements/AuthInput/AuthInput';
+import { NavLink, Link } from 'react-router-dom';
 
 const signInPage = (props: any) => {
 
@@ -23,7 +24,7 @@ const signInPage = (props: any) => {
                     <h2>Welcome</h2>
                     <p>Login to <strong>Hablamos</strong> to continue</p>
                 </div>
-                <form className={classes.SIForm}>
+                <form className={classes.SIForm} onSubmit={props.onSignInHandler}>
                     {formElementsArray.map(formElement => (
                         <AuthInput 
                             isAuth
@@ -31,7 +32,8 @@ const signInPage = (props: any) => {
                             elementType={formElement.config.elementType}
                             elementConfig={formElement.config.elementConfig}
                             value={formElement.config.value}
-                            name={formElement.config.name} />
+                            name={formElement.config.name} 
+                            inputChange={props.inputChange}/>
                     ))}
                     <span>Forgot your password ?</span>
                     <LargeBtn>Continue</LargeBtn>
@@ -43,7 +45,7 @@ const signInPage = (props: any) => {
                 </div>
                 <div className={classes.Footer}>
                     <p>Create a new account <br/>Fast & easy !</p>
-                    <LargeBtn>Sign Up</LargeBtn>
+                    <LargeBtn><Link to='/signup'>Sign Up</Link></LargeBtn>
                 </div>
             </div>
             <div className={classes.SideLogo}>

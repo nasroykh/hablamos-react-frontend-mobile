@@ -4,10 +4,17 @@ import Logo from '../../elements/Logo/Logo';
 import LargeBtn from '../../elements/LargeBtn/LargeBtn';
 import SmallBtn from '../../elements/SmallBtn/SmallBtn';
 import picture from '../../assets/icons/picture.svg';
+import { Redirect } from 'react-router-dom';
 
 const signedUpPage = (props: any) => {
+    let authRedirect = null;
+
+    if (!props.isAuth) {
+        authRedirect = <Redirect to='/'/>
+    }
     return (
         <div className={classes.Container}>
+            {authRedirect}
             <div className={classes.SignedUpPage}>
                 <div className={classes.Header}>
                     <Logo width="80px"/>

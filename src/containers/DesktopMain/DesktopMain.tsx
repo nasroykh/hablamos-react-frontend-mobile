@@ -3,17 +3,24 @@ import classes from './DesktopMain.module.css';
 import Logo from '../../elements/Logo/Logo';
 import bell from '../../assets/icons/NotifBell.svg';
 import DesktopChat from '../../components/DesktopChat/DesktopChat';
-import { Route, Switch, withRouter, RouteComponentProps, matchPath } from 'react-router-dom';
+import { Route, Switch, withRouter, RouteComponentProps, matchPath, Redirect } from 'react-router-dom';
 import Convs from '../../components/Convs/Convs';
 
-type AppProps = RouteComponentProps;
-
+interface AppProps extends RouteComponentProps {
+    isAuth: boolean;
+};
 
 class DesktopMain extends Component <AppProps> {
 
     render() {
+        let authRedirect = null;
+
+        if (!this.props.isAuth) {
+            authRedirect = <Redirect to='/'/>
+        }
         return (
             <div className={classes.DesktopMain}>
+                {authRedirect}
                 <div className={classes.Side}>
                     <div className={classes.SideHeader}>
                         <span className={classes.ProfilePicture}></span>

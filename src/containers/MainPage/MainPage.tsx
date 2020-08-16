@@ -5,10 +5,12 @@ import ProfileLayout from '../../components/ProfileLayout/ProfileLayout';
 import Logo from '../../elements/Logo/Logo';
 import bell from '../../assets/icons/NotifBell.svg';
 import DesktopMain from '../DesktopMain/DesktopMain';
-import {Route, Switch, RouteComponentProps, withRouter} from 'react-router-dom';
+import {Route, Switch, RouteComponentProps, withRouter, Redirect} from 'react-router-dom';
 import ChatPage from '../ChatPage/ChatPage';
 
-type AppProps = RouteComponentProps;
+interface AppProps extends RouteComponentProps {
+	isAuth: boolean;
+};
 
 class MainPage extends Component<AppProps> {
 
@@ -63,8 +65,14 @@ class MainPage extends Component<AppProps> {
     }
 
     render() {
+		let authRedirect = null;
+
+        if (!this.props.isAuth) {
+            authRedirect = <Redirect to='/'/>
+        }
         return (
             <div className={classes.MainPage}>
+				{authRedirect}
                 <div className={classes.Header}>
                     <input type="image" src={bell} alt="Notifications" width="25px"/>
                     <Logo width="35px"/>

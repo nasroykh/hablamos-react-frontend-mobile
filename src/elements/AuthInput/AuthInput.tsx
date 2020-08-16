@@ -51,7 +51,8 @@ const authInput = (props: any) => {
         case ('input'):
             inputElement = (<input 
                             {...props.elementConfig}
-                            value={props.value}/>)
+                            value={props.value}
+                            onChange={props.inputChange}/>)
     }
 
     return (
