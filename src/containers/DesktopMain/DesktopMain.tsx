@@ -40,7 +40,7 @@ class DesktopMain extends Component <AppProps> {
                             <DesktopChat/>
                         </Route>
                         <Route path={`${this.props.match.path}`}>
-                            <Logo width="80px"/>
+                            <Logo size="large"/>
                         </Route>
                     </Switch>
 

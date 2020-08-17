@@ -1,0 +1,49 @@
+.NotifSD {
+    position: fixed;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 75vw;
+    height: 75vh;
+    border-radius: 0 0 20px 0;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    background-color: #495867;
+    box-sizing: border-box;
+    transition: all 500ms ease-in-out;
+    overflow: auto;
+    margin: 0;
+    padding: auto;
+}
+
+.NotifHeader {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.NotifSD > * {
+    color: #ECC8AF;
+}
+
+.NotifHeader > h2, .NotifHeader > h4 {
+    align-self: flex-start;
+    margin: 20px;
+}
+
+.NotifHeader > h4 {
+    align-self: center;
+}
+
+.Open {
+    transform: translate(0, 0);
+    opacity: 1;
+}
+
+.Close {
+    transform: translate(-100vw, 0);
+    opacity: 0;
+}

@@ -1,0 +1,49 @@
+.SideDrawer {
+    position: fixed;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    width: 75vw;
+    height: 75vh;
+    border-radius: 0 0 0 20px;
+    top: 0;
+    right: 0;
+    z-index: 200;
+    background-color: #495867;
+    box-sizing: border-box;
+    transition: all 500ms ease-in-out;
+}
+
+.Open {
+    transform: translate(0, 0);
+    opacity: 1;
+}
+
+.Close {
+    transform: translate(100vw, 0);
+    opacity: 0;
+}
+
+.SDHeader {
+    margin: 30px 0;
+}
+
+.SDBody {
+    margin-bottom: auto;
+}
+
+.SDFooter {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.SDFooter span {
+    color: #ECC8AF;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    text-align: center;
+    margin: 25px;
+}

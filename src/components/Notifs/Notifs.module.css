@@ -1,0 +1,10 @@
+.Notifs {
+    display: flex; 
+    flex-flow: column;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    margin-bottom: auto;
+}

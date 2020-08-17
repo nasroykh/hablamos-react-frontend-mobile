@@ -1,11 +1,26 @@
 import React from 'react';
 import Aux from '../../hoc/Aux';
-import logoH from '../../assets/images/HablamosLogo.svg';
+import logoS from '../../assets/images/LogoSmall.svg';
+import logoM from '../../assets/images/LogoMedium.svg';
+import logoL from '../../assets/images/LogoLarge.svg';
 
 const logo = (props: any) => {
+    let logo = logoM;
+
+    switch (props.size) {
+        case ("small") : logo = logoS 
+            break;
+        case ("medium") : logo = logoM 
+            break;
+        case ("large") : logo = logoL 
+            break;
+    
+        default:
+            break;
+    }
     return (
         <Aux>
-            <input type="image" src={logoH} alt="Hablamos Logo" width={props.width} />
+            <input type="image" src={logo} alt="Hablamos Logo" />
         </Aux>
     )
 }

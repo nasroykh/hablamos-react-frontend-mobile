@@ -1,0 +1,27 @@
+.Notif {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-evenly;
+    list-style: none;
+    margin: 5px 0 ;
+    padding: 0;
+}
+
+.ContactPicture {
+    background-color: grey;
+    width: 55px;
+    height: 55px;
+    border-radius: 100%;
+}
+
+.ContactName {
+    font-weight: 600;
+}
+
+.ContactYN {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50px;
+}

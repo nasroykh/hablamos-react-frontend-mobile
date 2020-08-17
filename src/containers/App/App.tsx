@@ -14,7 +14,7 @@ import socketIOClient from 'socket.io-client';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import Spinner from '../../elements/Spinner/Spinner';
-const ENDPOINT = "http://127.0.0.1:4444"
+// const ENDPOINT = "http://127.0.0.1:4444"
 
 interface AppProps extends RouteComponentProps {
 	onSignIn: (email: string, password: string, socketId: string) => void;
@@ -26,13 +26,13 @@ interface AppProps extends RouteComponentProps {
 
 class App extends Component<AppProps> {
 
-	componentDidMount() {
+/* 	componentDidMount() {
 		const socket = socketIOClient(ENDPOINT);
 		let socketId= undefined;
 		socket.on('connected', (socketId: string) => {
 			this.setState({socketId: socketId})
 		});
-	}
+	} */
 
 	state = {
 		signInForm: {
@@ -212,7 +212,8 @@ class App extends Component<AppProps> {
 
 							<Switch>
 								<Route path="/home">
-									{this.props.loading ? <Spinner/> : <DesktopMain isAuth={this.props.isAuth} />}
+									{this.props.loading ? <Spinner/> : <DesktopMain isAuth={!this.props.isAuth} />}
+									{/* isAuth changed for test */} 
 								</Route>
 
 								<Route path="/signedup" exact>
@@ -232,8 +233,8 @@ class App extends Component<AppProps> {
 									inputChange={this.onInputChangeHandler}
 									onSignInHandler={this.onSignInHandler}/>
 								</Route>
-							</Switch>
-
+							</Switch> 
+							
 						) : (
 
 							<Switch>
@@ -243,7 +244,8 @@ class App extends Component<AppProps> {
 								</Route>
 
 								<Route path="/home">
-									{this.props.loading ? <Spinner/> : <MainPage isAuth={this.props.isAuth} />}
+									{this.props.loading ? <Spinner/> : <MainPage isAuth={!this.props.isAuth} />}
+									{/* isAuth changed for test */} 
 								</Route>
 
 								<Route path="/signedup" exact>
@@ -269,7 +271,7 @@ class App extends Component<AppProps> {
 						
 					</Media>
 
-
+	
 			</div>
 		  );
 		  

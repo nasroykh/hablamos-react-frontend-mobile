@@ -1,0 +1,52 @@
+.ContactSearch {
+    position: absolute;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    height: 50vh;
+    border-radius: 0 0 20px 20px;
+    top: 0;
+    z-index: 300;
+    background-color: #495867;
+    border: 1px #495867 solid;
+    box-sizing: border-box;
+    transition: all 500ms ease-in-out;
+    overflow: auto;
+    margin: 0;
+    padding: auto;
+}
+
+.Open {
+    transform: translate(0, 0);
+    opacity: 1;
+}
+
+.Close {
+    transform: translate(0, -100vh);
+    opacity: 0;
+}
+
+.SearchInput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    color: #ECC8AF;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-bottom: 1px #ECC8AF solid;
+    width: 80%;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 10px 0;
+    margin: 30px 0;
+}
+
+.SearchInput::placeholder {
+    color: #ecc8af9c;
+    font-weight: 500;
+
+}
