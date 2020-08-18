@@ -52,7 +52,8 @@ const authInput = (props: any) => {
             inputElement = (<input 
                             {...props.elementConfig}
                             value={props.value}
-                            onChange={props.inputChange}/>)
+                            onChange={props.inputChange}
+                            required/>)
     }
 
     return (

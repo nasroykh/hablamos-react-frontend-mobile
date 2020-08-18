@@ -25,38 +25,6 @@
     margin-left: 6vw;
 }
 
-.Contacts {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    padding: 0;
-    margin-left: 5vw;
-}
-
-.Contact {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
-    list-style: none;
-    margin-right: 3vw ;
-    padding: 0;
-}
-
-.Contact > h4 {
-    margin: 5px 0;
-    font-size: 0.9rem;
-    color: white;
-    font-weight: 500;
-}
-
-.ContactPicture {
-    background-color: grey;
-    width: 55px;
-    height: 55px;
-    border-radius: 100%;
-}
-
 .Chats {
     display: flex;
     flex-flow: column;

@@ -14,7 +14,7 @@ import socketIOClient from 'socket.io-client';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import Spinner from '../../elements/Spinner/Spinner';
-// const ENDPOINT = "http://127.0.0.1:4444"
+const ENDPOINT = "http://127.0.0.1:4444"
 
 interface AppProps extends RouteComponentProps {
 	onSignIn: (email: string, password: string, socketId: string) => void;
@@ -26,13 +26,13 @@ interface AppProps extends RouteComponentProps {
 
 class App extends Component<AppProps> {
 
-/* 	componentDidMount() {
+	componentDidMount() {
 		const socket = socketIOClient(ENDPOINT);
 		let socketId= undefined;
 		socket.on('connected', (socketId: string) => {
 			this.setState({socketId: socketId})
 		});
-	} */
+	}
 
 	state = {
 		signInForm: {
@@ -44,7 +44,8 @@ class App extends Component<AppProps> {
 					name: 'siusername'
 				},
 				value: '',
-				name: 'username'
+				name: 'username',
+				required: true
 			},
 			password: {
 				elementType: 'input',
@@ -54,7 +55,8 @@ class App extends Component<AppProps> {
 					name: 'sipassword'
 				},
 				value: '',
-				name: 'password'
+				name: 'password',
+				required: true
 			}
 		},
 		signUpForm: {
@@ -172,11 +174,26 @@ class App extends Component<AppProps> {
 
 		console.log(this.props);
 
-		this.setState({...this.state,
-		isSignUp:false})
-
 		this.props.onSignIn(this.state.signInForm.emailUsername.value, this.state.signInForm.password.value, this.state.socketId);
 
+		this.setState({...this.state,
+			isSignUp:false,
+		})
+
+		setTimeout(() => {
+			this.setState({...this.state,
+				signInForm: {
+					emailUsername: {
+						...this.state.signInForm.emailUsername,
+						value: ''
+					},
+					password: {
+						...this.state.signInForm.password,
+						value: ''
+					}	
+				}
+			});
+		}, 10000);
 
 	}
 
@@ -188,6 +205,24 @@ class App extends Component<AppProps> {
 
 		this.props.onSignUp(this.state.signUpForm.email.value, this.state.signUpForm.fullname.value, this.state.signUpForm.password.value, this.state.socketId)
 
+		setTimeout(() => {
+			this.setState({...this.state,
+				signUpForm: {
+					email: {
+						...this.state.signUpForm.email,
+						value: ''
+					},
+					password: {
+						...this.state.signUpForm.password,
+						value: ''
+					},
+					fullname: {
+						...this.state.signUpForm.fullname,
+						value: ''
+					}	
+				}
+			});
+		}, 10000);
 	}
 
 	render(){
@@ -212,8 +247,7 @@ class App extends Component<AppProps> {
 
 							<Switch>
 								<Route path="/home">
-									{this.props.loading ? <Spinner/> : <DesktopMain isAuth={!this.props.isAuth} />}
-									{/* isAuth changed for test */} 
+									{this.props.loading ? <Spinner/> : <DesktopMain isAuth={this.props.isAuth} />}
 								</Route>
 
 								<Route path="/signedup" exact>
@@ -245,7 +279,6 @@ class App extends Component<AppProps> {
 
 								<Route path="/home">
 									{this.props.loading ? <Spinner/> : <MainPage isAuth={!this.props.isAuth} />}
-									{/* isAuth changed for test */} 
 								</Route>
 
 								<Route path="/signedup" exact>
@@ -270,7 +303,7 @@ class App extends Component<AppProps> {
 						)}
 						
 					</Media>
-
+							
 	
 			</div>
 		  );

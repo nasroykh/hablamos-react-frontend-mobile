@@ -5,3 +5,7 @@ export {
 export {
     signUp
 } from './signUp';
+
+export {
+    logOut
+} from './logout';

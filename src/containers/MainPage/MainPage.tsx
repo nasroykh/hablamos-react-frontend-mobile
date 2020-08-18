@@ -17,6 +17,7 @@ interface AppProps extends RouteComponentProps {
 };
 
 class MainPage extends Component<AppProps> {
+	_isMounted = false;
 
     state = {
         profileEditForm : {
@@ -71,7 +72,23 @@ class MainPage extends Component<AppProps> {
 		notifShow: false,
 		csShow: false,
 		searchInput: '',
-		searchedContacts: []
+		searchedContacts: [],
+		friends: []
+	}
+
+	componentDidMount() {
+
+		let userId = localStorage.getItem('userId');
+
+		axios.post('/fetchFriends', {myProfileID: userId})
+		.then(res => {
+			let friends = res.data.Details.friendsProfile;
+			this.setState({...this.state,
+			friends: friends})
+		})
+		.catch(err => {
+			console.log(err);
+		})
 	}
 	
 	toggleSideDrawer = () => {
@@ -120,25 +137,66 @@ class MainPage extends Component<AppProps> {
 	}
 
 	searchInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+		this._isMounted = true;
 		event.preventDefault();
 		let searchInput = event.target.value;
 
 
-		console.log(searchInput);
+		let word = searchInput.toLowerCase().trim();
 
-		let word = searchInput.toLowerCase();
+		if (word.trim()) {
+			axios.post('/findUser', {word: word})
+			.then(res => {
+				console.log(res);
+				if (this._isMounted && res.data.Details) {
+					let fetchedProfiles: [] = res.data.Details.purifiedProfiles;
+					let userId = localStorage.getItem('userId');
+					
+					let updatedProfiles = fetchedProfiles.filter((profile: {_id: string}) => profile._id !== userId);
 
-		axios.post('/findUser', {word: word})
-		.then(res => {
-			console.log(res);
+					this.setState({
+						...this.state,
+						searchedContacts: updatedProfiles})
+				}
+				else if (this._isMounted && !res.data.Details) {
+					this.setState({
+						...this.state,
+						searchedContacts: []
+					})
+				}
+			})
+			.catch(err => {
+				console.log(err)
+			})
+		}
+
+		else {
 			this.setState({
 				...this.state,
-				searchedContacts: res.data.Details.purifiedProfiles})
+				searchedContacts: []
+			})
+		}
+
+	}
+
+	addContactHandler = (event: ChangeEvent<HTMLInputElement>) => {
+		event.preventDefault();
+		let contactId = event.target.id;
+		let userId = localStorage.getItem('userId');
+		event.target.disabled = true;
+		event.target.style.opacity = "0.4";
+		axios.post('addFriend', {myProfileID: userId, hisProfileID: contactId})
+		.then(res => {
+			console.log(res);
 		})
 		.catch(err => {
-			console.log(err)
+			console.log(err);
 		})
 
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
 	}
 
     render() {
@@ -172,7 +230,9 @@ class MainPage extends Component<AppProps> {
 						csShow={this.state.csShow} 
 						toggleSearchContact={this.toggleSearchContact}
 						searchInputHandler={this.searchInputHandler}
-						searchedContacts={this.state.searchedContacts}/>
+						searchedContacts={this.state.searchedContacts}
+						addContact={this.addContactHandler}
+						friends={this.state.friends}/>
 					</Route>
 
 				</Switch>

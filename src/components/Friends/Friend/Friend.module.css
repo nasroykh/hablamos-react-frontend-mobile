@@ -1,0 +1,27 @@
+.Friend {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100px;
+}
+
+.Friend > h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 500;
+    width: 75%;
+    padding: 0;
+    text-align: center;
+}
+
+.FriendPicture {
+    background-color: grey;
+    width: 55px;
+    height: 55px;
+    border-radius: 100%;
+}

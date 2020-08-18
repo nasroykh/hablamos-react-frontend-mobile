@@ -33,7 +33,8 @@ const signInPage = (props: any) => {
                             elementConfig={formElement.config.elementConfig}
                             value={formElement.config.value}
                             name={formElement.config.name} 
-                            inputChange={props.inputChange}/>
+                            inputChange={props.inputChange}
+                            required={formElement.config.required}/>
                     ))}
                     <span>Forgot your password ?</span>
                     <LargeBtn>Continue</LargeBtn>

@@ -30,7 +30,8 @@ export const signUp = (email: string, fullname: string, password: string, socket
         const profile = {
             fullName: fullname,
             firstName : fullname.split(' ')[0],
-            lastName : fullname.split(' ')[1]
+            lastName : fullname.split(' ')[1],
+            username : ''
         }
 
 

@@ -7,7 +7,7 @@ const searchedContact = (props: any) => {
         <li className={classes.SearchedContact}>
             <span className={classes.ContactPicture}></span>
             <span className={classes.ContactName}>{props.contactName}</span>
-            <input type="image" src={add} alt=""/>
+            <input type="image" src={add} alt="Add Contact" id={props.id} onClick={props.addContact}/>
         </li>
     )
 }

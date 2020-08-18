@@ -4,17 +4,19 @@ import SearchedContact from './SearchedContact/SearchedContact';
 
 const searchedContacts = (props: any) => {
 
-    let contacts;
+    let contacts ;
 
-    if (props.searchedContacts) {
+    if (props.searchedContacts.length) {
         contacts = props.searchedContacts.map((contact: { username: string, _id: string }) => {
             return <SearchedContact 
             contactName={contact.username}
-            key={contact._id}/>
+            key={contact._id}
+            id={contact._id}
+            addContact={props.addContact} />
         })
     }
-    else {
-        contacts = [];
+    else if (!props.searchedContacts.length) {
+        contacts = <span>No result</span>;
     }
 
 

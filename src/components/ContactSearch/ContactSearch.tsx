@@ -7,7 +7,7 @@ const contactSearch = (props: any) => {
     return (
         <div className={`${classes.ContactSearch} ${props.csShow ? classes.Open : classes.Close}`}>
             <input className={classes.SearchInput} type="search" placeholder="Enter Username or Fullname"  onChange={props.searchInputHandler} name="" id=""/>
-            <SearchedContacts searchedContacts={props.searchedContacts}/>
+            <SearchedContacts searchedContacts={props.searchedContacts} addContact={props.addContact}/>
         </div>
     )
 }

@@ -3,29 +3,21 @@ import classes from './ChatsLayout.module.css';
 import addIcon from '../../assets/icons/AddIcon.svg';
 import Convs from '../Convs/Convs';
 import ContactSearch from '../../components/ContactSearch/ContactSearch';
-
+import Friends from '../Friends/Friends';
 
 const chatsLayout = (props: any) => {
     return (
         <div className={classes.ChatsLayout}>
             <div className={classes.Header}>
                 <h2>Chat</h2>
-                <ul className={classes.Contacts}>
-                    <li className={classes.Contact}>
-                        <span className={classes.ContactPicture}></span>
-                        <h4>John Doe</h4>
-                    </li>
-                    <li className={classes.Contact}>
-                        <span className={classes.ContactPicture}></span>
-                        <h4>John Doe</h4>
-                    </li>
-                </ul>
+                <Friends friends={props.friends}/>
             </div>
             <div className={classes.Chats}>
                 <ContactSearch 
                 csShow={props.csShow} 
                 searchInputHandler={props.searchInputHandler}
-                searchedContacts={props.searchedContacts}/>
+                searchedContacts={props.searchedContacts}
+                addContact={props.addContact}/>
                 
                 <div className={classes.ChatsHeader}>
                     <h3>Today</h3>

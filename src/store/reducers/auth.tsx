@@ -45,6 +45,15 @@ const signUpFail = (state: any, action: any) => {
     return updateObject(state, {error: action.error, loading: false})        
 }
 
+const logOut = (state: any, action: any) => {
+    return updateObject(state, {
+        token: null,
+        userId: null,
+        socketId: null,
+        isAuth: false
+    })
+}
+
 
 const reducer = (state = INITIAL_STATE, action: { type: any; }) => {
     switch (action.type) {
@@ -53,6 +62,7 @@ const reducer = (state = INITIAL_STATE, action: { type: any; }) => {
         case actionTypes.SIGNIN_FAIL: return signInFail(state, action);
         case actionTypes.SIGNUP_START: return signUpStart(state, action);
         case actionTypes.SIGNUP_SUCCESS: return signUpSuccess(state, action);
+        case actionTypes.LOG_OUT: return logOut(state, action);
         default:
             return state;
     }
