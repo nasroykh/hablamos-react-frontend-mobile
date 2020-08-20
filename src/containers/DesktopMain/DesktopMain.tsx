@@ -37,9 +37,12 @@ class DesktopMain extends Component <AppProps> {
 
 		axios.post('/fetchFriends', {myProfileID: userId})
 		.then(res => {
-			let friends = res.data.Details.friendsProfile;
-			this.setState({...this.state,
-			friends: friends})
+			let friends: [];
+			if (res.data.Details) {
+				friends = res.data.Details.friendsProfile;
+				this.setState({...this.state,
+					friends: friends})
+			}
 		})
 		.catch(err => {
 			console.log(err);

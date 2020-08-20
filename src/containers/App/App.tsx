@@ -33,6 +33,9 @@ class App extends Component<AppProps> {
 		socket.on('connected', (socketId: string) => {
 			this.setState({socketId: socketId})
 		});
+		socket.on('notif', () => {
+			console.log("New Notification");
+		});
 	}
 
 	state = {
@@ -259,7 +262,7 @@ class App extends Component<AppProps> {
 
 							<Switch>
 								<Route path="/home">
-									{this.props.loading ? <Spinner/> : <DesktopMain isAuth={!this.props.isAuth} logout={this.logOutHandler} />}
+									{this.props.loading ? <Spinner/> : <DesktopMain isAuth={this.props.isAuth} logout={this.logOutHandler} />}
 								</Route>
 
 								<Route path="/signedup" exact>
@@ -290,7 +293,7 @@ class App extends Component<AppProps> {
 								</Route>
 
 								<Route path="/home">
-									{this.props.loading ? <Spinner/> : <MainPage isAuth={!this.props.isAuth} />}
+									{this.props.loading ? <Spinner/> : <MainPage isAuth={this.props.isAuth} />}
 								</Route>
 
 								<Route path="/signedup" exact>
