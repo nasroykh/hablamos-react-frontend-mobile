@@ -12,3 +12,13 @@
 .SearchedContacts > * {
     color: #ECC8AF;
 }
+
+@media (min-width: 500px) {
+    .SearchedContacts {
+
+    }
+
+    .SearchedContacts > * {
+        color: #495867;
+    }
+}

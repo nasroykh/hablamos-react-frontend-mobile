@@ -13,6 +13,15 @@
     box-sizing: border-box;
     color: #fff;
     letter-spacing: 3px;
+    cursor: pointer;
+}
+
+.LargeBtn > a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .LargeBtn img {
@@ -25,5 +34,6 @@
         font-weight: 600;
         font-size: 1rem;
     }
+
 
 }

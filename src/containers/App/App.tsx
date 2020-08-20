@@ -19,6 +19,7 @@ const ENDPOINT = "http://127.0.0.1:4444"
 interface AppProps extends RouteComponentProps {
 	onSignIn: (email: string, password: string, socketId: string) => void;
 	onSignUp: (email: string, fullname: string, password: string, socketId: string) => void;
+    logOut: () => void
 	loading: boolean;
 	redirectUrl: string;
 	isAuth: boolean;
@@ -172,8 +173,6 @@ class App extends Component<AppProps> {
 	onSignInHandler = (event: ChangeEvent<HTMLInputElement>) => {
 		event.preventDefault();
 
-		console.log(this.props);
-
 		this.props.onSignIn(this.state.signInForm.emailUsername.value, this.state.signInForm.password.value, this.state.socketId);
 
 		this.setState({...this.state,
@@ -195,6 +194,9 @@ class App extends Component<AppProps> {
 			});
 		}, 10000);
 
+		if (this.props.isAuth) {
+			this.props.history.replace(this.props.redirectUrl);
+		}
 	}
 
 	onSignUpHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -223,7 +225,17 @@ class App extends Component<AppProps> {
 				}
 			});
 		}, 10000);
+
+
+		if (this.props.isAuth) {
+			this.props.history.replace(this.props.redirectUrl);
+		}
 	}
+
+	logOutHandler = () => {
+        this.props.logOut();
+        this.props.history.replace('/');
+    }
 
 	render(){
 
@@ -247,7 +259,7 @@ class App extends Component<AppProps> {
 
 							<Switch>
 								<Route path="/home">
-									{this.props.loading ? <Spinner/> : <DesktopMain isAuth={this.props.isAuth} />}
+									{this.props.loading ? <Spinner/> : <DesktopMain isAuth={!this.props.isAuth} logout={this.logOutHandler} />}
 								</Route>
 
 								<Route path="/signedup" exact>
@@ -320,6 +332,7 @@ interface MapStateToPropsTypes {
 interface MapDispatchToPropsTypes {
 	onSignIn: (email: string, password: string, socketId: string) => void;
 	onSignUp: (email: string, fullname: string, password: string, socketId: string) => void;
+    logOut: () => void
 }
 	
 const mapStateToProps = (state: any, ownProps: any) => {
@@ -334,7 +347,8 @@ const mapStateToProps = (state: any, ownProps: any) => {
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
 	return {
 		onSignIn: (email: string, password: string, socketId: string) => dispatch(actions.signIn(email, password, socketId)),
-		onSignUp: (email: string, fullname: string, password: string, socketId: string) => dispatch(actions.signUp(email,fullname,password,socketId))
+		onSignUp: (email: string, fullname: string, password: string, socketId: string) => dispatch(actions.signUp(email,fullname,password,socketId)),
+        logOut: () => dispatch(actions.logOut)		
 	}
 };
 

@@ -10,7 +10,7 @@ const chatsLayout = (props: any) => {
         <div className={classes.ChatsLayout}>
             <div className={classes.Header}>
                 <h2>Chat</h2>
-                <Friends friends={props.friends}/>
+                <Friends friends={props.friends} friendSelect={props.friendSelect}/>
             </div>
             <div className={classes.Chats}>
                 <ContactSearch 

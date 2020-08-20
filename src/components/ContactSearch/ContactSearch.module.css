@@ -18,6 +18,10 @@
     padding: auto;
 }
 
+.ContactSearch::-webkit-scrollbar {
+    display: none;
+}
+
 .Open {
     transform: translate(0, 0);
     opacity: 1;
@@ -49,4 +53,43 @@
     color: #ecc8af9c;
     font-weight: 500;
 
+}
+
+.HideBtn {
+    display: none;
+}
+
+@media (min-width: 500px) {
+    .ContactSearch {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        background-color: #fff;
+        overflow: auto;
+        border: none;
+        border-bottom: 1px #495867 solid;
+        
+    }
+    
+    .SearchInput {
+        color: #495867;
+        border-bottom: 1px #495867 solid;
+        margin: 0 0 30px 0;
+
+    }
+    
+    .SearchInput::placeholder {
+        color: #495867;
+    }
+
+    .Close {
+        transform: translate(-100vw, 0);
+        opacity: 0;
+    }
+
+    .HideBtn {
+        display: block;
+        align-self: flex-start;
+        margin: 25px;
+    }
 }

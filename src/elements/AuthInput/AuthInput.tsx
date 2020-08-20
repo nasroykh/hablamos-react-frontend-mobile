@@ -26,6 +26,8 @@ const authInput = (props: any) => {
             break;
         
         case ('password'):
+            case('oldPassword'):
+            case('newPassword'):
             inputIcon = passIcon;
             isPass = true;
             if (passShow) {

@@ -3,14 +3,21 @@ import classes from './Friends.module.css';
 import Friend from './Friend/Friend';
 
 const friends = (props: any) => {
-
-    let friends: [] = props.friends;
+    
     let displayedFriends;
+    let friends: [];
+    
+    if (props.friends) {
+        if (props.friends.length) {
+            friends= props.friends;
+            displayedFriends = friends.map((friend: {fullName: string, _id: string}) => (
+                <Friend fullname={friend.fullName} key={friend._id} id={friend._id} friendSelect={props.friendSelect}/>
+            ))
+        }
+    }
 
-    if (friends.length) {
-        displayedFriends = friends.map((friend: {fullName: string}) => (
-            <Friend fullname={friend.fullName} />
-        ))
+    else {
+        displayedFriends = (<span>There's nothing to show</span>);
     }
 
     return (

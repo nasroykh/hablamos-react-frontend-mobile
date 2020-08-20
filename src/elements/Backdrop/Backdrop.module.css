@@ -8,3 +8,10 @@
     background-color: rgba(0, 0, 0, 0.5);
     transition: all 1s ease-out;
 }
+
+@media (min-width: 500px) {
+    .Backdrop {
+        width: 100%;
+        position: absolute;
+    }
+}

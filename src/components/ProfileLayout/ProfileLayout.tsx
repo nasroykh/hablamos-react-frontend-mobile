@@ -30,7 +30,9 @@ const profileLayout = (props: any) => {
                             elementType={formElement.config.elementType}
                             elementConfig={formElement.config.elementConfig}
                             value={formElement.config.value}
-                            name={formElement.config.name} />
+                            name={formElement.config.name} 
+                            inputChange={props.inputChange}
+                            required={formElement.config.required}/>
                     ))}
                 </form>
                 <div className={classes.ProfileTitle}>

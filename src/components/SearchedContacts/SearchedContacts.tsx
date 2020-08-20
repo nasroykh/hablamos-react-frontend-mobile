@@ -12,7 +12,8 @@ const searchedContacts = (props: any) => {
             contactName={contact.username}
             key={contact._id}
             id={contact._id}
-            addContact={props.addContact} />
+            addContact={props.addContact}
+            blue={props.blue} />
         })
     }
     else if (!props.searchedContacts.length) {

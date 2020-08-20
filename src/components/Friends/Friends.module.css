@@ -3,5 +3,12 @@
     align-items: center;
     list-style: none;
     padding: 0;
-    width: auto;
+    width: 100%;
+    overflow: auto;
+}
+
+@media (max-width: 500px) {
+    .Friends::-webkit-scrollbar {
+        display: none;
+    }
 }

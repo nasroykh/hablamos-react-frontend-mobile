@@ -16,6 +16,10 @@
         height: 100%;
         width: 30%;
         border-right: 1px #495867 solid;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        position: relative;
     }
 
     .SideHeader {
@@ -23,14 +27,17 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        height: 12%;
+        height: 15%;
         border-bottom: 1px #495867 solid;
+        box-sizing: border-box;
     }
 
-    .SideHeader > span {
+    .ProfilePicture {
         margin: 0 15px;
-        width: 70px;
-        height: 70px;
+        background-color: grey;
+        width: 55px;
+        height: 55px;
+        border-radius: 100%;
     }
 
     .SideHeader h3 {
@@ -38,9 +45,30 @@
         font-weight: 700;
     }
 
+    .Logout {
+        margin-left: auto;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        color: #ECC8AF;
+        font-weight: 600;
+        cursor: pointer;
+    } 
+
+    .Logout > * {
+        margin: 0 3px;
+    }
+
+
     .SideHeader > input {
-        margin-left: auto; 
-        margin-right: 20px;
+        margin: 0 20px;
+    }
+
+    .FriendsLayout {
+        display: flex;
+        align-items: center;
+        width: 95%;
+        justify-content: space-between;
     }
 
     .ConvsLay {
@@ -50,24 +78,21 @@
         width: 100%;
         height: 88%;
         overflow-y: auto;
+        position: relative;
         overflow-x: hidden;
+    }
+
+    .ConvsLay::-webkit-scrollbar {
+        display: none;
     }
 
     .ChatsHeader {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
-        margin-left: 5%;
-        width: 100%;
+        justify-content: space-between;
+        width: 90%;
         color: #495867;
         font-size: 1.2rem;
-    }
-
-    .ProfilePicture {
-        background-color: grey;
-        width: 55px;
-        height: 55px;
-        border-radius: 100%;
     }
 
     .Chat {
@@ -78,6 +103,7 @@
         flex-flow: column;
         align-items: center;
         justify-content: center;
+        position: relative;
     }
 
     .ChatHeader {

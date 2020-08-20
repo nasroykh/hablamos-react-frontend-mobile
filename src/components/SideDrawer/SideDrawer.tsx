@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import classes from './SideDrawer.module.css';
 import Logo from '../../elements/Logo/Logo';
 import NavItems from '../NavItems/NavItems';
@@ -8,15 +8,17 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 interface Props extends RouteComponentProps {
     sdShow?: boolean;
-    logOut: () => void
+    logOut: () => void;
+    navClick: (event: SyntheticEvent<HTMLLIElement>) => void;
 }
 
-const sideDrawer: React.FC<Props> = ({sdShow, logOut, history}) => {
+const sideDrawer: React.FC<Props> = ({sdShow, logOut, history, navClick}) => {
 
     const logOutHandler = () => {
         logOut();
         history.replace('/');
     }
+
 
     return (
         <div className={`${classes.SideDrawer} ${sdShow ? classes.Open : classes.Close}`}>
@@ -24,7 +26,7 @@ const sideDrawer: React.FC<Props> = ({sdShow, logOut, history}) => {
                 <Logo size="small"/>
             </div>
             <nav className={classes.SDBody}>
-                <NavItems/>
+                <NavItems navClick={navClick}/>
             </nav>
             <div className={classes.SDFooter}>
                 <span onClick={logOutHandler}>Logout</span>

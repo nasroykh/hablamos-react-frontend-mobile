@@ -1,4 +1,4 @@
-import React, { Component, ChangeEvent } from 'react';
+import React, { Component, ChangeEvent, SyntheticEvent } from 'react';
 import classes from './MainPage.module.css';
 import ChatsLayout from '../../components/ChatsLayout/ChatsLayout';
 import ProfileLayout from '../../components/ProfileLayout/ProfileLayout';
@@ -55,7 +55,7 @@ class MainPage extends Component<AppProps> {
 					placeholder: 'Old password'
 				},
 				value: '',
-				name: 'password'
+				name: 'oldPassword'
 			},
 			newPassword: {
 				elementType: 'input',
@@ -64,7 +64,7 @@ class MainPage extends Component<AppProps> {
 					placeholder: 'New password'
 				},
 				value: '',
-				name: 'password'
+				name: 'newPassword'
 			}
 		},
 		sdShow: false,
@@ -89,6 +89,81 @@ class MainPage extends Component<AppProps> {
 		.catch(err => {
 			console.log(err);
 		})
+	}
+
+	onInputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+		event.preventDefault();
+		let typedInput = event.target.value;
+		console.log(event.target.name);
+		switch (event.target.placeholder) {
+			case ("Username"):
+				this.setState({
+					...this.state,
+					profileEditForm: {
+						...this.state.profileEditForm,
+						username: {
+							...this.state.profileEditForm.username,
+							value: typedInput
+						}
+					}
+				})
+			break;
+
+			case ("Fullname"):
+				this.setState({
+					...this.state,
+					profileEditForm: {
+						...this.state.profileEditForm,
+						fullname: {
+							...this.state.profileEditForm.fullname,
+							value: typedInput
+						}
+					}
+				})
+			break;
+
+			case ("Email address"):
+				this.setState({
+					...this.state,
+					profileEditForm: {
+						...this.state.profileEditForm,
+						email: {
+							...this.state.profileEditForm.email,
+							value: typedInput
+						}
+					}
+				})
+			break;
+
+			case ("Old password"):
+				this.setState({
+					...this.state,
+					profileEditForm: {
+						...this.state.profileEditForm,
+						oldPassword: {
+							...this.state.profileEditForm.oldPassword,
+							value: typedInput
+						}
+					}
+				})
+			break;
+
+			case ("New password"):
+				this.setState({
+					...this.state,
+					profileEditForm: {
+						...this.state.profileEditForm,
+						newPassword: {
+							...this.state.profileEditForm.newPassword,
+							value: typedInput
+						}
+					}
+				})
+			break;
+
+			default:
+				break;
+		}
 	}
 	
 	toggleSideDrawer = () => {
@@ -192,9 +267,47 @@ class MainPage extends Component<AppProps> {
 		.catch(err => {
 			console.log(err);
 		})
-
 	}
 
+	friendSelectHandler = (event: SyntheticEvent<HTMLLIElement>) => {
+		event.preventDefault();
+		let userId = localStorage.getItem('userId');
+		let friendId = event.currentTarget.id;
+
+		axios.post('/createConversation', {participants: [
+			{ID: userId},
+			{ID: friendId}
+		]})
+		.then(res => {
+			this.props.history.push(`${this.props.match.path}/chat/${friendId}`)
+		})
+		.catch(err => {
+
+		});
+	}
+
+	navClickHandler = (event: SyntheticEvent<HTMLLIElement>) => {
+        event.preventDefault();
+        let id = event.currentTarget.id;
+        switch (id) {
+			case 'Chat':
+				this.props.history.replace('/home');
+				this.setState({...this.state,
+				sdShow: false,
+				bdShow: false});
+				break;
+		
+			case 'Profile':
+				this.props.history.replace('/home/profile');
+				this.setState({...this.state,
+					sdShow: false,
+					bdShow: false});
+				break;
+			default:
+				break;
+		}
+    }
+ 
 	componentWillUnmount() {
 		this._isMounted = false;
 	}
@@ -215,14 +328,14 @@ class MainPage extends Component<AppProps> {
                     <span className={classes.ProfilePicture} onClick={this.toggleSideDrawer}></span>
                 </div>
 
-				<SideDrawer sdShow={this.state.sdShow} />
+				<SideDrawer sdShow={this.state.sdShow} navClick={this.navClickHandler} />
 				<Backdrop clicked={this.toggleBackDrop} bdShow={this.state.bdShow}/>
 				<NotifSD notifShow={this.state.notifShow}/>
 
 				<Switch>
 
 					<Route path={`${this.props.match.path}/profile`}>
-						<ProfileLayout profileEditForm={this.state.profileEditForm} />
+						<ProfileLayout profileEditForm={this.state.profileEditForm} inputChange={this.onInputChangeHandler}/>
 					</Route>
 					
 					<Route path={this.props.match.path}>
@@ -232,7 +345,8 @@ class MainPage extends Component<AppProps> {
 						searchInputHandler={this.searchInputHandler}
 						searchedContacts={this.state.searchedContacts}
 						addContact={this.addContactHandler}
-						friends={this.state.friends}/>
+						friends={this.state.friends}
+						friendSelect={this.friendSelectHandler}/>
 					</Route>
 
 				</Switch>

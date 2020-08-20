@@ -4,7 +4,7 @@ import Logo from '../../elements/Logo/Logo';
 import LargeBtn from '../../elements/LargeBtn/LargeBtn';
 import SmallBtn from '../../elements/SmallBtn/SmallBtn';
 import picture from '../../assets/icons/picture.svg';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink, Link } from 'react-router-dom';
 
 const signedUpPage = (props: any) => {
     let authRedirect = null;
@@ -31,7 +31,7 @@ const signedUpPage = (props: any) => {
                 </div>
 
                 <div className={classes.Footer}>
-                    <SmallBtn>Skip</SmallBtn>
+                    <SmallBtn><Link to='/home'>Skip</Link></SmallBtn>
                     <SmallBtn>Continue</SmallBtn>
                 </div>    
 

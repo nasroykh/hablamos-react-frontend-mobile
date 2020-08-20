@@ -5,23 +5,34 @@
     justify-content: center;
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 7px;
     width: 100px;
 }
 
 .Friend > h4 {
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: white;
-    font-weight: 500;
-    width: 75%;
+    font-weight: 600;
     padding: 0;
+    cursor: pointer;
     text-align: center;
 }
 
 .FriendPicture {
     background-color: grey;
     width: 55px;
+    cursor: pointer;
     height: 55px;
     border-radius: 100%;
+}
+
+@media (min-width: 500px) {
+    .Friend > h4 {
+        color: #495867;
+    }
+
+    .Friend {
+        margin-right: auto;
+    }
 }
