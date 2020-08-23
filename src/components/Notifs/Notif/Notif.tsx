@@ -9,9 +9,9 @@ const notif = (props: any) => {
     return (
         <li className={classes.Notif}>
             <span className={classes.ContactPicture}></span>
-            <span className={classes.ContactName}>John Doe</span>
+            <span className={classes.ContactName}>{props.fullName}</span>
             <span className={classes.ContactYN}>
-                <input type="image" src={props.blue ? blueAccept : accept} alt=""/>
+                <input type="image" src={props.blue ? blueAccept : accept} alt="" id={props.id} onClick={props.acceptInv}/>
                 <input type="image" src={props.blue ? blueRefuse : refuse} alt=""/>
             </span>
         </li>

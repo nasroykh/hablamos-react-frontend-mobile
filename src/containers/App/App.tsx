@@ -29,13 +29,13 @@ class App extends Component<AppProps> {
 
 	componentDidMount() {
 		const socket = socketIOClient(ENDPOINT);
-		let socketId= undefined;
 		socket.on('connected', (socketId: string) => {
 			this.setState({socketId: socketId})
 		});
 		socket.on('notif', () => {
 			console.log("New Notification");
 		});
+
 	}
 
 	state = {
@@ -237,7 +237,8 @@ class App extends Component<AppProps> {
 
 	logOutHandler = () => {
         this.props.logOut();
-        this.props.history.replace('/');
+		this.props.history.replace('/');
+		//post send to backend (to remove socketId)
     }
 
 	render(){
@@ -262,7 +263,7 @@ class App extends Component<AppProps> {
 
 							<Switch>
 								<Route path="/home">
-									{this.props.loading ? <Spinner/> : <DesktopMain isAuth={this.props.isAuth} logout={this.logOutHandler} />}
+									{this.props.loading ? <Spinner/> : <DesktopMain isAuth={!this.props.isAuth} logout={this.logOutHandler} />}
 								</Route>
 
 								<Route path="/signedup" exact>
@@ -293,7 +294,7 @@ class App extends Component<AppProps> {
 								</Route>
 
 								<Route path="/home">
-									{this.props.loading ? <Spinner/> : <MainPage isAuth={this.props.isAuth} />}
+									{this.props.loading ? <Spinner/> : <MainPage isAuth={!this.props.isAuth} />}
 								</Route>
 
 								<Route path="/signedup" exact>
@@ -319,7 +320,6 @@ class App extends Component<AppProps> {
 						
 					</Media>
 							
-	
 			</div>
 		  );
 		  

@@ -73,7 +73,9 @@ class MainPage extends Component<AppProps> {
 		csShow: false,
 		searchInput: '',
 		searchedContacts: [],
-		friends: []
+		friends: [],
+		convs: [],
+		requests: []
 	}
 
 	componentDidMount() {
@@ -82,9 +84,49 @@ class MainPage extends Component<AppProps> {
 
 		axios.post('/fetchFriends', {myProfileID: userId})
 		.then(res => {
-			let friends = res.data.Details.friendsProfile;
-			this.setState({...this.state,
-			friends: friends})
+			console.log(res);
+			let data = res.data.Details;
+			if (data) {
+				if (data.friendsProfile.length) {
+					let friends = data.friendsProfile;
+					this.setState({...this.state,
+					friends: friends})
+				}
+			}
+
+		})
+		.catch(err => {
+			console.log(err);
+		})
+
+		axios.post('/fetchConversation', {myProfileID: userId})
+		.then(res => {
+			console.log(res);
+			let data = res.data.Details;
+			if (data) {
+				if (data.length) {
+					let convs = data;
+					this.setState({...this.state,
+					convs: convs});
+				}
+			}		
+		})
+		.catch(err => {
+			console.log(err);
+		})
+
+		axios.post('/fetchFriendsRequest', {myProfileID: userId})
+		.then(res => {
+			console.log(res);
+			let data = res.data.Details;
+			if (data.profiles) {
+				if (data.profiles.length) {
+					let requests = data.profiles;
+					this.setState({...this.state,
+					requests: requests})
+				}
+			}
+
 		})
 		.catch(err => {
 			console.log(err);
@@ -260,7 +302,7 @@ class MainPage extends Component<AppProps> {
 		let userId = localStorage.getItem('userId');
 		event.target.disabled = true;
 		event.target.style.opacity = "0.4";
-		axios.post('addFriend', {myProfileID: userId, hisProfileID: contactId})
+		axios.post('/sendInvitation', {myProfileID: userId, hisProfileID: contactId})
 		.then(res => {
 			console.log(res);
 		})
@@ -274,11 +316,9 @@ class MainPage extends Component<AppProps> {
 		let userId = localStorage.getItem('userId');
 		let friendId = event.currentTarget.id;
 
-		axios.post('/createConversation', {participants: [
-			{ID: userId},
-			{ID: friendId}
-		]})
+		axios.post('/openConversation', {myProfileID: userId, hisProfileID: friendId})
 		.then(res => {
+			console.log(res);
 			this.props.history.push(`${this.props.match.path}/chat/${friendId}`)
 		})
 		.catch(err => {
@@ -306,7 +346,21 @@ class MainPage extends Component<AppProps> {
 			default:
 				break;
 		}
-    }
+	}
+	
+	acceptInvHandler = (event: SyntheticEvent<HTMLLIElement>) => {
+		console.log(event.currentTarget.id);
+		let contactId = event.currentTarget.id;
+		let userId = localStorage.getItem('userId');
+
+		axios.post('/addFriend', {myProfileID: userId, hisProfileID: contactId})
+		.then(res => {
+			console.log(res);
+		})
+		.catch(err => {
+			console.log(err)
+		})
+	}
  
 	componentWillUnmount() {
 		this._isMounted = false;
@@ -330,7 +384,7 @@ class MainPage extends Component<AppProps> {
 
 				<SideDrawer sdShow={this.state.sdShow} navClick={this.navClickHandler} />
 				<Backdrop clicked={this.toggleBackDrop} bdShow={this.state.bdShow}/>
-				<NotifSD notifShow={this.state.notifShow}/>
+				<NotifSD notifShow={this.state.notifShow} acceptInv={this.acceptInvHandler} requests={this.state.requests}/>
 
 				<Switch>
 
@@ -346,7 +400,9 @@ class MainPage extends Component<AppProps> {
 						searchedContacts={this.state.searchedContacts}
 						addContact={this.addContactHandler}
 						friends={this.state.friends}
-						friendSelect={this.friendSelectHandler}/>
+						friendSelect={this.friendSelectHandler}
+						convs={this.state.convs}
+						convSelect={this.friendSelectHandler}/>
 					</Route>
 
 				</Switch>

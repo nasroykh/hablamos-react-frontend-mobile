@@ -3,14 +3,14 @@ import classes from './Conv.module.css';
 
 const conv = (props: any) => {
     return (
-        <li className={classes.Conv}>
+        <li className={classes.Conv} onClick={props.convSelect} id={props.id}>
             <span className={classes.ChatPicture}></span>
             <span className={classes.NameAndLastMes}>
-                <h4>John Doe</h4>
-                <p>Lorem Ipsum Dolor Sit Amet</p>
+                <h4>{props.fullname}</h4>
+                <p>Lorem ipsum dolor</p>
             </span>
             <span className={classes.Time}>
-                <span>5:12PM</span>
+                <span>10:00PM</span>
                 <span></span>
             </span>
         </li>

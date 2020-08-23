@@ -134,7 +134,7 @@ class DesktopMain extends Component <AppProps> {
 		let userId = localStorage.getItem('userId');
 		event.target.disabled = true;
 		event.target.style.opacity = "0.4";
-		axios.post('addFriend', {myProfileID: userId, hisProfileID: contactId})
+		axios.post('/sendInvitation', {myProfileID: userId, hisProfileID: contactId})
 		.then(res => {
 			console.log(res);
 		})

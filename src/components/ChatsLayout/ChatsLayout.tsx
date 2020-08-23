@@ -14,7 +14,7 @@ const chatsLayout = (props: any) => {
             </div>
             <div className={classes.Chats}>
                 <ContactSearch 
-                csShow={props.csShow} 
+                csShow={props.csShow}
                 searchInputHandler={props.searchInputHandler}
                 searchedContacts={props.searchedContacts}
                 addContact={props.addContact}/>
@@ -23,7 +23,7 @@ const chatsLayout = (props: any) => {
                     <h3>Today</h3>
                     <input type="image" src={addIcon} alt="Add a contact" onClick={props.toggleSearchContact}/>
                 </div>
-                <Convs/>
+                <Convs convs={props.convs} convSelect={props.convSelect}/>
             </div>
         </div>
     )

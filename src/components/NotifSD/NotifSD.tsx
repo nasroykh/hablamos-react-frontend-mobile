@@ -13,7 +13,7 @@ const notifSD = (props: any) => {
                 <h4>Friend requests</h4>
             </div>
 
-            <Notifs blue={props.blue}/>
+            <Notifs blue={props.blue} acceptInv={props.acceptInv} requests={props.requests}/>
         </div>
     )
 }
