@@ -13,6 +13,7 @@ import * as actions from '../../store/actions/index';
 import socketIOClient from 'socket.io-client'; 
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
+import axios from '../../axios-hb';
 import Spinner from '../../elements/Spinner/Spinner';
 const ENDPOINT = "http://127.0.0.1:4444"
 
@@ -236,7 +237,8 @@ class App extends Component<AppProps> {
 	}
 
 	logOutHandler = () => {
-        this.props.logOut();
+
+		this.props.logOut();
 		this.props.history.replace('/');
 		//post send to backend (to remove socketId)
     }
@@ -263,7 +265,7 @@ class App extends Component<AppProps> {
 
 							<Switch>
 								<Route path="/home">
-									{this.props.loading ? <Spinner/> : <DesktopMain isAuth={!this.props.isAuth} logout={this.logOutHandler} />}
+									{this.props.loading ? <Spinner/> : <DesktopMain isAuth={this.props.isAuth} logout={this.logOutHandler} />}
 								</Route>
 
 								<Route path="/signedup" exact>
@@ -294,7 +296,7 @@ class App extends Component<AppProps> {
 								</Route>
 
 								<Route path="/home">
-									{this.props.loading ? <Spinner/> : <MainPage isAuth={!this.props.isAuth} />}
+									{this.props.loading ? <Spinner/> : <MainPage isAuth={this.props.isAuth} />}
 								</Route>
 
 								<Route path="/signedup" exact>
@@ -342,7 +344,7 @@ const mapStateToProps = (state: any, ownProps: any) => {
 	return {
 		loading: state.loading,
 		redirectUrl: state.redirectUrl,
-		isAuth: state.isAuth
+		isAuth: state.isAuth,
 	}
 }
 

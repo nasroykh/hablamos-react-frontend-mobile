@@ -46,6 +46,7 @@ const signUpFail = (state: any, action: any) => {
 }
 
 const logOut = (state: any, action: any) => {
+    localStorage.clear();
     return updateObject(state, {
         token: null,
         userId: null,
