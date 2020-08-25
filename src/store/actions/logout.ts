@@ -2,7 +2,9 @@ import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
 export const logOut = () => {
-    axios.post('/LogOut', {token: localStorage.getItem('token')})
+    let token = localStorage.getItem('token');
+    let socketId = localStorage.getItem('socketId');
+    axios.post('/LogOut', {}, {headers: {Authorization: token, webSocketID: socketId }})
     .then(res => {
         console.log(res);
     })

@@ -29,14 +29,21 @@ class ChatPage extends Component<AppProps> {
 		const socket = socketIOClient(ENDPOINT);
         let userId = localStorage.getItem('userId');
         let friendId= this.props.match.params.id;
+        let token = localStorage.getItem('token');
+		let socketId = localStorage.getItem('socketId');
 
-		axios.post('/openConversation', {myProfileID: userId, hisProfileID: friendId})
+		axios.post('/openConversation', {myProfileID: friendId, hisProfileID: userId}, {headers: {Authorization: token, webSocketID: socketId }})
 		.then(res => {
             console.log(res);
-            this.setState({...this.state,
-                messages: res.data.Details.messages,
-                convId: res.data.Details.conversationID
-            })
+            if (res.data.Details) {
+                if (res.data.Details.messages) {
+                    this.setState({...this.state,
+                        messages: res.data.Details.messages,
+                        convId: res.data.Details.conversationID
+                    })
+                }
+            }
+
 		})
 		.catch(err => {
             console.log(err);
@@ -51,11 +58,13 @@ class ChatPage extends Component<AppProps> {
         event.preventDefault();
         let message = this.state.messageValue;
         let userId = localStorage.getItem('userId');
+        let token = localStorage.getItem('token');
+		let socketId = localStorage.getItem('socketId');
 
         axios.post('/sendMessage', {
             message: message,
             senderID: userId,
-            conversationID: this.state.convId})
+            conversationID: this.state.convId}, {headers: {Authorization: token, webSocketID: socketId }})
         .then(res => {
             console.log(res);
         })

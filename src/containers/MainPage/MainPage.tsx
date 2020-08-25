@@ -80,9 +80,11 @@ class MainPage extends Component<AppProps> {
 
 	componentDidMount() {
 
-		let userId = localStorage.getItem('userId');
+		let userId = localStorage.getItem('userId');    
+		let token = localStorage.getItem('token');
+		let socketId = localStorage.getItem('socketId');
 
-		axios.post('/fetchFriends', {myProfileID: userId})
+		axios.post('/fetchFriends', {myProfileID: userId}, {headers: {Authorization: token, webSocketID: socketId }})
 		.then(res => {
 			console.log(res);
 			let data = res.data.Details;
@@ -99,7 +101,7 @@ class MainPage extends Component<AppProps> {
 			console.log(err);
 		})
 
-		axios.post('/fetchConversation', {myProfileID: userId})
+		axios.post('/fetchConversation', {myProfileID: userId}, {headers: {Authorization: token, webSocketID: socketId }})
 		.then(res => {
 			console.log(res);
 			let data = res.data.Details;
@@ -115,7 +117,7 @@ class MainPage extends Component<AppProps> {
 			console.log(err);
 		})
 
-		axios.post('/fetchFriendsRequest', {myProfileID: userId})
+		axios.post('/fetchFriendsRequest', {myProfileID: userId}, {headers: {Authorization: token, webSocketID: socketId }})
 		.then(res => {
 			console.log(res);
 			let data = res.data.Details;
@@ -257,12 +259,14 @@ class MainPage extends Component<AppProps> {
 		this._isMounted = true;
 		event.preventDefault();
 		let searchInput = event.target.value;
+		let token = localStorage.getItem('token');
+		let socketId = localStorage.getItem('socketId');
 
 
 		let word = searchInput.toLowerCase().trim();
 
 		if (word.trim()) {
-			axios.post('/findUser', {word: word})
+			axios.post('/findUser', {word: word}, {headers: {Authorization: token, webSocketID: socketId }})
 			.then(res => {
 				console.log(res);
 				if (this._isMounted && res.data.Details) {
@@ -302,7 +306,9 @@ class MainPage extends Component<AppProps> {
 		let userId = localStorage.getItem('userId');
 		event.target.disabled = true;
 		event.target.style.opacity = "0.4";
-		axios.post('/sendInvitation', {myProfileID: userId, hisProfileID: contactId})
+		let token = localStorage.getItem('token');
+		let socketId = localStorage.getItem('socketId');
+		axios.post('/sendInvitation', {myProfileID: userId, hisProfileID: contactId}, {headers: {Authorization: token, webSocketID: socketId }})
 		.then(res => {
 			console.log(res);
 		})
@@ -315,8 +321,10 @@ class MainPage extends Component<AppProps> {
 		event.preventDefault();
 		let userId = localStorage.getItem('userId');
 		let friendId = event.currentTarget.id;
+		let token = localStorage.getItem('token');
+		let socketId = localStorage.getItem('socketId');
 
-		axios.post('/openConversation', {myProfileID: userId, hisProfileID: friendId})
+		axios.post('/openConversation', {myProfileID: userId, hisProfileID: friendId}, {headers: {Authorization: token, webSocketID: socketId }})
 		.then(res => {
 			console.log(res);
 			this.props.history.push(`${this.props.match.path}/chat/${friendId}`)
@@ -352,8 +360,10 @@ class MainPage extends Component<AppProps> {
 		console.log(event.currentTarget.id);
 		let contactId = event.currentTarget.id;
 		let userId = localStorage.getItem('userId');
+		let token = localStorage.getItem('token');
+		let socketId = localStorage.getItem('socketId');
 
-		axios.post('/addFriend', {myProfileID: userId, hisProfileID: contactId})
+		axios.post('/addFriend', {myProfileID: userId, hisProfileID: contactId}, {headers: {Authorization: token, webSocketID: socketId }})
 		.then(res => {
 			console.log(res);
 		})

@@ -32,6 +32,7 @@ class App extends Component<AppProps> {
 		const socket = socketIOClient(ENDPOINT);
 		socket.on('connected', (socketId: string) => {
 			this.setState({socketId: socketId})
+			localStorage.setItem('socketId', socketId)
 		});
 		socket.on('notif', () => {
 			console.log("New Notification");
