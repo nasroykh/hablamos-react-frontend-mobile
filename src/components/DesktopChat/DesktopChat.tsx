@@ -11,7 +11,7 @@ const desktopChat = (props: any) => {
                 <h3>John Doe</h3>
             </div>
             <div className={classes.ConvLay}>
-                <ChatPage />
+                <ChatPage socket={props.socket} />
             </div>
         </Aux>
     )

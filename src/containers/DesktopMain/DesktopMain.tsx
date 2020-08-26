@@ -17,7 +17,8 @@ import logout from '../../assets/icons/logout.svg';
 
 interface AppProps extends RouteComponentProps {
     isAuth: boolean;
-    logout: () => void
+	logout: () => void;
+	socket: any
 };
 
 class DesktopMain extends Component <AppProps> {
@@ -28,21 +29,62 @@ class DesktopMain extends Component <AppProps> {
         searchedContacts: [],
         csShow: false,
         bdShow: false,
-        notifShow: false
+		notifShow: false,
+		convs: [],
+		requests: []
     }
 
     componentDidMount() {
 
-		let userId = localStorage.getItem('userId');
+		let userId = localStorage.getItem('userId');    
+		let token = localStorage.getItem('token');
+		let socketId = localStorage.getItem('socketId');
 
-		axios.post('/fetchFriends', {myProfileID: userId})
+		axios.post('/fetchFriends', {myProfileID: userId}, {headers: {Authorization: token, webSocketID: socketId }})
 		.then(res => {
-			let friends: [];
-			if (res.data.Details) {
-				friends = res.data.Details.friendsProfile;
-				this.setState({...this.state,
+			console.log(res);
+			let data = res.data.Details;
+			if (data) {
+				if (data.friendsProfile.length) {
+					let friends = data.friendsProfile;
+					this.setState({...this.state,
 					friends: friends})
+				}
 			}
+
+		})
+		.catch(err => {
+			console.log(err);
+		})
+
+		axios.post('/fetchConversation', {myProfileID: userId}, {headers: {Authorization: token, webSocketID: socketId }})
+		.then(res => {
+			console.log(res);
+			let data = res.data.Details;
+			if (data) {
+				if (data.length) {
+					let convs = data;
+					this.setState({...this.state,
+					convs: convs});
+				}
+			}		
+		})
+		.catch(err => {
+			console.log(err);
+		})
+
+		axios.post('/fetchFriendsRequest', {myProfileID: userId}, {headers: {Authorization: token, webSocketID: socketId }})
+		.then(res => {
+			console.log(res);
+			let data = res.data.Details;
+			if (data.profiles) {
+				if (data.profiles.length) {
+					let requests = data.profiles;
+					this.setState({...this.state,
+					requests: requests})
+				}
+			}
+
 		})
 		.catch(err => {
 			console.log(err);
@@ -144,16 +186,32 @@ class DesktopMain extends Component <AppProps> {
 
     }
     
-    friendSelectHandler = (event: SyntheticEvent<HTMLLIElement>) => {
+	acceptInvHandler = (event: SyntheticEvent<HTMLLIElement>) => {
+		console.log(event.currentTarget.id);
+		let contactId = event.currentTarget.id;
+		let userId = localStorage.getItem('userId');
+		let token = localStorage.getItem('token');
+		let socketId = localStorage.getItem('socketId');
+
+		axios.post('/addFriend', {myProfileID: userId, hisProfileID: contactId}, {headers: {Authorization: token, webSocketID: socketId }})
+		.then(res => {
+			console.log(res);
+		})
+		.catch(err => {
+			console.log(err)
+		})
+	}
+
+	friendSelectHandler = (event: SyntheticEvent<HTMLLIElement>) => {
 		event.preventDefault();
 		let userId = localStorage.getItem('userId');
 		let friendId = event.currentTarget.id;
+		let token = localStorage.getItem('token');
+		let socketId = localStorage.getItem('socketId');
 
-		axios.post('/createConversation', {participants: [
-			{ID: userId},
-			{ID: friendId}
-		]})
+		axios.post('/openConversation', {myProfileID: userId, hisProfileID: friendId}, {headers: {Authorization: token, webSocketID: socketId }})
 		.then(res => {
+			console.log(res);
 			this.props.history.push(`${this.props.match.path}/chat/${friendId}`)
 		})
 		.catch(err => {
@@ -175,7 +233,12 @@ class DesktopMain extends Component <AppProps> {
             <div className={classes.DesktopMain}>
                 {authRedirect}
                 <div className={classes.Side}>
-                    <NotifSD notifShow={this.state.notifShow} blue toggleNotif={this.toggleNotifSD}/>
+					<NotifSD 
+					notifShow={this.state.notifShow} 
+					blue 
+					toggleNotif={this.toggleNotifSD}
+					acceptInv={this.acceptInvHandler} 
+					requests={this.state.requests}/>
                     <div className={classes.SideHeader}>
                         <span className={classes.ProfilePicture}></span>
                         <h3>John Doe</h3>
@@ -205,13 +268,13 @@ class DesktopMain extends Component <AppProps> {
                             <input type="image" src={addIcon} alt="Search" onClick={this.toggleSearchContact}/>
                         </div>
                         <Backdrop clicked={this.toggleBackDrop} bdShow={this.state.bdShow}/>
-                        <Convs/>
+                        <Convs  convs={this.state.convs} convSelect={this.friendSelectHandler}/>
                     </div>
                 </div>
                 <div className={classes.Chat}>
                     <Switch>
                         <Route path={`${this.props.match.path}/chat/:id`} exact>
-                            <DesktopChat/>
+                            <DesktopChat socket={this.props.socket}/>
                         </Route>
                         <Route path={`${this.props.match.path}`}>
                             <Logo size="large"/>

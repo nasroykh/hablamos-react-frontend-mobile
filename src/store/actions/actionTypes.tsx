@@ -8,5 +8,7 @@ export const SIGNUP_FAIL = 'SIGNUP_FAIL';
 
 export const LOG_OUT = 'LOG_OUT';
 
+export const CHECK_AUTH = 'CHECK_AUTH';
+
 
 export const SET_AUTH_REDIRECT_PATH = 'SET_AUTH_REDIRECT_PATH';

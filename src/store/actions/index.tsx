@@ -1,5 +1,6 @@
 export {
-    signIn
+    signIn,
+    checkAuth
 } from './signIn';
 
 export {

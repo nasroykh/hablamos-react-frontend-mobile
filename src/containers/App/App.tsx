@@ -20,6 +20,7 @@ const ENDPOINT = "http://127.0.0.1:4444"
 interface AppProps extends RouteComponentProps {
 	onSignIn: (email: string, password: string, socketId: string) => void;
 	onSignUp: (email: string, fullname: string, password: string, socketId: string) => void;
+	checkAuth: () => void;
     logOut: () => void
 	loading: boolean;
 	redirectUrl: string;
@@ -30,12 +31,16 @@ class App extends Component<AppProps> {
 
 	componentDidMount() {
 		const socket = socketIOClient(ENDPOINT);
+		this.props.checkAuth()
+		this.setState({...this.state, socket: socket})
+
 		socket.on('connected', (socketId: string) => {
 			this.setState({socketId: socketId})
 			localStorage.setItem('socketId', socketId)
 		});
 		socket.on('notif', () => {
 			console.log("New Notification");
+			alert("New notification !");
 		});
 
 	}
@@ -98,7 +103,8 @@ class App extends Component<AppProps> {
 			}
 		},
 		socketId: '',
-		isSignUp: false
+		isSignUp: false,
+		socket: null
 	}
 
 	onInputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -266,7 +272,7 @@ class App extends Component<AppProps> {
 
 							<Switch>
 								<Route path="/home">
-									{this.props.loading ? <Spinner/> : <DesktopMain isAuth={this.props.isAuth} logout={this.logOutHandler} />}
+									{this.props.loading ? <Spinner/> : <DesktopMain socket={this.state.socket} isAuth={this.props.isAuth} logout={this.logOutHandler} />}
 								</Route>
 
 								<Route path="/signedup" exact>
@@ -293,7 +299,7 @@ class App extends Component<AppProps> {
 							<Switch>
 
 								<Route path="/home/chat/:id">
-									<ChatPage />
+									<ChatPage socket={this.state.socket}/>
 								</Route>
 
 								<Route path="/home">
@@ -338,6 +344,7 @@ interface MapStateToPropsTypes {
 interface MapDispatchToPropsTypes {
 	onSignIn: (email: string, password: string, socketId: string) => void;
 	onSignUp: (email: string, fullname: string, password: string, socketId: string) => void;
+	checkAuth: () => void;
     logOut: () => void
 }
 	
@@ -354,7 +361,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
 	return {
 		onSignIn: (email: string, password: string, socketId: string) => dispatch(actions.signIn(email, password, socketId)),
 		onSignUp: (email: string, fullname: string, password: string, socketId: string) => dispatch(actions.signUp(email,fullname,password,socketId)),
-        logOut: () => dispatch(actions.logOut)		
+		checkAuth: () => dispatch(actions.checkAuth()),
+		logOut: () => dispatch(actions.logOut)		
 	}
 };
 

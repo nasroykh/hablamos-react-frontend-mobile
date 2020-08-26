@@ -46,13 +46,19 @@ const signUpFail = (state: any, action: any) => {
 }
 
 const logOut = (state: any, action: any) => {
-    localStorage.clear();
+
     return updateObject(state, {
         token: null,
         userId: null,
         socketId: null,
         isAuth: false
     })
+}
+
+const checkAuth = (state: any ,action: any) => {
+    if (!state.isAuth) {
+        return updateObject(state, {isAuth: action.isAuth});
+    }
 }
 
 
@@ -64,6 +70,7 @@ const reducer = (state = INITIAL_STATE, action: { type: any; }) => {
         case actionTypes.SIGNUP_START: return signUpStart(state, action);
         case actionTypes.SIGNUP_SUCCESS: return signUpSuccess(state, action);
         case actionTypes.LOG_OUT: return logOut(state, action);
+        case actionTypes.CHECK_AUTH: return checkAuth(state, action);
         default:
             return state;
     }

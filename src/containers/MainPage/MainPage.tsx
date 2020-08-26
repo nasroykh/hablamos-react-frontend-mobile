@@ -71,7 +71,6 @@ class MainPage extends Component<AppProps> {
 		bdShow : false,
 		notifShow: false,
 		csShow: false,
-		searchInput: '',
 		searchedContacts: [],
 		friends: [],
 		convs: [],

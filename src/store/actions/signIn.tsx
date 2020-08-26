@@ -23,6 +23,30 @@ export const signInFail = (error: any) => {
     }
 }
 
+export const checkAuth = () => {
+    return (dispatch: any) => {
+        let token = localStorage.getItem('token');
+        let socketId = localStorage.getItem('socketId');
+        axios.post('/checkAuth', {}, {headers: {Authorization: token, webSocketID: socketId }} )
+        .then(res => {
+            console.log(res)
+            if (res.data.Status === "Success") {
+                dispatch(checkAuthSuccess())
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+} 
+
+export const checkAuthSuccess = () => {
+    return {
+        type: actionTypes.CHECK_AUTH,
+        isAuth: true
+    }
+}
+
 export const signIn = (email: string, password: string, socketId: string, toSignedUp?: boolean) => {
     return (dispatch: any) => {
         dispatch(signInStart());

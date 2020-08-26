@@ -7,6 +7,7 @@ export const logOut = () => {
     axios.post('/LogOut', {}, {headers: {Authorization: token, webSocketID: socketId }})
     .then(res => {
         console.log(res);
+        localStorage.clear();
     })
     .catch(err => {
         console.log(err);
