@@ -1,3 +1,5 @@
+@import 'scss/variables.scss';
+
 * {
 	margin: 0;
   	padding: 0;
@@ -6,6 +8,16 @@
 
 html, body, #root {
 	height: 100%;
+	background-color: $bgColor;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+ul, li {
+	list-style: none;
 }
 
 body {

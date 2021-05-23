@@ -1,0 +1,22 @@
+@import '../../scss/variables';
+
+.SignInPage {
+
+    padding: 1em 0;
+
+    h2 {
+        color: $primaryColor;
+        text-align: center;
+        margin-top: 1.5em;
+    }
+}
+
+.SignInForm {
+    display: flex;
+    flex-direction: column;
+    margin: 2em;
+
+    a, button {
+        margin: 1em auto 0;
+    }
+}

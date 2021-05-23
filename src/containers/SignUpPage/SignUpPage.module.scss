@@ -1,0 +1,26 @@
+@import '../../scss/variables';
+
+.SignUpPage {
+
+    padding: 1em 0;
+
+    h2 {
+        color: $primaryColor;
+        text-align: center;
+        margin-top: 1.5em;
+    }
+}
+
+.SignUpForm {
+    display: flex;
+    flex-direction: column;
+    margin: 2em;
+
+    button {
+        margin-top: 3em;
+    }
+
+    a {
+        margin-top: 1em;
+    }
+}

@@ -1,0 +1,14 @@
+.Contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1em 1em 4em;
+    height: 100%;
+    overflow: scroll;
+}
+
+.ContactsSearch {
+    padding: 1em;
+    height: 50%;
+    margin-bottom: .5em;
+}

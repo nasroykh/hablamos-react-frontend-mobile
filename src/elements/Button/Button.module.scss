@@ -1,0 +1,22 @@
+@import '../../scss/variables';
+
+.Primary, .Secondary {
+    padding: 1em .5em;
+    border-radius: 10px;
+    font-size: .85rem;
+}
+
+.Primary {
+    background-color: $secondaryColor;
+    color: $whiteColor;
+    width: 75%;
+    margin: auto;
+}
+
+.Secondary {
+    color: $primaryColor;
+    background-color: $bgColor;
+    border: 2px $primaryColor solid;
+    width: 55%;
+    margin: auto;   
+}

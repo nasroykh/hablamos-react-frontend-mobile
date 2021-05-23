@@ -1,0 +1,25 @@
+@import '../../scss/variables';
+
+.LandingPage {
+
+    padding: 1em 0 2em;
+    
+    h1, h2 {
+        color: $primaryColor;
+        text-align: center;
+        margin: 1.5em 0 1em;
+    }
+}
+
+.LandingImage { 
+    margin-bottom: 1.5em;
+
+    div {
+        margin-left: -$m-pad;
+        margin-right: -$m-pad;
+
+        img {
+            width: 100%;
+        }
+    }
+}

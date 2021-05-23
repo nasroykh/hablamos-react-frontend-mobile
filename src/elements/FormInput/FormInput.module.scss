@@ -1,0 +1,30 @@
+@import '../../scss/variables';
+
+.FormInput {
+    display: block;
+    color: $whiteColor;
+    padding: 1.25em;
+    border: 1px $primaryColor solid;
+    font-size: 1rem;
+    border-radius: 15px;
+    border-left: 5px $primaryColor solid;
+    border-right: 5px $primaryColor solid;
+
+    &:focus {
+        border-left: 10px $primaryColor solid;
+        border-right: 10px $primaryColor solid;
+    }
+}
+
+.SignForm {
+    color: $whiteColor;
+    padding: 1.5em;
+    border-left: 3px $primaryColor solid;
+    border-bottom: 1px $primaryColor solid;
+    font-size: .9rem;
+
+    &:focus {
+        box-shadow: 0px 2px 0px $primaryColor;
+        background-color: rgba(#000, 0.2);
+    }
+}

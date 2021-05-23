@@ -1,0 +1,32 @@
+@import '../../scss/variables';
+
+.Tab {
+    height: 80%;
+    margin: 0 (-$m-pad);
+    border: 2px $secondaryColor solid;
+    border-radius: 15px 15px 0 0;
+    overflow: hidden;
+
+    & > input {
+        margin: 1em auto;
+        width: 95%;
+    }
+
+}
+
+.TabHeader {
+    background-color: $secondaryColor;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .75em ($m-pad);
+    color: $whiteColor;
+
+    h2 {
+        margin-right: auto;
+    }
+
+    a:last-of-type {
+        margin-left: 1em;
+    }
+}
