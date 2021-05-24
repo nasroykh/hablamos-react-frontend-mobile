@@ -28,3 +28,16 @@
         background-color: rgba(#000, 0.2);
     }
 }
+
+.FormSelect {
+    width: 60%;
+    option:hover {
+        background-color: $primaryColor;
+        color: $bgColor;
+    }
+    option {
+        background-color: $bgColor;
+
+        
+    }
+}

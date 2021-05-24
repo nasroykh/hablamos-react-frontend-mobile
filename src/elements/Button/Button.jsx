@@ -30,7 +30,7 @@ const Button = (props) => {
             break;
 
         case 'menu-btn':
-            btn = <button className={classes.MenuBtn}><MenuBtn/></button>;
+            btn = <button onClick={props.click} className={classes.MenuBtn}><MenuBtn/></button>;
             break;
 
         case 'profile-pic':

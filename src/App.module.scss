@@ -3,6 +3,7 @@
 .App {
     height: 100%;
     padding: 0 ($m-pad);
+    overflow: auto;
 }
 
 a {
@@ -34,7 +35,7 @@ p {
     font-size: .85rem;
 }
 
-input {
+input, select {
     border: none;
     background: none;
     outline: none;

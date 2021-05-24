@@ -9,8 +9,9 @@ import SignUpPage from './containers/SignUpPage/SignUpPage';
 import SignInPage from './containers/SignInPage/SignInPage';
 import MainPage from './containers/MainPage/MainPage';
 import ChatPage from './containers/ChatPage/ChatPage';
-const ENDPOINT = "http://localhost:4444"; 
-const socket = socketIOClient(ENDPOINT);
+import { isDesktop, isMobile } from "react-device-detect";
+// const ENDPOINT = "http://localhost:4444"; 
+// const socket = socketIOClient(ENDPOINT);
 
 const App = () => {
 
@@ -18,6 +19,13 @@ const App = () => {
 	const [username, setUsername] = useState('');
 	const [conv, setConv] = useState('');
 	const [friend, setFriend] = useState('');
+
+	useEffect(() => {
+		if (isMobile && window.location.hostname==='hablamos.me') {
+			window.location.href = 'https://m.hablamos.me';
+		} 
+
+	}, [])
 
 	// useEffect(() => {
 	// 	socket.on("connection", () => {

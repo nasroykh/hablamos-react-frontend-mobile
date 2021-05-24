@@ -2,6 +2,9 @@
 
 .Conv {
     margin-bottom: 3em;
+    &:last-of-type {
+        margin: 0;
+    }
 }
 
 .Conv > a {

@@ -6,27 +6,123 @@
     border: 2px $secondaryColor solid;
     border-radius: 15px 15px 0 0;
     overflow: hidden;
-
-    & > input {
-        margin: 1em auto;
-        width: 95%;
-    }
-
 }
+
+.TabBody {
+    height: 87.5%;
+    overflow: auto;
+    padding: 0 ($m-pad);
+}
+
 
 .TabHeader {
     background-color: $secondaryColor;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: .75em ($m-pad);
+    padding: 0 ($m-pad);
+    height: 12.5%;
     color: $whiteColor;
-
+    
     h2 {
         margin-right: auto;
     }
-
+    
     a:last-of-type {
         margin-left: 1em;
+    }
+}
+
+.AddContactTab {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    input {
+        margin: 1em 0;
+    }
+}
+
+.GroupTab {
+    padding: 2em ($m-pad);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    ul {
+        margin: 1em 0;
+    }
+}
+
+.ProfileTab {
+    
+    padding: 2em ($m-pad);
+
+    input {
+        width: 100%;
+    }
+    
+    label {
+        color: $primaryColor;
+        font-family: $secondaryFont;
+        margin-left: 1em;
+    }
+    
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    div {
+        margin: .5em 0;
+    }
+
+    button {
+        margin: 2em auto 1em;
+    }
+
+    h3 {
+        color: $primaryColor;
+        font-family: $primaryFont;
+        font-weight: 400;
+        align-self: flex-start;
+        margin: 2em .5em 1em;
+    }
+}
+
+.ProfilePic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+    img {
+        width: 50%;
+    }
+
+    h1 {
+        color: $primaryColor;
+        margin: .5em 0 1em;
+    }
+}
+
+.ContactTab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 3em 0;
+    
+    img {
+        width: 50%;
+    }
+
+    a {
+        margin: .5em 0;
+    }
+
+    h1 {
+        color: $primaryColor;
+        margin: .5em 0 1.5em;
     }
 }

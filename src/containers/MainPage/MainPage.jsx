@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './MainPage.module.scss';
 import NavBar from '../../components/NavBar/NavBar';
 import Tab from '../../components/Tab/Tab';
 import {Switch, Route} from 'react-router-dom';
+import SideDrawer from '../../components/SideDrawer/SideDrawer';
+import BackDrop from '../../elements/BackDrop/BackDrop';
 
 const MainPage = () => {
+
+    const [sdShow, setSdShow] = useState(false);
+    const [bdShow, setBdShow] = useState(false);
+
+    const sdToggleHandler = () => {
+        setBdShow(!bdShow);
+        setSdShow(!sdShow);
+    }
+
     return (
         <div className={classes.MainPage}>
-            <NavBar/>
+            <BackDrop bdShow={bdShow} click={sdToggleHandler}/>
+            <SideDrawer sdShow={sdShow} sdToggleHandler={() => setTimeout(sdToggleHandler,300)}/>
+            <NavBar sdToggleHandler={sdToggleHandler}/>
             
             <Switch>
                 <Route path='/main/convs'>
@@ -32,6 +45,14 @@ const MainPage = () => {
 
                 <Route path='/main/creategroup'>
                     <Tab tabName='creategroup'/>
+                </Route>
+
+                <Route path='/main/profile'>
+                    <Tab tabName='profile'/>
+                </Route>
+
+                <Route path='/main/contact'>
+                    <Tab tabName='contact'/>
                 </Route>
             </Switch>
         </div>
