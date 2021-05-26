@@ -17,7 +17,7 @@ const SignUpPage = () => {
                 <FormInput sign type="text" placeholder="First name"/>
                 <FormInput sign type="text" placeholder="Last name"/>
                 <Button btnType='primary-form'>Confirm</Button>
-                <Button btnType='secondary-form' to='/'>Cancel</Button>
+                <Button btnType='secondary-form' to='/main/convs'>Cancel</Button>
             </form>
         </div>
     )

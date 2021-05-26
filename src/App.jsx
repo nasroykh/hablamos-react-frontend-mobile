@@ -55,15 +55,32 @@ const App = () => {
 	// 	});
 
 	// }, [fetchedMessages])
+
+	const [sdShow, setSdShow] = useState(false);
+    const [bdShow, setBdShow] = useState(false);
+
+    const sdToggleHandler = () => {
+        setBdShow(!bdShow);
+        setSdShow(!sdShow);
+    }
+
 	
  	return (
 		<div className={classes.App}>
 			<Switch>
-				<Route path='/chat'>
-					<ChatPage/>
+				<Route path='/chat/:id'>
+					<ChatPage
+						sdShow={sdShow}
+						bdShow={bdShow}
+						sdToggleHandler={sdToggleHandler}
+					/>
 				</Route>
 				<Route path='/main'>
-					<MainPage/>
+					<MainPage
+						sdShow={sdShow}
+						bdShow={bdShow}
+						sdToggleHandler={sdToggleHandler}
+					/>
 				</Route>
 				<Route path='/signin'>
 					<SignInPage/>
