@@ -1,30 +1,41 @@
 import classes from './App.module.scss';
 import React, {useEffect, useState} from 'react';
-// import axios from './axios';
 import socketIOClient from "socket.io-client";
-import {Switch, Route} from 'react-router-dom'
-import LoadingPage from './containers/LoadingPage/LoadingPage';
+import {Switch, Route, Redirect} from 'react-router-dom'
+import { isMobile } from "react-device-detect";
+import {useSelector, useDispatch} from 'react-redux';
+// import LoadingPage from './containers/LoadingPage/LoadingPage';
 import LandingPage from './containers/LandingPage/LandingPage';
 import SignUpPage from './containers/SignUpPage/SignUpPage';
 import SignInPage from './containers/SignInPage/SignInPage';
 import MainPage from './containers/MainPage/MainPage';
 import ChatPage from './containers/ChatPage/ChatPage';
-import { isDesktop, isMobile } from "react-device-detect";
-// const ENDPOINT = "http://localhost:4444"; 
-// const socket = socketIOClient(ENDPOINT);
+import {checkAuth} from './store/auth-actions';
+
+const ENDPOINT = "http://localhost:4444"; 
+const socket = socketIOClient(ENDPOINT);
 
 const App = () => {
 
-	const [fetchedMessages, setFetchedMessages] = useState([]);
-	const [username, setUsername] = useState('');
-	const [conv, setConv] = useState('');
-	const [friend, setFriend] = useState('');
+	let isAuth = useSelector(state => state.auth.isAuth);
+	const dispatch = useDispatch(); 
 
 	useEffect(() => {
 		if (isMobile && window.location.hostname==='hablamos.me') {
 			window.location.href = 'https://m.hablamos.me';
 		} 
 
+		dispatch(checkAuth(localStorage.getItem('token')));
+
+		socket.on("connection", () => {
+			console.log('Connected to socket!');
+		});
+		
+		// socket.emit('getId', '60afef864bbd17afacb08c07');
+
+		// socket.on('message:receive', (message) => {
+		// 	console.log(message)
+		// })
 	}, [])
 
 	// useEffect(() => {
@@ -64,34 +75,39 @@ const App = () => {
         setSdShow(!sdShow);
     }
 
-	
  	return (
 		<div className={classes.App}>
 			<Switch>
+
 				<Route path='/chat/:id'>
-					<ChatPage
-						sdShow={sdShow}
-						bdShow={bdShow}
-						sdToggleHandler={sdToggleHandler}
-					/>
+					{isAuth ? 
+						<ChatPage
+							sdShow={sdShow}
+							bdShow={bdShow}
+							sdToggleHandler={sdToggleHandler}/> : <Redirect to='/'/>}
 				</Route>
+
 				<Route path='/main'>
+					{isAuth ? 
 					<MainPage
 						sdShow={sdShow}
 						bdShow={bdShow}
-						sdToggleHandler={sdToggleHandler}
-					/>
+						sdToggleHandler={sdToggleHandler}/> : <Redirect to='/'/>}
 				</Route>
+
 				<Route path='/signin'>
-					<SignInPage/>
+					{isAuth ? <Redirect to='/main/convs'/> : <SignInPage/>}
 				</Route>
+
 				<Route path='/signup'>
-					<SignUpPage/>
+					{isAuth ? <Redirect to='/main/convs'/> : <SignUpPage/>}
 				</Route>
+
 				<Route path='/'>
 					{/* <LoadingPage/> */}
-					<LandingPage/>
+					{isAuth ? <Redirect to='/main/convs'/> : <LandingPage/>}
 				</Route>
+
 			</Switch>
 		</div>
   	);

@@ -35,8 +35,8 @@ const SideDrawer = (props) => {
                         <span>Settings</span>
                     </NavLink>
                 </li>
-                <li onClick={props.sdToggleHandler}>
-                    <NavLink to='/signin'>
+                <li onClick={props.logoutHandler}>
+                    <NavLink to='#'>
                         <NavLogout/>
                         <span>Logout</span>
                     </NavLink>

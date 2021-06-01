@@ -13,7 +13,9 @@ const FormInput = (props) => {
             <input 
             type={props.type}
             placeholder={props.placeholder}
-            className={`${props.sign ? classes.SignForm : classes.FormInput}`} />   
+            className={`${props.sign ? classes.SignForm : classes.FormInput}`} 
+            onChange={props.onChangeHandler}
+            name={props.name}/>   
         )
     }
 
