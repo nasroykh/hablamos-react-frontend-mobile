@@ -10,7 +10,7 @@ import SignUpPage from './containers/SignUpPage/SignUpPage';
 import SignInPage from './containers/SignInPage/SignInPage';
 import MainPage from './containers/MainPage/MainPage';
 import ChatPage from './containers/ChatPage/ChatPage';
-import {checkAuth} from './store/auth-actions';
+import {checkAuth} from './store/auth/auth-actions';
 
 const ENDPOINT = "http://localhost:4444"; 
 const socket = socketIOClient(ENDPOINT);
@@ -36,7 +36,7 @@ const App = () => {
 		// socket.on('message:receive', (message) => {
 		// 	console.log(message)
 		// })
-	}, [])
+	}, [dispatch])
 
 	// useEffect(() => {
 	// 	socket.on("connection", () => {

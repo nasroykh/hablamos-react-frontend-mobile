@@ -1,5 +1,6 @@
 import {authActions} from './auth-slice';
-import axios from '../axios';
+import {userActions} from '../user/user-slice';
+import axios from '../../axios';
 
 export const signUp = (signUpInfos) => {
     return async (dispatch) => {
@@ -17,6 +18,7 @@ export const signUp = (signUpInfos) => {
 
             if (res.status === 201) {
                 dispatch(authActions.loggedIn({token: res.data.token}));
+                dispatch(userActions.loginSuccess({userInfos: res.data.user}));
                 localStorage.setItem('token', res.data.token);
             }
 
@@ -37,10 +39,10 @@ export const login = (loginInfos) => {
 
             if (res.status === 200) {
                 dispatch(authActions.loggedIn({token: res.data.token}));
+                dispatch(userActions.loginSuccess({userInfos: res.data.user}));
                 localStorage.setItem('token', res.data.token);
             }
 
-            console.log(res.data);
         } catch (e) {
             console.log(e);
         }
@@ -52,7 +54,7 @@ export const logout = (token) => {
     return async (dispatch) => {
         try {
 
-            let res = await axios.post('/users/logout', {}, {headers: {Authorization: token}});
+            let res = await axios.post('/users/logout');
 
             if (res.status === 200) {
                 dispatch(authActions.loggedOut());
@@ -69,16 +71,23 @@ export const logout = (token) => {
 export const checkAuth = (token) => {
     return async (dispatch) => {
         try {
-            let res = await axios.get('/users/check', {headers: {Authorization: token}});
+            let res;
 
-            if (res.status === 200) {
-                dispatch(authActions.loggedIn({token: res.data.token}));
-                localStorage.setItem('token', res.data.token);
-            }
+            if (token) {
+                res = await axios.get('/users/check');
+                if (res.status === 200) {
+                    localStorage.setItem('token', res.data.token);
+                    dispatch(authActions.loggedIn({token: res.data.token}));
+                    dispatch(userActions.loginSuccess({userInfos: res.data.user}));
+                } else {
+                    throw new Error();
+                }
+    
+                console.log(res.data);
+            } 
 
-            console.log(res.data);
         } catch (e) {
-            console.log(e);
+            console.log('Error');
         }
     }
 }

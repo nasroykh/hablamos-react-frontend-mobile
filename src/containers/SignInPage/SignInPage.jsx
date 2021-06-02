@@ -1,33 +1,25 @@
-import React from 'react';
-import {Redirect} from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import React, {useRef} from 'react';
+import { useDispatch } from 'react-redux';
 import classes from './SignInPage.module.scss';
 import Logo from '../../elements/Logo/Logo';
 import FormInput from '../../elements/FormInput/FormInput';
 import Button from '../../elements/Button/Button';
-import {authActions} from '../../store/auth-slice';
-import {login} from '../../store/auth-actions';
+import {login} from '../../store/auth/auth-actions';
 
 const SignInPage = () => {
 
     const dispatch = useDispatch();
 
-    let loginInfos = useSelector(state => (
-        {
-            identifier: state.auth.identifier,
-            password: state.auth.password
-        }
-    ));
-
-    const inputChangeHandler = (e) => {
-        dispatch(authActions.inputChangeHandler({
-            name: e.target.name,
-            value: e.target.value
-        }));
-    }
+    const identifierInput = useRef();
+    const passwordInput = useRef();
 
     const loginHandler = (e) => {
         e.preventDefault();
+
+        let loginInfos = {
+            identifier: identifierInput.current.value,
+            password: passwordInput.current.value
+        }
 
         dispatch(login(loginInfos));
     }
@@ -41,14 +33,16 @@ const SignInPage = () => {
                     sign 
                     type="text" 
                     placeholder="Username/Email" 
-                    onChangeHandler={inputChangeHandler}
-                    name='identifier'/>
+                    inputRef={identifierInput}
+                    name='identifier'
+                    required/>
                 <FormInput 
                     sign 
                     type="password" 
                     placeholder="Password" 
-                    onChangeHandler={inputChangeHandler}
-                    name='password'/>
+                    inputRef={passwordInput}
+                    name='password'
+                    required/>
                 <Button btnType='primary-form'>Confirm</Button>
                 <Button btnType='secondary-form' to='/'>Cancel</Button>
             </form>

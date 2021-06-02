@@ -6,6 +6,7 @@ import {ReactComponent as MenuBtn} from '../../assets/menu-btn.svg';
 import {ReactComponent as AddConv} from '../../assets/add-conv-icon.svg';
 import {ReactComponent as BackBtn} from '../../assets/back-btn.svg';
 import {ReactComponent as AddFriend} from '../../assets/add-friend-icon.svg';
+import {ReactComponent as CancelAdd} from '../../assets/cancel-add-icon.svg';
 import {ReactComponent as Group} from '../../assets/group-icon.svg';
 import {ReactComponent as FileIcon} from '../../assets/file-icon.svg';
 import {ReactComponent as SendBtn} from '../../assets/send-btn.svg';
@@ -49,7 +50,11 @@ const Button = (props) => {
             break;
 
         case 'add-contact':
-            btn = <Link to={props.to} className={classes.TabHeaderBtn}><AddFriend/></Link>;
+            btn = <Link to={props.to} onClick={props.click} className={classes.TabHeaderBtn}><AddFriend/></Link>;
+            break;
+
+        case 'add-contact-btn':
+            btn = <button onClick={props.click} id={props.id} className={classes.TabHeaderBtn}><AddFriend/></button>;
             break;
 
         case 'group':

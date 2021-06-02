@@ -1,36 +1,31 @@
-import React from 'react';
-import {Redirect} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import React, {useRef} from 'react';
+import {useDispatch} from 'react-redux';
 import classes from './SignUpPage.module.scss';
 import Logo from '../../elements/Logo/Logo';
 import Button from '../../elements/Button/Button';
 import FormInput from '../../elements/FormInput/FormInput';
-import {authActions} from '../../store/auth-slice';
-import {signUp} from '../../store/auth-actions';
+import {signUp} from '../../store/auth/auth-actions';
 
 const SignUpPage = () => {
 
     const dispatch = useDispatch();
 
-    const signUpInfos = useSelector(state => (
-        {
-            username: state.auth.username,
-            email: state.auth.email,
-            password: state.auth.password,
-            firstName: state.auth.firstName,
-            lastName: state.auth.lastName
-        }
-    ));
-
-    const inputChangeHandler = (e) => {
-        dispatch(authActions.inputChangeHandler({
-            name: e.target.name,
-            value: e.target.value
-        }));
-    }
+    const usernameInput = useRef();
+    const emailInput = useRef();
+    const passwordInput = useRef();
+    const firstNameInput = useRef();
+    const lastNameInput = useRef();
 
     const signUpHandler = (e) => {
         e.preventDefault();
+
+        let signUpInfos = {
+            username: usernameInput.current.value,
+            email: emailInput.current.value,
+            password: passwordInput.current.value,
+            firstName: firstNameInput.current.value,
+            lastName: lastNameInput.current.value,
+        };
 
         dispatch(signUp(signUpInfos));
     }
@@ -43,35 +38,38 @@ const SignUpPage = () => {
                 <FormInput 
                     sign 
                     type="text" 
-                    placeholder="Username"                    
-                    onChangeHandler={inputChangeHandler}
-                    name='username'/>
+                    placeholder="Username (Required)"                    
+                    inputRef={usernameInput}
+                    name='username'
+                    required/>
                 <FormInput 
                     sign 
                     type="email" 
-                    placeholder="Email"                    
-                    onChangeHandler={inputChangeHandler}
-                    name='email'/>
+                    placeholder="Email (Required)"                    
+                    inputRef={emailInput}
+                    name='email'
+                    required/>
                 <FormInput 
                     sign 
                     type="password" 
-                    placeholder="Password"                    
-                    onChangeHandler={inputChangeHandler}
-                    name='password'/>
+                    placeholder="Password (Required)"                    
+                    inputRef={passwordInput}
+                    name='password'
+                    required/>
                 <FormInput 
                     sign 
                     type="text" 
                     placeholder="First name"                    
-                    onChangeHandler={inputChangeHandler}
+                    inputRef={firstNameInput}
                     name='firstName'/>
                 <FormInput 
                     sign 
                     type="text" 
                     placeholder="Last name"                    
-                    onChangeHandler={inputChangeHandler}
+                    inputRef={lastNameInput}
                     name='lastName'/>
                 <Button btnType='primary-form'>Confirm</Button>
-                <Button btnType='secondary-form' to='/main/convs'>Cancel</Button>
+                <Button btnType='secondary-form' to='/'>Cancel</Button>
             </form>
         </div>
     )

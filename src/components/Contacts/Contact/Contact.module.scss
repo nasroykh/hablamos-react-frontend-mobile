@@ -6,10 +6,6 @@
     &:last-child {
         margin-bottom: 0;
     }
-
-    &:nth-child(even) span {
-        background-color: $secondaryColor;
-    }
 }
 
 .Contact > a {    
@@ -27,10 +23,18 @@
         margin: 0 4em 0 1em;
     }
 
-    span {
-        height: 10px;
-        width:  10px;
-        border-radius: 100em;
-        background-color: #499747;
-    }
+}
+
+.StatusDot {
+    height: 10px;
+    width:  10px;
+    border-radius: 100em;
+}
+
+.Online {
+    background-color: #499747;
+}
+
+.Offline {
+    background-color: $secondaryColor;
 }

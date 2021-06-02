@@ -6,7 +6,7 @@ import Tab from '../../components/Tab/Tab';
 import {Switch, Route, useHistory} from 'react-router-dom';
 import SideDrawer from '../../components/SideDrawer/SideDrawer';
 import BackDrop from '../../elements/BackDrop/BackDrop';
-import {logout} from '../../store/auth-actions';
+import {logout} from '../../store/auth/auth-actions';
 
 const MainPage = (props) => {
 

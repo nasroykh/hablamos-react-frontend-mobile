@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import {useSelector, useDispatch} from 'react-redux';
 import classes from './Tab.module.scss';
 import Auxiliary from '../../hoc/Auxiliary';
 import Button from '../../elements/Button/Button';
@@ -6,10 +7,29 @@ import Convs from '../Convs/Convs';
 import Contacts from '../Contacts/Contacts';
 import FormInput from '../../elements/FormInput/FormInput';
 import pic from '../../assets/demo-profile-pic.jpg';
+import { fetchConvs, fetchFriends, contactSearch, addContact} from '../../store/user/user-actions';
 
 const Tab = (props) => {
     let tab;
 
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchConvs());
+        dispatch(fetchFriends());
+    }, [dispatch])
+
+    let convs = useSelector(state => state.user.convs);
+    let friends = useSelector(state => state.user.friends);
+    let contacts = useSelector(state => state.user.foundContacts);
+
+    const contactSearchHandler = (e) => {
+        dispatch(contactSearch(e.target.value));
+    }
+
+    const addContactHandler = (e) => {
+        dispatch(addContact(e.currentTarget.id));
+    }
 
     switch (props.tabName) {
         case 'convs':
@@ -20,13 +40,14 @@ const Tab = (props) => {
                         <Button to='/main/convs/add' btnType='add-conv'/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.ConvsTab}` }>
-                        <Convs/>
+                        <Convs convs={convs}/>
                     </div>
                 </Auxiliary>
             );
             break;
 
         case 'addconv':
+            //fetch friends and pass it to Contacts component
             tab = (
                 <Auxiliary>
                     <div className={classes.TabHeader}>
@@ -34,13 +55,14 @@ const Tab = (props) => {
                         <Button to='/main/convs' btnType='back-btn'/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.ConvsTab}` }>
-                        <Contacts/>
+                        <Contacts friends={friends}/>
                     </div>
                 </Auxiliary>
             );
             break;
 
         case 'friends':
+            //fetch friends and pass it to Contacts component
             tab = (
                 <Auxiliary>
                     <div className={classes.TabHeader}>
@@ -49,7 +71,7 @@ const Tab = (props) => {
                         <Button to='/main/friends/search' btnType='add-contact'/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.FriendsTab}` }>
-                        <Contacts/>
+                        <Contacts friends={friends}/>
                     </div>
                 </Auxiliary>
             );
@@ -63,8 +85,8 @@ const Tab = (props) => {
                         <Button to='/main/friends' btnType='back-btn'/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.AddContactTab}` }>
-                        <FormInput type='search' placeholder='Enter username...'/>
-                        <Contacts search/>
+                        <FormInput type='search' placeholder='Enter username...' onChange={contactSearchHandler}/>
+                        <Contacts search friends={contacts} addContactHandler={addContactHandler}/>
                     </div>
                 </Auxiliary>
             );
