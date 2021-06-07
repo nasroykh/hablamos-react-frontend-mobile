@@ -11,14 +11,30 @@ import SignInPage from './containers/SignInPage/SignInPage';
 import MainPage from './containers/MainPage/MainPage';
 import ChatPage from './containers/ChatPage/ChatPage';
 import {checkAuth} from './store/auth/auth-actions';
+import {userActions} from './store/user/user-slice';
+import DialogBox from './components/DialogBox/DialogBox';
 
-const ENDPOINT = "http://localhost:4444"; 
-const socket = socketIOClient(ENDPOINT);
+const ENDPOINT = "https://fierce-inlet-31066.herokuapp.com"; 
+export const socket = socketIOClient(ENDPOINT);
 
 const App = () => {
 
 	let isAuth = useSelector(state => state.auth.isAuth);
-	const dispatch = useDispatch(); 
+	
+	const dispatch = useDispatch();
+
+	const [sdShow, setSdShow] = useState(false);
+	const [bdShow, setBdShow] = useState(false);
+
+	useEffect(() => {
+        socket.on('message:receive', (payload) => {
+			dispatch(userActions.receiveMessage({
+				message: payload.message,
+				sender: payload.sender,
+				time: payload.time
+			}));
+        });
+    }, [dispatch]);
 
 	useEffect(() => {
 		if (isMobile && window.location.hostname==='hablamos.me') {
@@ -31,44 +47,8 @@ const App = () => {
 			console.log('Connected to socket!');
 		});
 		
-		// socket.emit('getId', '60afef864bbd17afacb08c07');
-
-		// socket.on('message:receive', (message) => {
-		// 	console.log(message)
-		// })
 	}, [dispatch])
-
-	// useEffect(() => {
-	// 	socket.on("connection", () => {
-	// 		console.log('Connected to socket!');
-	// 	});
-	// 	socket.on('message', (mes) => {
-	// 		console.log(mes)
-	// 	});
-	// 	socket.on('conv', (data) => {
-	// 		if (data._id) {
-	// 			setConv(data._id)
-	// 			setFetchedMessages(data.messages);
-	// 		} else {
-	// 			setConv('')
-	// 			setFetchedMessages([]);
-	// 		}
-	// 	});
-	// 	socket.on('receiveMessage', (data) => {
-	// 		let newMessages = [...fetchedMessages];
-	// 		newMessages.push({
-	// 			sender: data.username,
-	// 			message: data.message,
-	// 			sentAt: data.date,
-	// 			_id: data._id
-	// 		});
-	// 		setFetchedMessages(newMessages);
-	// 	});
-
-	// }, [fetchedMessages])
-
-	const [sdShow, setSdShow] = useState(false);
-    const [bdShow, setBdShow] = useState(false);
+	
 
     const sdToggleHandler = () => {
         setBdShow(!bdShow);
@@ -77,9 +57,10 @@ const App = () => {
 
  	return (
 		<div className={classes.App}>
+			<DialogBox/>
 			<Switch>
 
-				<Route path='/chat/:id'>
+				<Route path='/chat'>
 					{isAuth ? 
 						<ChatPage
 							sdShow={sdShow}

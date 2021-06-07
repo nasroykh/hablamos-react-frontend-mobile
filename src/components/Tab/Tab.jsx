@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 import classes from './Tab.module.scss';
 import Auxiliary from '../../hoc/Auxiliary';
 import Button from '../../elements/Button/Button';
@@ -7,21 +8,45 @@ import Convs from '../Convs/Convs';
 import Contacts from '../Contacts/Contacts';
 import FormInput from '../../elements/FormInput/FormInput';
 import pic from '../../assets/demo-profile-pic.jpg';
-import { fetchConvs, fetchFriends, contactSearch, addContact} from '../../store/user/user-actions';
+import { 
+    fetchConvs, 
+    fetchFriends, 
+    contactSearch, 
+    addContact, 
+    fetchRequests, 
+    acceptContact} from '../../store/user/user-actions';
+import { userActions } from '../../store/user/user-slice';
 
 const Tab = (props) => {
     let tab;
 
     const dispatch = useDispatch();
 
+    const history = useHistory();
+
     useEffect(() => {
-        dispatch(fetchConvs());
-        dispatch(fetchFriends());
-    }, [dispatch])
+        switch (props.tabName) {
+            case 'convs':
+                dispatch(fetchConvs());
+                break;
+        
+            case 'friends':
+            case 'addconv':
+                dispatch(fetchFriends());
+                break;
+            case 'requests':
+                dispatch(fetchRequests());
+                break;
+
+            default:
+                break;
+        }
+    }, [dispatch, props.tabName])
 
     let convs = useSelector(state => state.user.convs);
     let friends = useSelector(state => state.user.friends);
     let contacts = useSelector(state => state.user.foundContacts);
+    let requests = useSelector(state => state.user.friendRequests);
 
     const contactSearchHandler = (e) => {
         dispatch(contactSearch(e.target.value));
@@ -29,6 +54,15 @@ const Tab = (props) => {
 
     const addContactHandler = (e) => {
         dispatch(addContact(e.currentTarget.id));
+    }
+
+    const acceptContactHandler = (e) => {
+        dispatch(acceptContact(e.currentTarget.id));
+    }
+
+    const openConvHandler= (e) => {
+
+        // dispatch(userActions.loadConv(e.currentTarget.id))
     }
 
     switch (props.tabName) {
@@ -55,7 +89,7 @@ const Tab = (props) => {
                         <Button to='/main/convs' btnType='back-btn'/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.ConvsTab}` }>
-                        <Contacts friends={friends}/>
+                        <Contacts friends={friends} openConvHandler={openConvHandler}/>
                     </div>
                 </Auxiliary>
             );
@@ -67,11 +101,12 @@ const Tab = (props) => {
                 <Auxiliary>
                     <div className={classes.TabHeader}>
                         <h2>Friends</h2>
+                        <Button to='/main/friends/requests' btnType='request'/>
                         <Button to='/main/friends/group' btnType='group'/>
                         <Button to='/main/friends/search' btnType='add-contact'/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.FriendsTab}` }>
-                        <Contacts friends={friends}/>
+                        <Contacts friends={friends} openConvHandler={openConvHandler}/>
                     </div>
                 </Auxiliary>
             );
@@ -87,6 +122,21 @@ const Tab = (props) => {
                     <div className={`${classes.TabBody} ${classes.AddContactTab}` }>
                         <FormInput type='search' placeholder='Enter username...' onChange={contactSearchHandler}/>
                         <Contacts search friends={contacts} addContactHandler={addContactHandler}/>
+                    </div>
+                </Auxiliary>
+            );
+            break;
+
+        case 'requests':
+            //fetch friends and pass it to Contacts component
+            tab = (
+                <Auxiliary>
+                    <div className={classes.TabHeader}>
+                        <h2>Friend requests</h2>
+                        <Button to='/main/friends' btnType='back-btn'/>
+                    </div>
+                    <div className={`${classes.TabBody} ${classes.FriendsTab}` }>
+                        <Contacts friends={requests} requests acceptContactHandler={acceptContactHandler}/>
                     </div>
                 </Auxiliary>
             );

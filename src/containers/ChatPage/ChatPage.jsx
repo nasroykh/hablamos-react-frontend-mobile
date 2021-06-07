@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {useParams} from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 import classes from './ChatPage.module.scss';
 import NavBar from '../../components/NavBar/NavBar';
 import SideDrawer from '../../components/SideDrawer/SideDrawer';
@@ -9,25 +9,70 @@ import Button from '../../elements/Button/Button';
 import BackDrop from '../../elements/BackDrop/BackDrop';
 import FormInput from '../../elements/FormInput/FormInput';
 import {userActions} from '../../store/user/user-slice';
-import {sendMessage} from '../../store/user/user-actions';
+import {fetchMessages, sendMessage} from '../../store/user/user-actions';
+import { socket } from '../../App';
+
 
 const ChatPage = (props) => {
 
     const dispatch = useDispatch();
-    const params = useParams();
+    const location = useLocation();
+    const history = useHistory();
 
     const messageInput = useRef();
 
-    let conv = useSelector(state => state.user.messages);
+    let conv = useSelector(state => state.user.selectedConv);
     let userId = useSelector(state => state.user._id);
 
+    const [convId, setConvId] = useState('');
+    const [friendId, setFriendId] = useState('');
+
+
+
     useEffect(() => {
-        dispatch(userActions.loadMessages({_id: params.id}));
-    }, [dispatch, params.id])
+        if ((!conv.messages && conv._id) || conv.new ) {
+            history.push(`/chat?_id=${conv._id}`)
+        }
+    }, [conv, history])
+
+    useEffect(() => {
+        let query = location.search;
+        console.log(history.location);
+        query = query.replace('?', '').split('=');
+        
+        let _id = '';
+        let friendId = '';
+
+        if (query[0] === '_id') {
+            _id = query[1];
+            dispatch(fetchMessages(_id));
+            socket.emit('join', _id);
+            setConvId(_id);
+        } else if (query[0] === 'friendId') {
+            friendId = query[1];
+            setFriendId(friendId);
+            dispatch(userActions.checkIfConvExist({friendId}));
+        }
+
+
+        return () => {
+            if (_id) {
+                socket.emit('leave', _id);
+            }
+            dispatch(userActions.leaveConv());
+        };
+
+    }, [dispatch, history.location, location.search])
 
     const sendMessageHandler = (e) => {
         e.preventDefault();
-        dispatch(sendMessage(messageInput.current.value, params.id));
+
+        if (friendId) {
+            dispatch(sendMessage(messageInput.current.value, conv._id, friendId));
+        } else {
+            let part = conv.participants.find(el => el !== userId);
+            dispatch(sendMessage(messageInput.current.value, convId, part));
+        }
         messageInput.current.value = '';
     }
 
@@ -37,7 +82,7 @@ const ChatPage = (props) => {
             <SideDrawer sdShow={props.sdShow} sdToggleHandler={() => setTimeout(props.sdToggleHandler,300)}/>
             <NavBar chat sdToggleHandler={props.sdToggleHandler}/>
             <div className={classes.ChatHeader}>
-                <h2>John Doe</h2>
+                <h2>{conv.friendUsername}</h2>
             </div>
             <Messages messages={conv.messages} userId={userId}/>
             <form className={classes.ChatForm} onSubmit={sendMessageHandler}>

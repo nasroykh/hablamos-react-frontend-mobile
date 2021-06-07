@@ -11,7 +11,7 @@ const Messages = (props) => {
             <Message key={message._id} user={message.sender===props.userId ? true : false} message={message.message} time='2:40pm'/>
         ))
     } else {
-        messagesList = <li key='null'>No Messages</li>
+        messagesList = <li key='notfound' className={classes.NoMessage}>Start a conversation by saying 'Hi!'</li>
     }
 
     return (

@@ -24,13 +24,13 @@ const SideDrawer = (props) => {
                     </NavLink>
                 </li>
                 <li onClick={props.sdToggleHandler}>
-                    <NavLink to='/main/profile' activeClassName={classes.Active}>
+                    <NavLink to='#' /* activeClassName={classes.Active} */>
                         <NavProfile/>
                         <span>Profile</span>
                     </NavLink>
                 </li>
                 <li onClick={props.sdToggleHandler}>
-                    <NavLink to='/main/settings' activeClassName={classes.Active}>
+                    <NavLink to='#' /* activeClassName={classes.Active} */>
                         <NavSet/>
                         <span>Settings</span>
                     </NavLink>

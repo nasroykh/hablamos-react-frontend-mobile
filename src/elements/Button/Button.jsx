@@ -8,6 +8,7 @@ import {ReactComponent as BackBtn} from '../../assets/back-btn.svg';
 import {ReactComponent as AddFriend} from '../../assets/add-friend-icon.svg';
 import {ReactComponent as CancelAdd} from '../../assets/cancel-add-icon.svg';
 import {ReactComponent as Group} from '../../assets/group-icon.svg';
+import {ReactComponent as Request} from '../../assets/request-icon.svg';
 import {ReactComponent as FileIcon} from '../../assets/file-icon.svg';
 import {ReactComponent as SendBtn} from '../../assets/send-btn.svg';
 import {ReactComponent as ChatBackBtn} from '../../assets/chat-back-btn.svg';
@@ -26,7 +27,7 @@ const Button = (props) => {
             break;
 
         case 'primary-form':
-            btn = <button type='submit' className={classes.Primary}>{props.children}</button>;
+            btn = <button type='submit' onClick={props.click} className={classes.Primary}>{props.children}</button>;
             break;
     
         case 'secondary-form':
@@ -59,6 +60,10 @@ const Button = (props) => {
 
         case 'group':
             btn = <Link to={props.to} className={classes.TabHeaderBtn}><Group/></Link>;
+            break;
+
+        case 'request':
+            btn = <Link to={props.to} className={classes.TabHeaderBtn}><Request/></Link>;
             break;
 
         case 'chat-back-btn':

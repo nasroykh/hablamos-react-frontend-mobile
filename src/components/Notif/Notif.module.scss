@@ -1,0 +1,25 @@
+@import '../../scss/variables';
+
+.Notif {
+    display: block;
+    border: 20px solid $bgColor;
+    border-top: 10px solid $tertiaryColor;
+    border-bottom: 10px solid $bgColor;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin: 0 (-$m-pad);
+    padding: 2em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $whiteColor;
+    background-color: $bgColor;
+    font-family: $primaryFont;
+    transform: translateY(100%);
+    transition: all 500ms ease-in-out;
+}
+
+.Show {
+    transform: translateY(0%);
+}

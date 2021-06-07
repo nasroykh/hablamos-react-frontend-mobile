@@ -9,11 +9,29 @@ const Contacts = (props) => {
     let friendsList;
 
     if (props.friends) {
-        friendsList = props.friends.map(friend => (
-            <Contact addContactHandler={props.addContactHandler} status={friend.status} name={friend.username} id={friend._id} key={friend._id} search={props.search}/>
-        ))
-    } else {
-        friendsList = <li className={classes.Null}>No friends</li>
+        if (props.friends.length) {
+            friendsList = props.friends.map(friend => (
+                <Contact 
+                addContactHandler={props.addContactHandler} 
+                acceptContactHandler={props.acceptContactHandler}
+                openConvHandler={props.openConvHandler}
+                status={friend.status} 
+                name={friend.username} 
+                id={friend._id} 
+                key={friend._id} 
+                search={props.search} 
+                requests={props.requests}/>
+            ))
+        } else {
+            if (props.search) {
+                friendsList = 'Enter a username above'
+            } else if (props.requests) {
+                friendsList = 'No requests'
+            } else {
+                friendsList = 'No friends'
+            }
+            friendsList = <li className={classes.NoFriend}>{friendsList}</li>
+        }
     }
 
     return (
