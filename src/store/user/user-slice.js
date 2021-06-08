@@ -14,7 +14,8 @@ const initialState = {
     foundContacts: [],
     socketId: '',
     sentRequests: [],
-    dialogText: ''
+    dialogText: '',
+    isLoading: false
 }
 
 const userSlice = createSlice({
@@ -22,43 +23,54 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         loginSuccess(state, action) {
+            state.isLoading = false;
             for (const key in action.payload.userInfos) {
                 state[key] = action.payload.userInfos[key];
             }
         },
-        loginError(state, action) {
+        setError(state, action) {
+            state.isLoading = false;
             state.dialogText = action.payload.error;
         },
         fetchConvsSuccess(state, action) {
+            state.isLoading = false;
             for (let i = 0; i < action.payload.convs.length; i++) {
                 action.payload.convs[i].participants = action.payload.convs[i].participants.filter(el => el._id !== state._id);
             }
             state.convs = action.payload.convs;
         },
         fetchFriendsSuccess(state, action) {
+            state.isLoading = false;
             state.friends = action.payload.friends;
         },
         fetchRequestsSuccess(state, action) {
+            state.isLoading = false;
             state.friendRequests = action.payload.requests;
         },
         contactSearchSuccess(state, action) {
+            state.isLoading = false;
             state.foundContacts = action.payload.contacts;
         },
         contactSearchError(state, action) {
+            state.isLoading = false;
             state.foundContacts = [];
         },
         contactAddSuccess(state, action) {
+            state.isLoading = false;
             state.sentRequests.push(action.payload._id);
         },
         contactAcceptSuccess(state) {
+            state.isLoading = false;
             console.log('accepted')
         },
         fetchMessagesSuccess(state, action) {
+            state.isLoading = false;
             state.selectedConv = action.payload.conv;
             let friend = state.selectedConv.participants.find(el => el !== state._id);
             state.selectedConv.friendUsername = state.friends.find(el => el._id === friend).username;
         },
         sendMessageSuccess(state, action) {
+            state.isLoading = false;
             if (action.payload.conv._id) {
                 state.selectedConv = action.payload.conv;
                 state.selectedConv.new = true;
@@ -87,6 +99,12 @@ const userSlice = createSlice({
         },
         closeDialogBox(state) {
             state.dialogText = '';
+        },
+        setIsLoading(state) {
+            state.isLoading = true;
+        },
+        setLoadingDone(state) {
+            state.isLoading = false;
         }
     }
 });

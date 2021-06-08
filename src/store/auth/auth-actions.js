@@ -7,6 +7,8 @@ import { socket } from '../../App';
 export const signUp = (signUpInfos) => {
     return async (dispatch) => {
         try {
+
+            dispatch(userActions.setIsLoading());
             
             let {username, email, password, firstName, lastName} = signUpInfos;
             
@@ -28,7 +30,7 @@ export const signUp = (signUpInfos) => {
 
             console.log(res.data);
         } catch (e) {
-            dispatch(userActions.loginError({error: 'Unable to signup, please verify your infos.'}));
+            dispatch(userActions.setError({error: 'Unable to signup, please verify your infos.'}));
         }
     }
 }
@@ -36,6 +38,7 @@ export const signUp = (signUpInfos) => {
 export const login = (loginInfos) => {
     return async (dispatch) => {
         try {
+            dispatch(userActions.setIsLoading());
 
             let {identifier, password} = loginInfos;
             
@@ -50,7 +53,7 @@ export const login = (loginInfos) => {
             }
 
         } catch (e) {
-            dispatch(userActions.loginError({error: 'Unable to login, please verify your email/password.'}));
+            dispatch(userActions.setError({error: 'Unable to login, please verify your email/password.'}));
         }
     }
 }
@@ -59,7 +62,7 @@ export const login = (loginInfos) => {
 export const logout = (token) => {
     return async (dispatch) => {
         try {
-
+            // dispatch(userActions.setIsLoading());
             let res = await axios.post('/users/logout', {}, {headers: {Authorization: localStorage.getItem('token')}});
 
             if (res.status === 200) {
@@ -70,7 +73,7 @@ export const logout = (token) => {
 
             console.log(res.data);
         } catch (e) {
-            dispatch(userActions.loginError({error: 'Unable to logout, please refresh the page'}));
+            dispatch(userActions.setError({error: 'Unable to logout, please refresh the page'}));
         }
     }
 }
@@ -79,6 +82,7 @@ export const checkAuth = (token) => {
     return async (dispatch) => {
         try {
             let res;
+            // dispatch(userActions.setIsLoading());
 
             if (token) {
                 res = await axios.get('/users/check', {headers: {Authorization: localStorage.getItem('token')}});

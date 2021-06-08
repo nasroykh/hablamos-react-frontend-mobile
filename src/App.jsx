@@ -13,13 +13,16 @@ import ChatPage from './containers/ChatPage/ChatPage';
 import {checkAuth} from './store/auth/auth-actions';
 import {userActions} from './store/user/user-slice';
 import DialogBox from './components/DialogBox/DialogBox';
+import LoadingSpinner from './elements/LoadingSpinner/LoadingSpinner';
 
 const ENDPOINT = "https://fierce-inlet-31066.herokuapp.com"; 
+// const ENDPOINT = "ws://localhost:4444"; 
 export const socket = socketIOClient(ENDPOINT);
 
 const App = () => {
 
 	let isAuth = useSelector(state => state.auth.isAuth);
+	let isLoading = useSelector(state => state.user.isLoading);
 	
 	const dispatch = useDispatch();
 
@@ -56,8 +59,9 @@ const App = () => {
     }
 
  	return (
-		<div className={classes.App}>
+		 <div className={classes.App}>
 			<DialogBox/>
+			{isLoading ? <LoadingSpinner/> : null}
 			<Switch>
 
 				<Route path='/chat'>

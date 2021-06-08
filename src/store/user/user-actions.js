@@ -4,6 +4,7 @@ import axios from '../../axios';
 export const fetchConvs = () => {
     return async (dispatch) => {
         try {
+            dispatch(userActions.setIsLoading());
 
             let res = await axios.get('/convs', {headers: {Authorization: localStorage.getItem('token')}});
 
@@ -16,6 +17,7 @@ export const fetchConvs = () => {
             console.log(res.data);
 
         } catch (e) {
+            dispatch(userActions.setLoadingDone());
             console.log(e);
         }
     }
@@ -24,6 +26,7 @@ export const fetchConvs = () => {
 export const fetchFriends = () => {
     return async (dispatch) => {
         try {
+            dispatch(userActions.setIsLoading());
 
             let res = await axios.get('/users/friends', {headers: {Authorization: localStorage.getItem('token')}});
 
@@ -37,6 +40,7 @@ export const fetchFriends = () => {
 
         } catch (e) {
             console.log(e);
+            dispatch(userActions.setLoadingDone());
         }
     }
 }
@@ -44,6 +48,7 @@ export const fetchFriends = () => {
 export const fetchRequests = () => {
     return async (dispatch) => {
         try {
+            dispatch(userActions.setIsLoading());
 
             let res = await axios.get('/users/requests', {headers: {Authorization: localStorage.getItem('token')}});
 
@@ -56,6 +61,7 @@ export const fetchRequests = () => {
             console.log(res.data);
 
         } catch (e) {
+            dispatch(userActions.setLoadingDone());
             console.log(e);
         }
     }
@@ -64,6 +70,7 @@ export const fetchRequests = () => {
 export const contactSearch = (username) => {
     return async (dispatch) => {
         try {
+            dispatch(userActions.setIsLoading());
             if (username) {
                 let res = await axios.get('/users', {params: {username}, headers: {Authorization: localStorage.getItem('token')}});
     
@@ -89,6 +96,7 @@ export const contactSearch = (username) => {
 export const addContact = (_id) => {
     return async (dispatch) => {
         try {
+            dispatch(userActions.setIsLoading());
             let res = await axios.post('/users/add', {_id}, {headers: {Authorization: localStorage.getItem('token')}});
 
             if (res.status === 200) {
@@ -100,7 +108,7 @@ export const addContact = (_id) => {
             console.log(res.data);
 
         } catch (e) {
-            dispatch(userActions.loginError({error: 'Unable to add contact'}));
+            dispatch(userActions.setError({error: 'Unable to add contact'}));
         }
     }
 }
@@ -108,6 +116,7 @@ export const addContact = (_id) => {
 export const acceptContact = (_id) => {
     return async (dispatch) => {
         try {
+            dispatch(userActions.setIsLoading());
             let res = await axios.post('/users/accept', {_id}, {headers: {Authorization: localStorage.getItem('token')}});
 
             if (res.status === 200) {
@@ -117,7 +126,7 @@ export const acceptContact = (_id) => {
             console.log(res.data);
 
         } catch (e) {
-            dispatch(userActions.loginError({error: 'Unable to accept contact'}));
+            dispatch(userActions.setError({error: 'Unable to accept contact'}));
         }
     }
 }
@@ -125,6 +134,7 @@ export const acceptContact = (_id) => {
 export const fetchMessages = (_id, friendId) => {
     return async (dispatch) => {
         try {
+            dispatch(userActions.setIsLoading());
             let res = await axios.get('/convs', {params: {_id, friendId}, headers: {Authorization: localStorage.getItem('token')}});
 
             if (res.status === 200) {
@@ -136,6 +146,7 @@ export const fetchMessages = (_id, friendId) => {
             console.log(res.data);
 
         } catch (e) {
+            dispatch(userActions.setLoadingDone());
             console.log(e);
         }
     }
@@ -144,6 +155,7 @@ export const fetchMessages = (_id, friendId) => {
 export const sendMessage = (message, _id, friendId) => {
     return async (dispatch) => {
         try {
+            dispatch(userActions.setIsLoading());
             let res = await axios.post('/convs/message', {message, _id, friendId}, {headers: {Authorization: localStorage.getItem('token')}});
 
             if (res.status === 201) {
@@ -156,7 +168,7 @@ export const sendMessage = (message, _id, friendId) => {
             console.log(res.data);
 
         } catch (e) {
-            dispatch(userActions.loginError({error: 'Unable to send message, please refresh the page and retry'}));
+            dispatch(userActions.setError({error: 'Unable to send message, please refresh the page and retry'}));
         }
     }
 }
