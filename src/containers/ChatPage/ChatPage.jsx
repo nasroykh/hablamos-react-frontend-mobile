@@ -79,7 +79,7 @@ const ChatPage = (props) => {
     return (
         <div className={classes.ChatPage}>
             <BackDrop bdShow={props.bdShow} click={props.sdToggleHandler}/>
-            <SideDrawer sdShow={props.sdShow} sdToggleHandler={() => setTimeout(props.sdToggleHandler,300)}/>
+            <SideDrawer sdShow={props.sdShow} sdToggleHandler={() => setTimeout(props.sdToggleHandler,300)} logoutHandler={props.logoutHandler}/>
             <NavBar chat sdToggleHandler={props.sdToggleHandler}/>
             <div className={classes.ChatHeader}>
                 <h2>{conv.friendUsername}</h2>

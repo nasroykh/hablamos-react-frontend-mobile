@@ -36,7 +36,7 @@ const SideDrawer = (props) => {
                     </NavLink>
                 </li>
                 <li onClick={props.logoutHandler}>
-                    <NavLink to='#'>
+                    <NavLink to='/'>
                         <NavLogout/>
                         <span>Logout</span>
                     </NavLink>

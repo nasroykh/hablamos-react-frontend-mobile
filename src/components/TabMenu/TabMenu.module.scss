@@ -1,0 +1,39 @@
+@import '../../scss/variables';
+
+.TabMenu {
+    position: absolute;
+    background-color: $secondaryColor;
+    border-left: 3px solid $primaryColor;
+    border-bottom: 3px solid $primaryColor;
+    border-bottom-left-radius: 15px;
+    right: 0;
+    bottom: 0;
+    transform: translateY(99%);
+    opacity: 0;
+    z-index: -1;
+    pointer-events: none;
+    transition: all 250ms ease-in-out;
+}
+
+.TabMenu > li {
+    
+    border-bottom: 2px solid $primaryColor;
+    
+    &:last-child {
+        border-bottom: none;
+    }
+    
+    a {
+        color: $whiteColor;
+        text-align: left;
+        display: block;
+        width: 100%;
+        padding: 1em;
+    }
+}
+
+.Show {
+    z-index: 8;
+    pointer-events: all;
+    opacity: 1;
+}

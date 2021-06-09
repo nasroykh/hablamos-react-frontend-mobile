@@ -36,7 +36,7 @@ const Contact = (props) => {
             <Link to="#">
                 <img src={pic} alt=""/>
                 <h3>{props.name}</h3>
-                <Button click={props.addContactHandler} id={props.id} btnType='add-contact-btn'/>
+                {props.sent ? <Button click={props.cancelAddContactHandler} cancel id={props.id} btnType={'add-contact-btn'}/> : <Button click={props.addContactHandler} id={props.id} btnType='add-contact-btn'/>}
             </Link>
         )
     } else if (props.group) {
@@ -54,6 +54,7 @@ const Contact = (props) => {
                 <img src={pic} alt=""/>
                 <h3>{props.name}</h3>
                 <Button click={props.acceptContactHandler} id={props.id} btnType='add-contact-btn'/> 
+                <Button click={props.refuseContactHandler} cancel id={props.id} btnType='add-contact-btn'/> 
             </Link>
         )
     }

@@ -12,8 +12,6 @@ import {socket} from '../../App';
 
 const MainPage = (props) => {
 
-    let token = useSelector(state => state.auth.token);
-    
     const dispatch = useDispatch();
     
     const history = useHistory();
@@ -23,7 +21,6 @@ const MainPage = (props) => {
 	const [notifLink, setNotifLink] = useState('');
 
     useEffect(() => {
-        console.log(history.location.pathname)
 
         const clearNotif = () => {
             setTimeout(() => {
@@ -65,20 +62,10 @@ const MainPage = (props) => {
 
     }, [])
     
-    const logoutHandler = (e) => {
-        e.preventDefault();
-
-        dispatch(logout(token));
-
-        props.sdToggleHandler();
-
-        history.push('/');
-    }
-
     return (
         <div className={classes.MainPage}>
-            <BackDrop bdShow={props.bdShow} click={props.sdToggleHandler}/>
-            <SideDrawer sdShow={props.sdShow} sdToggleHandler={() => setTimeout(props.sdToggleHandler,300)} logoutHandler={logoutHandler}/>
+            <BackDrop bdShow={props.bdShow} click={props.bdClickHandler}/>
+            <SideDrawer sdShow={props.sdShow} sdToggleHandler={() => setTimeout(props.sdToggleHandler,300)} logoutHandler={props.logoutHandler}/>
             <NavBar sdToggleHandler={props.sdToggleHandler}/>
             <Notif notifShow={notifShow} notifLink={notifLink}>{notifMessage}</Notif>
             
@@ -92,7 +79,7 @@ const MainPage = (props) => {
                 </Route>
 
                 <Route exact path='/main/friends'>
-                    <Tab tabName='friends'/>
+                    <Tab tabName='friends' tabMenuShow={props.tabMenuShow} tabMenuToggleHandler={props.tabMenuToggleHandler}/>
                 </Route>
 
                 <Route exact path='/main/friends/requests'>

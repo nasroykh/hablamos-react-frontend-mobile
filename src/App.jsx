@@ -1,7 +1,7 @@
 import classes from './App.module.scss';
 import React, {useEffect, useState} from 'react';
 import socketIOClient from "socket.io-client";
-import {Switch, Route, Redirect} from 'react-router-dom'
+import {Switch, Route, Redirect, useHistory} from 'react-router-dom'
 import { isMobile } from "react-device-detect";
 import {useSelector, useDispatch} from 'react-redux';
 // import LoadingPage from './containers/LoadingPage/LoadingPage';
@@ -10,7 +10,7 @@ import SignUpPage from './containers/SignUpPage/SignUpPage';
 import SignInPage from './containers/SignInPage/SignInPage';
 import MainPage from './containers/MainPage/MainPage';
 import ChatPage from './containers/ChatPage/ChatPage';
-import {checkAuth} from './store/auth/auth-actions';
+import {checkAuth, logout} from './store/auth/auth-actions';
 import {userActions} from './store/user/user-slice';
 import DialogBox from './components/DialogBox/DialogBox';
 import LoadingSpinner from './elements/LoadingSpinner/LoadingSpinner';
@@ -22,12 +22,16 @@ export const socket = socketIOClient(ENDPOINT);
 const App = () => {
 
 	let isAuth = useSelector(state => state.auth.isAuth);
+	let token = useSelector(state => state.auth.token);
 	let isLoading = useSelector(state => state.user.isLoading);
 	
 	const dispatch = useDispatch();
 
+	const history = useHistory();
+
 	const [sdShow, setSdShow] = useState(false);
 	const [bdShow, setBdShow] = useState(false);
+	const [tabMenuShow, setTabMenuShow] = useState(false);
 
 	useEffect(() => {
         socket.on('message:receive', (payload) => {
@@ -58,6 +62,27 @@ const App = () => {
         setSdShow(!sdShow);
     }
 
+	const bdClickHandler = () => {
+		setSdShow(false);
+		setBdShow(false);
+		setTabMenuShow(false);
+	}
+
+	const tabMenuToggleHandler = () => {
+		setBdShow(!bdShow);
+		setTabMenuShow(!tabMenuShow)
+	}
+
+	const logoutHandler = (e) => {
+        e.preventDefault();
+
+        dispatch(logout(token));
+
+        sdToggleHandler();
+
+        history.push('/');
+    }
+
  	return (
 		 <div className={classes.App}>
 			<DialogBox/>
@@ -69,7 +94,8 @@ const App = () => {
 						<ChatPage
 							sdShow={sdShow}
 							bdShow={bdShow}
-							sdToggleHandler={sdToggleHandler}/> : <Redirect to='/'/>}
+							sdToggleHandler={sdToggleHandler}
+							logoutHandler={logoutHandler}/> : <Redirect to='/'/>}
 				</Route>
 
 				<Route path='/main'>
@@ -77,7 +103,11 @@ const App = () => {
 					<MainPage
 						sdShow={sdShow}
 						bdShow={bdShow}
-						sdToggleHandler={sdToggleHandler}/> : <Redirect to='/'/>}
+						sdToggleHandler={sdToggleHandler}
+						tabMenuToggleHandler={tabMenuToggleHandler}
+						tabMenuShow={tabMenuShow}
+						bdClickHandler={bdClickHandler}
+						logoutHandler={logoutHandler}/> : <Redirect to='/'/>}
 				</Route>
 
 				<Route path='/signin'>

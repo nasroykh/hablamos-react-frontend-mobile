@@ -55,7 +55,7 @@ const Button = (props) => {
             break;
 
         case 'add-contact-btn':
-            btn = <button onClick={props.click} id={props.id} className={classes.TabHeaderBtn}><AddFriend/></button>;
+            btn = <button onClick={props.click} id={props.id} className={classes.TabHeaderBtn}>{props.cancel ? <CancelAdd/> : <AddFriend/>}</button>;
             break;
 
         case 'group':
@@ -76,6 +76,14 @@ const Button = (props) => {
         
         case 'send-btn':
             btn = <button type='submit' onClick={props.click} className={classes.SendBtn}><SendBtn/></button>;
+            break;
+        
+        case 'tab-menu':
+            btn = <button onClick={props.click} className={classes.TabMenu}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>;
             break;
 
         default:

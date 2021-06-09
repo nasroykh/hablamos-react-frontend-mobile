@@ -2,6 +2,7 @@
 
 .Contact {
     margin-bottom: 2em;
+    
 
     &:last-child {
         margin-bottom: 0;
@@ -11,16 +12,19 @@
 .Contact > a {    
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     color: $primaryColor;
     
     * {
         font-family: $secondaryFont;
         font-weight: 600;
+        margin: 0 .25em;
     }
     
     h3 {
-        margin: 0 4em 0 1em;
+        word-break: break-all;
+        padding-left: .5em;
+        margin-right: auto;
     }
 
 }

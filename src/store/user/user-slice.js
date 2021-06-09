@@ -13,7 +13,6 @@ const initialState = {
     selectedConv: {},
     foundContacts: [],
     socketId: '',
-    sentRequests: [],
     dialogText: '',
     isLoading: false
 }
@@ -47,6 +46,10 @@ const userSlice = createSlice({
             state.isLoading = false;
             state.friendRequests = action.payload.requests;
         },
+        fetchRequestsError(state, action) {
+            state.isLoading = false;
+            state.friendRequests = [];
+        },
         contactSearchSuccess(state, action) {
             state.isLoading = false;
             state.foundContacts = action.payload.contacts;
@@ -57,11 +60,28 @@ const userSlice = createSlice({
         },
         contactAddSuccess(state, action) {
             state.isLoading = false;
-            state.sentRequests.push(action.payload._id);
+            for (let i = 0; i < state.foundContacts.length; i++) {
+                if (state.foundContacts[i]._id === action.payload.contact._id) {
+                    state.foundContacts[i].sent = true
+                } 
+            }
         },
-        contactAcceptSuccess(state) {
+        contactCancelAddSuccess(state, action) {
             state.isLoading = false;
-            console.log('accepted')
+            for (let i = 0; i < state.foundContacts.length; i++) {
+                if (state.foundContacts[i]._id === action.payload.contact._id) {
+                    state.foundContacts[i].sent = false
+                } 
+                
+            }
+        },
+        contactAcceptSuccess(state, action) {
+            state.isLoading = false;
+            state.friendRequests = state.friendRequests.filter(el => el._id !== action.payload._id)
+        },
+        contactRefuseSuccess(state, action) {
+            state.isLoading = false;
+            state.friendRequests = state.friendRequests.filter(el => el._id !== action.payload._id)
         },
         fetchMessagesSuccess(state, action) {
             state.isLoading = false;
@@ -75,13 +95,13 @@ const userSlice = createSlice({
                 state.selectedConv = action.payload.conv;
                 state.selectedConv.new = true;
             } else {
-                state.selectedConv.messages.push({message: action.payload.message, _id: Date.now(), sender: state._id});
+                state.selectedConv.messages.push({message: action.payload.message, _id: Date.now(), sender: state._id, sentAt: Date.now()});
             }
         },
         receiveMessage(state, action) {
             if (action.payload.sender !== state._id) {
                 // if (state.selectedConv.messages[state.selectedConv.messages.length-1]._id !== Date.now()) {
-                    state.selectedConv.messages.push({message: action.payload.message, _id: Date.now(), sender: action.payload.sender})
+                    state.selectedConv.messages.push({message: action.payload.message, _id: Date.now(), sender: action.payload.sender, sentAt: action.payload.time})
                 // }
             }
         },

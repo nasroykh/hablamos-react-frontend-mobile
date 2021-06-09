@@ -2,20 +2,22 @@ import React, { useEffect, useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import classes from './Tab.module.scss';
+import pic from '../../assets/demo-profile-pic.jpg';
 import Auxiliary from '../../hoc/Auxiliary';
 import Button from '../../elements/Button/Button';
 import Convs from '../Convs/Convs';
 import Contacts from '../Contacts/Contacts';
 import FormInput from '../../elements/FormInput/FormInput';
-import pic from '../../assets/demo-profile-pic.jpg';
+import TabMenu from '../TabMenu/TabMenu';
 import { 
     fetchConvs, 
     fetchFriends, 
     contactSearch, 
     addContact, 
     fetchRequests, 
-    acceptContact} from '../../store/user/user-actions';
-import { userActions } from '../../store/user/user-slice';
+    acceptContact,
+    cancelAddContact,
+    refuseContact} from '../../store/user/user-actions';
 
 const Tab = (props) => {
     let tab;
@@ -56,13 +58,16 @@ const Tab = (props) => {
         dispatch(addContact(e.currentTarget.id));
     }
 
+    const cancelAddContactHandler = (e) => {
+        dispatch(cancelAddContact(e.currentTarget.id));
+    }
+
     const acceptContactHandler = (e) => {
         dispatch(acceptContact(e.currentTarget.id));
     }
 
-    const openConvHandler= (e) => {
-
-        // dispatch(userActions.loadConv(e.currentTarget.id))
+    const refuseContactHandler = (e) => {
+        dispatch(refuseContact(e.currentTarget.id));
     }
 
     switch (props.tabName) {
@@ -89,7 +94,7 @@ const Tab = (props) => {
                         <Button to='/main/convs' btnType='back-btn'/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.ConvsTab}` }>
-                        <Contacts friends={friends} openConvHandler={openConvHandler}/>
+                        <Contacts friends={friends} addConv />
                     </div>
                 </Auxiliary>
             );
@@ -101,12 +106,11 @@ const Tab = (props) => {
                 <Auxiliary>
                     <div className={classes.TabHeader}>
                         <h2>Friends</h2>
-                        <Button to='/main/friends/requests' btnType='request'/>
-                        <Button to='/main/friends/group' btnType='group'/>
-                        <Button to='/main/friends/search' btnType='add-contact'/>
+                        <Button btnType='tab-menu' click={props.tabMenuToggleHandler}/>
+                        <TabMenu friends tabMenuShow={props.tabMenuShow} tabMenuToggleHandler={props.tabMenuToggleHandler}/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.FriendsTab}` }>
-                        <Contacts friends={friends} openConvHandler={openConvHandler}/>
+                        <Contacts friends={friends} />
                     </div>
                 </Auxiliary>
             );
@@ -121,7 +125,7 @@ const Tab = (props) => {
                     </div>
                     <div className={`${classes.TabBody} ${classes.AddContactTab}` }>
                         <FormInput type='search' placeholder='Enter username...' onChange={contactSearchHandler}/>
-                        <Contacts search friends={contacts} addContactHandler={addContactHandler}/>
+                        <Contacts search friends={contacts} addContactHandler={addContactHandler} cancelAddContactHandler={cancelAddContactHandler}/>
                     </div>
                 </Auxiliary>
             );
@@ -136,7 +140,7 @@ const Tab = (props) => {
                         <Button to='/main/friends' btnType='back-btn'/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.FriendsTab}` }>
-                        <Contacts friends={requests} requests acceptContactHandler={acceptContactHandler}/>
+                        <Contacts friends={requests} requests acceptContactHandler={acceptContactHandler} refuseContactHandler={refuseContactHandler}/>
                     </div>
                 </Auxiliary>
             );

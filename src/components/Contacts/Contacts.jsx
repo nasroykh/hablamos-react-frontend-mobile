@@ -6,22 +6,37 @@ import Contact from './Contact/Contact';
 
 const Contacts = (props) => {
 
+    let convs = useSelector(state => state.user.convs);
+
     let friendsList;
 
     if (props.friends) {
         if (props.friends.length) {
-            friendsList = props.friends.map(friend => (
+            friendsList = props.friends.map(friend => { 
+                
+                if (props.addConv) {
+                    for (let i = 0; i < convs.length; i++) {
+                        if (convs[i].participants[0]._id === friend._id) {
+                            return null
+                        }
+                    }
+                }
+
+                return (
                 <Contact 
                 addContactHandler={props.addContactHandler} 
+                cancelAddContactHandler={props.cancelAddContactHandler}
                 acceptContactHandler={props.acceptContactHandler}
+                refuseContactHandler={props.refuseContactHandler}
                 openConvHandler={props.openConvHandler}
                 status={friend.status} 
                 name={friend.username} 
                 id={friend._id} 
                 key={friend._id} 
                 search={props.search} 
-                requests={props.requests}/>
-            ))
+                requests={props.requests}
+                sent={friend.sent}/>
+            )})
         } else {
             if (props.search) {
                 friendsList = 'Enter a username above'

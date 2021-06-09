@@ -62,7 +62,9 @@ export const fetchRequests = () => {
 
         } catch (e) {
             dispatch(userActions.setLoadingDone());
-            console.log(e);
+            dispatch(userActions.fetchRequestsError({
+                requests: []
+            }));
         }
     }
 }
@@ -101,7 +103,7 @@ export const addContact = (_id) => {
 
             if (res.status === 200) {
                 dispatch(userActions.contactAddSuccess({
-                    contacts: res.data
+                    contact: res.data
                 }));
             }
 
@@ -113,6 +115,26 @@ export const addContact = (_id) => {
     }
 }
 
+export const cancelAddContact = (_id) => {
+    return async (dispatch) => {
+        try {
+            dispatch(userActions.setIsLoading());
+            let res = await axios.delete('/users/requests', {params: {_id, sent: true}, headers: {Authorization: localStorage.getItem('token')}});
+
+            if (res.status === 200) {
+                dispatch(userActions.contactCancelAddSuccess({
+                    contact: res.data
+                }));
+            }
+
+            console.log(res.data);
+
+        } catch (e) {
+            dispatch(userActions.setError({error: 'Unable to cancel add contact'}));
+        }
+    }
+}
+
 export const acceptContact = (_id) => {
     return async (dispatch) => {
         try {
@@ -120,7 +142,25 @@ export const acceptContact = (_id) => {
             let res = await axios.post('/users/accept', {_id}, {headers: {Authorization: localStorage.getItem('token')}});
 
             if (res.status === 200) {
-                dispatch(userActions.contactAcceptSuccess());
+                dispatch(userActions.contactAcceptSuccess({_id}));
+            }
+
+            console.log(res.data);
+
+        } catch (e) {
+            dispatch(userActions.setError({error: 'Unable to accept contact'}));
+        }
+    }
+}
+
+export const refuseContact = (_id) => {
+    return async (dispatch) => {
+        try {
+            dispatch(userActions.setIsLoading());
+            let res = await axios.delete('/users/requests', {params: {_id}, headers: {Authorization: localStorage.getItem('token')}});
+
+            if (res.status === 200) {
+                dispatch(userActions.contactRefuseSuccess({_id}));
             }
 
             console.log(res.data);
