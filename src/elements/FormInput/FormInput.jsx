@@ -17,7 +17,8 @@ const FormInput = (props) => {
             ref={props.inputRef}
             name={props.name}
             required={props.required}
-            onChange={props.onChange} />   
+            onChange={props.onChange}
+            disabled={props.disabled} />   
         )
     }
 

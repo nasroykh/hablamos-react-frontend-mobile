@@ -24,3 +24,47 @@
         margin-top: 1em;
     }
 }
+
+.PictureUpload {
+    display: flex;
+    flex-direction: column;
+    margin: 7em 0;
+    align-items: center;
+    color: $whiteColor;
+    font-size: .85rem;
+    
+    label {
+        font-family: $primaryFont;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60%;
+        margin: 0 auto;
+        padding: .5em;
+        border-radius: 10px;
+        border: 2px solid $whiteColor;
+    }
+
+    span {
+        font-family: $secondaryFont;
+        margin-top: 1em;
+    }
+
+    input {
+        display: none;
+    }
+
+    svg {
+        margin: 0 1em;
+    }
+}
+
+.PictureButtons {
+    display: flex;
+    flex-direction: column;
+    margin: 2em;
+
+    button {
+        margin-bottom: 1em;
+    }
+}

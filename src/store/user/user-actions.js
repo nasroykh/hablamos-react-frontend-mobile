@@ -212,3 +212,43 @@ export const sendMessage = (message, _id, friendId) => {
         }
     }
 }
+
+export const sendFile = (file, _id, friendId) => {
+    return async (dispatch) => {
+        try {
+            dispatch(userActions.setIsLoading());
+            let res = await axios.post('/convs/file', file, {params: {_id, friendId}, headers: {Authorization: localStorage.getItem('token')}});
+
+            if (res.status === 201) {
+                dispatch(userActions.sendFileSuccess({
+                    file,
+                    conv: res.data.conv,
+                    lastMessageId: res.data.lastMessageId
+                }));
+            }
+
+            console.log(res.data);
+
+        } catch (e) {
+            dispatch(userActions.setError({error: 'Unable to send file, please refresh the page and retry'}));
+        }
+    }
+}
+
+export const uploadPicture = (picture) => {
+    return async (dispatch) => {
+        try {
+            dispatch(userActions.setIsLoading());
+            let res = await axios.post('/users/picture', picture, {headers: {Authorization: localStorage.getItem('token')}});
+
+            if (res.status === 201) {
+                dispatch(userActions.uploadPictureSuccess());
+            }
+
+            console.log(res.data);
+
+        } catch (e) {
+            dispatch(userActions.setError({error: 'Unable to upload image'}));
+        }
+    }
+}

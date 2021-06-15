@@ -14,7 +14,8 @@ const initialState = {
     foundContacts: [],
     socketId: '',
     dialogText: '',
-    isLoading: false
+    isLoading: false,
+    pictureUploaded: false
 }
 
 const userSlice = createSlice({
@@ -37,6 +38,7 @@ const userSlice = createSlice({
                 action.payload.convs[i].participants = action.payload.convs[i].participants.filter(el => el._id !== state._id);
             }
             state.convs = action.payload.convs;
+            state.pictureUploaded = false;
         },
         fetchFriendsSuccess(state, action) {
             state.isLoading = false;
@@ -88,6 +90,7 @@ const userSlice = createSlice({
             state.selectedConv = action.payload.conv;
             let friend = state.selectedConv.participants.find(el => el !== state._id);
             state.selectedConv.friendUsername = state.friends.find(el => el._id === friend).username;
+            state.selectedConv.participants = state.selectedConv.participants.filter(el => el !== state._id);
         },
         sendMessageSuccess(state, action) {
             state.isLoading = false;
@@ -98,11 +101,23 @@ const userSlice = createSlice({
                 state.selectedConv.messages.push({message: action.payload.message, _id: Date.now(), sender: state._id, sentAt: Date.now()});
             }
         },
+        sendFileSuccess(state, action) {
+            state.isLoading = false;
+            if (action.payload.conv._id) {
+                state.selectedConv = action.payload.conv;
+                state.selectedConv.new = true;
+            } else {
+                state.selectedConv.messages.push({file: action.payload.file, _id: action.payload.lastMessageId, sender: state._id, sentAt: Date.now()});
+            }
+        },
         receiveMessage(state, action) {
             if (action.payload.sender !== state._id) {
-                // if (state.selectedConv.messages[state.selectedConv.messages.length-1]._id !== Date.now()) {
-                    state.selectedConv.messages.push({message: action.payload.message, _id: Date.now(), sender: action.payload.sender, sentAt: action.payload.time})
-                // }
+                state.selectedConv.messages.push({message: action.payload.message, _id: Date.now(), sender: action.payload.sender, sentAt: action.payload.time})
+            }
+        },
+        receiveFile(state, action) {
+            if (action.payload.sender !== state._id) {
+                state.selectedConv.messages.push({file: action.payload.file, _id: action.payload._id, sender: action.payload.sender, sentAt: action.payload.time})
             }
         },
         leaveConv(state) {
@@ -125,6 +140,10 @@ const userSlice = createSlice({
         },
         setLoadingDone(state) {
             state.isLoading = false;
+        },
+        uploadPictureSuccess(state) {
+            state.isLoading = false;
+            state.pictureUploaded = true;
         }
     }
 });

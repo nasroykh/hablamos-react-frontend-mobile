@@ -14,9 +14,10 @@ import {checkAuth, logout} from './store/auth/auth-actions';
 import {userActions} from './store/user/user-slice';
 import DialogBox from './components/DialogBox/DialogBox';
 import LoadingSpinner from './elements/LoadingSpinner/LoadingSpinner';
+import BackDrop from './elements/BackDrop/BackDrop';
 
-const ENDPOINT = "https://fierce-inlet-31066.herokuapp.com"; 
-// const ENDPOINT = "ws://localhost:4444"; 
+// const ENDPOINT = "https://fierce-inlet-31066.herokuapp.com"; 
+const ENDPOINT = "ws://localhost:4444"; 
 export const socket = socketIOClient(ENDPOINT);
 
 const App = () => {
@@ -35,18 +36,27 @@ const App = () => {
 
 	useEffect(() => {
         socket.on('message:receive', (payload) => {
-			dispatch(userActions.receiveMessage({
-				message: payload.message,
-				sender: payload.sender,
-				time: payload.time
-			}));
+			if (payload.file) {
+				dispatch(userActions.receiveFile({
+					_id: payload.lastMessageId,
+					sender: payload.sender,
+					time: payload.time,
+					file: true
+				}));
+			} else {
+				dispatch(userActions.receiveMessage({
+					message: payload.message,
+					sender: payload.sender,
+					time: payload.time
+				}));
+			}
         });
     }, [dispatch]);
 
 	useEffect(() => {
-		if (isMobile && window.location.hostname==='hablamos.me') {
-			window.location.href = 'https://m.hablamos.me';
-		} 
+		// if (!isMobile) {
+		// 	window.location.href = 'https://hablamos.me';
+		// } 
 
 		dispatch(checkAuth(localStorage.getItem('token')));
 
@@ -87,6 +97,7 @@ const App = () => {
 		 <div className={classes.App}>
 			<DialogBox/>
 			{isLoading ? <LoadingSpinner/> : null}
+			{isLoading ? <BackDrop loading/> : null}
 			<Switch>
 
 				<Route path='/chat'>
@@ -115,7 +126,8 @@ const App = () => {
 				</Route>
 
 				<Route path='/signup'>
-					{isAuth ? <Redirect to='/main/convs'/> : <SignUpPage/>}
+					<SignUpPage/>
+					{/* {isAuth ? <Redirect to='/signup/picture'/> : <SignUpPage/>} */}
 				</Route>
 
 				<Route path='/'>

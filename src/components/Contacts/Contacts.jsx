@@ -35,7 +35,8 @@ const Contacts = (props) => {
                 key={friend._id} 
                 search={props.search} 
                 requests={props.requests}
-                sent={friend.sent}/>
+                sent={friend.sent}
+                hasPicture={friend.hasPicture}/>
             )})
         } else {
             if (props.search) {

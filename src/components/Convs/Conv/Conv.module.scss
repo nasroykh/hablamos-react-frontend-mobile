@@ -9,7 +9,8 @@
 
 .Conv > a {
     display: grid;
-    grid-template-columns: 2fr 3fr 1fr;
+    grid-template-columns: 2fr 6fr 1fr;
+    column-gap: .5em;
     align-items: center;
     justify-items: flex-start;
     color: $primaryColor;
@@ -20,7 +21,7 @@
 
     img {
         grid-row: 1/3;
-        height: 120%;
+        border-radius: 50%;
     }
 
     span {

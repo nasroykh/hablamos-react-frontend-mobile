@@ -9,7 +9,6 @@ import {ReactComponent as AddFriend} from '../../assets/add-friend-icon.svg';
 import {ReactComponent as CancelAdd} from '../../assets/cancel-add-icon.svg';
 import {ReactComponent as Group} from '../../assets/group-icon.svg';
 import {ReactComponent as Request} from '../../assets/request-icon.svg';
-import {ReactComponent as FileIcon} from '../../assets/file-icon.svg';
 import {ReactComponent as SendBtn} from '../../assets/send-btn.svg';
 import {ReactComponent as ChatBackBtn} from '../../assets/chat-back-btn.svg';
 
@@ -68,10 +67,6 @@ const Button = (props) => {
 
         case 'chat-back-btn':
             btn = <Link to={props.to} className={classes.ChatBackBtn}><ChatBackBtn/></Link>;
-            break;
-
-        case 'file-send':
-            btn = <button onClick={props.click} className={classes.FileSend}><FileIcon/></button>;
             break;
         
         case 'send-btn':

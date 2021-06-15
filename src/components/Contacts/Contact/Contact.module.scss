@@ -10,21 +10,31 @@
 }
 
 .Contact > a {    
-    display: flex;
+    // display: flex;
+    // align-items: center;
+    // justify-content: space-between;
+    display: grid;
+    grid-template-columns: 2fr 6fr 1fr auto;
     align-items: center;
-    justify-content: space-between;
+    justify-items: flex-start;
+    column-gap: .5em;
+    
     color: $primaryColor;
     
     * {
         font-family: $secondaryFont;
         font-weight: 600;
-        margin: 0 .25em;
+        // margin: 0 .25em;
+    }
+
+    img {
+        border-radius: 50%;
     }
     
     h3 {
         word-break: break-all;
-        padding-left: .5em;
-        margin-right: auto;
+        // padding-left: .5em;
+        // margin-right: auto;
     }
 
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import classes from './Tab.module.scss';
-import pic from '../../assets/demo-profile-pic.jpg';
+import pic from '../../assets/default-profile-pic.png';
 import Auxiliary from '../../hoc/Auxiliary';
 import Button from '../../elements/Button/Button';
 import Convs from '../Convs/Convs';
@@ -36,6 +36,7 @@ const Tab = (props) => {
             case 'addconv':
                 dispatch(fetchFriends());
                 break;
+
             case 'requests':
                 dispatch(fetchRequests());
                 break;

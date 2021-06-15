@@ -23,7 +23,14 @@ const Messages = (props) => {
 
 
             return (
-            <Message key={message._id} user={message.sender===props.userId ? true : false} message={message.message} time={formattedTime}/>
+            <Message 
+                key={message._id} 
+                friendId={props.friendId[0]} 
+                user={message.sender===props.userId ? true : false} 
+                message={message.message} 
+                time={formattedTime}
+                id={message._id}
+                isFile={message.file ? true : false}/>
         )})
     } else {
         messagesList = <li key='notfound' className={classes.NoMessage}>Start a conversation by saying 'Hi!'</li>
