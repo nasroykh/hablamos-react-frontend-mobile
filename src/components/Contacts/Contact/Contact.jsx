@@ -21,7 +21,8 @@ const Contact = (props) => {
             break;
     }
 
-    let pictureUrl = `http://localhost:4444/users/${props.id}/picture`;
+    let pictureUrl = `http://192.168.1.7:4444/users/${props.id}/picture`;
+    // let pictureUrl = `http://localhost:4444/users/${props.id}/picture`;
 
 
     let contact = (

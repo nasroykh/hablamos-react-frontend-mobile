@@ -31,7 +31,7 @@ const ChatPage = (props) => {
 
     useEffect(() => {
         if ((!conv.messages && conv._id) || conv.new ) {
-            history.push(`/main/convs/chat?_id=${conv._id}`)
+            history.push(`/chat?_id=${conv._id}`)
         }
     }, [conv, history])
 
@@ -54,7 +54,6 @@ const ChatPage = (props) => {
             dispatch(userActions.checkIfConvExist({friendId}));
         }
 
-                                                                                //Check NEW CONV NEW MESSAGE BUG
         return () => {
             if (_id) {
                 socket.emit('leave', _id);
@@ -65,7 +64,9 @@ const ChatPage = (props) => {
     }, [dispatch, history.location, location.search])
 
     const fileSendChangeHandler = (e) => {
-        setSelectedFile(e.target.files[0]);
+        if (e.target.files[0]) {
+            setSelectedFile(e.target.files[0]);
+        }
     }
 
     const sendMessageHandler = (e) => {
@@ -114,7 +115,8 @@ const ChatPage = (props) => {
                 <FormInput 
                     type="text" 
                     inputRef={messageInput} 
-                    placeholder={selectedFile.name} 
+                    placeholder={selectedFile.name ? selectedFile.name : undefined} 
+                    value={selectedFile.name ? '' : undefined}
                     disabled={selectedFile.name ? true : false} />
                 <Button btnType="send-btn" />
             </form>

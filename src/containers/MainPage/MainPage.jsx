@@ -35,7 +35,7 @@ const MainPage = (props) => {
             if (history.location.pathname !== '/chat') {
                 setNotifShow(true);
                 setNotifMessage(`New message from ${sender.username}`)
-                setNotifLink('/main/convs');
+                setNotifLink('/');
                 clearNotif();
             }
             

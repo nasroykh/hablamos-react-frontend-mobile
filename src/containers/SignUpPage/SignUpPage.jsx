@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Switch, Route, Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import classes from './SignUpPage.module.scss';
 import {ReactComponent as ImageIcon} from '../../assets/file-icon.svg';
 import Logo from '../../elements/Logo/Logo';
@@ -63,7 +63,7 @@ const SignUpPage = () => {
                     <Auxiliary>
                         <h2>Choose a profile picture</h2>
                         <div className={classes.PictureUpload}>
-                        <label >
+                        <label>
                             <input type="file" accept='image/*' onChange={pictureUploadChangeHandler}/>
                             Upload a picture
                             <ImageIcon/>

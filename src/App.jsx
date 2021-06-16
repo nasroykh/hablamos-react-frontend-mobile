@@ -17,7 +17,8 @@ import LoadingSpinner from './elements/LoadingSpinner/LoadingSpinner';
 import BackDrop from './elements/BackDrop/BackDrop';
 
 // const ENDPOINT = "https://fierce-inlet-31066.herokuapp.com"; 
-const ENDPOINT = "ws://localhost:4444"; 
+// const ENDPOINT = "ws://localhost:4444"; 
+const ENDPOINT = "ws://192.168.1.7:4444"; 
 export const socket = socketIOClient(ENDPOINT);
 
 const App = () => {

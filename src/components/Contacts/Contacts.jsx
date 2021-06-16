@@ -24,19 +24,19 @@ const Contacts = (props) => {
 
                 return (
                 <Contact 
-                addContactHandler={props.addContactHandler} 
-                cancelAddContactHandler={props.cancelAddContactHandler}
-                acceptContactHandler={props.acceptContactHandler}
-                refuseContactHandler={props.refuseContactHandler}
-                openConvHandler={props.openConvHandler}
-                status={friend.status} 
-                name={friend.username} 
-                id={friend._id} 
-                key={friend._id} 
-                search={props.search} 
-                requests={props.requests}
-                sent={friend.sent}
-                hasPicture={friend.hasPicture}/>
+                    addContactHandler={props.addContactHandler} 
+                    cancelAddContactHandler={props.cancelAddContactHandler}
+                    acceptContactHandler={props.acceptContactHandler}
+                    refuseContactHandler={props.refuseContactHandler}
+                    openConvHandler={props.openConvHandler}
+                    status={friend.status} 
+                    name={friend.username} 
+                    id={friend._id} 
+                    key={friend._id} 
+                    search={props.search} 
+                    requests={props.requests}
+                    sent={friend.sent}
+                    hasPicture={friend.hasPicture}/>
             )})
         } else {
             if (props.search) {
