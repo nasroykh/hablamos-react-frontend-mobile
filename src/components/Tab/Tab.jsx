@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import classes from './Tab.module.scss';
@@ -17,7 +17,9 @@ import {
     fetchRequests, 
     acceptContact,
     cancelAddContact,
-    refuseContact} from '../../store/user/user-actions';
+    refuseContact,
+    createGroupChat } from '../../store/user/user-actions';
+import { userActions } from '../../store/user/user-slice';
 
 const Tab = (props) => {
     let tab;
@@ -26,6 +28,15 @@ const Tab = (props) => {
 
     const history = useHistory();
 
+    const groupNameInput = useRef();
+
+    let convs = useSelector(state => state.user.convs);
+    let friends = useSelector(state => state.user.friends);
+    let contacts = useSelector(state => state.user.foundContacts);
+    let requests = useSelector(state => state.user.friendRequests);
+    let selectedFriends = useSelector(state => state.user.selectedFriends);
+    let selectedConv = useSelector(state => state.user.selectedConv);
+    
     useEffect(() => {
         switch (props.tabName) {
             case 'convs':
@@ -34,6 +45,7 @@ const Tab = (props) => {
         
             case 'friends':
             case 'addconv':
+            case 'addtogroup':
                 dispatch(fetchFriends());
                 break;
 
@@ -44,12 +56,12 @@ const Tab = (props) => {
             default:
                 break;
         }
-    }, [dispatch, props.tabName])
 
-    let convs = useSelector(state => state.user.convs);
-    let friends = useSelector(state => state.user.friends);
-    let contacts = useSelector(state => state.user.foundContacts);
-    let requests = useSelector(state => state.user.friendRequests);
+        if (selectedConv._id) {
+            history.push(`/chat?_id=${selectedConv._id}`);
+        }
+    }, [dispatch, history, props.tabName, selectedConv])
+
 
     const contactSearchHandler = (e) => {
         dispatch(contactSearch(e.target.value));
@@ -69,6 +81,16 @@ const Tab = (props) => {
 
     const refuseContactHandler = (e) => {
         dispatch(refuseContact(e.currentTarget.id));
+    }
+
+    const addToGroupHandler = (e) => {
+        e.preventDefault();
+
+        dispatch(userActions.addToGroup({_id: e.target.id}));
+    }
+
+    const createGroupHandler = () => {
+        dispatch(createGroupChat(groupNameInput.current.value, selectedFriends));
     }
 
     switch (props.tabName) {
@@ -172,8 +194,7 @@ const Tab = (props) => {
                         <Button to='/main/friends' btnType='back-btn'/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.GroupTab}` }>
-                        <FormInput type='search' placeholder='Enter username...'/>
-                        <Contacts group/>
+                        <Contacts friends={friends} group addToGroupHandler={addToGroupHandler}/>
                         <Button btnType='primary' to='/main/friends/group/confirm'>Confirm</Button>
                     </div>
                 </Auxiliary>
@@ -187,9 +208,9 @@ const Tab = (props) => {
                         <h2>Create a group chat</h2>
                         <Button to='/main/friends/group' btnType='back-btn'/>
                     </div>
-                    <div className={`${classes.TabBody} ${classes.GroupTab}` }>
-                        <FormInput type='search' placeholder='Enter group name...'/>
-                        <Button btnType='primary'>Confirm</Button>
+                    <div className={`${classes.TabBody} ${classes.ConfirmGroupTab}` }>
+                        <FormInput type='search' placeholder='Enter group name...' inputRef={groupNameInput}/>
+                        <Button btnType='primary-form' click={createGroupHandler}>Confirm</Button>
                         <Button btnType='secondary' to='/main/friends/group'>Cancel</Button>
                     </div>
                 </Auxiliary>

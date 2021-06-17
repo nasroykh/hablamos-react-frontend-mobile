@@ -9,7 +9,14 @@ const Convs = (props) => {
     if (props.convs) {
         if (props.convs.length) {
             convsList = props.convs.map(conv => (
-                <Conv key={conv._id} id={conv._id} friendId={conv.participants[0]._id} name={conv.participants[0].username} message='wee' time='2:20pm'/>
+                <Conv 
+                key={conv._id} 
+                id={conv._id} 
+                friendId={conv.participants[0]._id} 
+                name={conv.participants[0].username}
+                groupName={conv.groupName} 
+                message='wee' 
+                time='2:20pm' />
             ))
         } else {
             console.log('no convs')

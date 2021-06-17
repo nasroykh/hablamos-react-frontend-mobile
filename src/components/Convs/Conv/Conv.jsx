@@ -12,7 +12,7 @@ const Conv = (props) => {
         <li className={classes.Conv}>
             <Link to={`/chat?_id=${props.id}`}>
                 <img src={pictureUrl} alt="Profile pic"/>
-                <h3>{props.name}</h3>
+                <h3>{props.groupName ? props.groupName : props.name}</h3>
                 <p>{props.message}</p>
                 <span>{props.time}</span>
             </Link>

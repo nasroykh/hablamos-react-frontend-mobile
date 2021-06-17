@@ -15,11 +15,11 @@ const TabMenu = (props) => {
                     Search for a friend
                 </Link>
             </li>
-            {/* <li>
-                <Link to='/main/group'>
+            <li onClick={props.tabMenuToggleHandler}>
+                <Link to='/main/friends/group'>
                     Create a group chat
                 </Link>
-            </li> */}
+            </li>
         </ul>
     )
 }

@@ -15,7 +15,9 @@ const initialState = {
     socketId: '',
     dialogText: '',
     isLoading: false,
-    pictureUploaded: false
+    pictureUploaded: false,
+    selectedFriends: [],
+    groupName: ''
 }
 
 const userSlice = createSlice({
@@ -88,9 +90,11 @@ const userSlice = createSlice({
         fetchMessagesSuccess(state, action) {
             state.isLoading = false;
             state.selectedConv = action.payload.conv;
-            let friend = state.selectedConv.participants.find(el => el !== state._id);
-            state.selectedConv.friendUsername = state.friends.find(el => el._id === friend).username;
-            state.selectedConv.participants = state.selectedConv.participants.filter(el => el !== state._id);
+            if (state.selectedConv.participants.length === 2) {
+                let friend = state.selectedConv.participants.find(el => el !== state._id);
+                state.selectedConv.friendUsername = state.friends.find(el => el._id === friend).username;
+                state.selectedConv.participants = state.selectedConv.participants.filter(el => el !== state._id);
+            }
         },
         sendMessageSuccess(state, action) {
             state.isLoading = false;
@@ -144,6 +148,16 @@ const userSlice = createSlice({
         uploadPictureSuccess(state) {
             state.isLoading = false;
             state.pictureUploaded = true;
+        },
+        addToGroup(state, action) {
+            if (state.selectedFriends.includes(action.payload._id)) {
+                state.selectedFriends = state.selectedFriends.filter(el => el !== action.payload._id);
+            } else {
+                state.selectedFriends.push(action.payload._id);
+            }
+        },
+        createGroupChatSuccess(state, action) {
+            state.selectedConv = action.payload.conv;
         }
     }
 });

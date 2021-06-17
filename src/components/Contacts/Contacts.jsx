@@ -36,7 +36,8 @@ const Contacts = (props) => {
                     search={props.search} 
                     requests={props.requests}
                     sent={friend.sent}
-                    hasPicture={friend.hasPicture}/>
+                    group={props.group}
+                    addToGroupHandler={props.addToGroupHandler}/>
             )})
         } else {
             if (props.search) {

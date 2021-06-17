@@ -98,13 +98,14 @@ const ChatPage = (props) => {
         setSelectedFile('');
     }
 
+
     return (
         <div className={classes.ChatPage}>
             <BackDrop bdShow={props.bdShow} click={props.sdToggleHandler}/>
             <SideDrawer sdShow={props.sdShow} sdToggleHandler={() => setTimeout(props.sdToggleHandler,300)} logoutHandler={props.logoutHandler}/>
             <NavBar chat sdToggleHandler={props.sdToggleHandler}/>
             <div className={classes.ChatHeader}>
-                <h2>{conv.friendUsername}</h2>
+                <h2>{conv.groupName ? conv.groupName : conv.friendUsername}</h2>
             </div>
             <Messages messages={conv.messages} friendId={conv.participants} userId={userId}/>
             <form className={classes.ChatForm} onSubmit={sendMessageHandler}>

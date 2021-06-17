@@ -42,14 +42,30 @@
 }
 
 .GroupTab {
-    padding: 2em ($m-pad);
+    padding: 0 ($m-pad) 1em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     ul {
-        margin: 1em 0;
+        margin-bottom: 1em;
     }
+}
+
+.ConfirmGroupTab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5em 0;
+
+    * {
+        margin: 0;
+    }
+
+    button {
+        margin: 3em 0 1em;
+    }
+
 }
 
 .ProfileTab {

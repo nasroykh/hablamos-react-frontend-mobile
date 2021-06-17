@@ -30,7 +30,8 @@ const Messages = (props) => {
                 message={message.message} 
                 time={formattedTime}
                 id={message._id}
-                isFile={message.file ? true : false}/>
+                isFile={message.file ? true : false}
+                sender={message.sender}/>
         )})
     } else {
         messagesList = <li key='notfound' className={classes.NoMessage}>Start a conversation by saying 'Hi!'</li>

@@ -14,7 +14,7 @@ const NavBar = (props) => {
     
     return (
         <div className={classes.NavBar}>
-            {props.chat ? <Button btnType='chat-back-btn' to='/main/convs'/> : <Button btnType='profile-pic' to='/'><img src={pictureUrl} alt="Profile pic"/></Button>}
+            {props.chat ? <Button btnType='chat-back-btn' to='/'/> : <Button btnType='profile-pic' to='/'><img src={pictureUrl} alt="Profile pic"/></Button>}
             <Logo/>
             <Button btnType='menu-btn' click={props.sdToggleHandler}/>
         </div>

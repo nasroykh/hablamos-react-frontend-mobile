@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import classes from './Contact.module.scss';
 import pic from '../../../assets/default-profile-pic.png';
 import {Link} from 'react-router-dom';
@@ -24,14 +25,15 @@ const Contact = (props) => {
     let pictureUrl = `http://192.168.1.7:4444/users/${props.id}/picture`;
     // let pictureUrl = `http://localhost:4444/users/${props.id}/picture`;
 
+    const selectedFriends = useSelector(state => state.user.selectedFriends);
+
+    let isSelected = selectedFriends.includes(props.id);
 
     let contact = (
             <Link to={`/chat?friendId=${props.id}`} onClick={props.openConvHandler}>
                 <img src={pictureUrl} alt="Profile pic"/>
                 <h3>{props.name}</h3>
-                {props.search ? <Button click={props.addContactHandler} id={props.id} btnType='add-contact-btn'/> : 
-                <span className={`${classes.StatusDot} ${statusClass}`}></span>}
-                {props.group ? <input type="checkbox"/> : null}
+                <span className={`${classes.StatusDot} ${statusClass}`}></span>
             </Link>
     );
 
@@ -45,11 +47,10 @@ const Contact = (props) => {
         )
     } else if (props.group) {
         contact = (
-            <Link to="#">
+            <Link to="#" id={props.id} className={`${isSelected ? classes.Selected : ''}`} onClick={props.addToGroupHandler}>
                 <img src={pictureUrl} alt="Profile pic"/>
                 <h3>{props.name}</h3>
                 <span className={`${classes.StatusDot} ${statusClass}`}></span>
-                <input type="checkbox"/>
             </Link>
         )
     } else if (props.requests) {
