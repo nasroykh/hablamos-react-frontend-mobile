@@ -276,3 +276,23 @@ export const createGroupChat = (groupName, participants) => {
         }
     }
 }
+
+export const updateProfile = (firstName, lastName, username, status, oldPassword, newPassword) => {
+    return async (dispatch) => {
+        try {
+            dispatch(userActions.setIsLoading());
+            let res = await axios.post('/users/update', {firstName, lastName, username, status, oldPassword, newPassword} , {headers: {Authorization: localStorage.getItem('token')}});
+
+            if (res.status === 201) {
+                dispatch(userActions.updateProfileSuccess({
+                    userInfos: res.data
+                }));
+            }
+
+            console.log(res.data);
+
+        } catch (e) {
+            dispatch(userActions.setError({error: 'Unable to update profile'}));
+        }
+    }
+}

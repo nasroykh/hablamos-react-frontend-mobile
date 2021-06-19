@@ -69,9 +69,11 @@
 }
 
 .ProfileTab {
-    
     padding: 2em ($m-pad);
 
+}
+
+.ProfileForm {
     input {
         width: 100%;
     }
@@ -86,15 +88,16 @@
         display: flex;
         flex-direction: column;
     }
-
+    
     div {
-        margin: .5em 0;
+        margin: 1.5em 0;
     }
-
+    
     button {
         margin: 2em auto 1em;
+        display: block;
     }
-
+    
     h3 {
         color: $primaryColor;
         font-family: $primaryFont;
@@ -111,11 +114,34 @@
     margin-bottom: 1em;
     img {
         width: 50%;
+        border-radius: 50%;
     }
 
     h1 {
         color: $primaryColor;
         margin: .5em 0 1em;
+    }
+}
+
+.PictureUpload {
+    color: $whiteColor;
+    font-size: .85rem;
+    font-family: $primaryFont;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    padding: .75em 0;
+    border-radius: 10px;
+    border: 2px solid $whiteColor;
+
+    input {
+        display: none;
+    }
+
+    svg {
+        margin: 0 1em;
     }
 }
 

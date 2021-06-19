@@ -63,12 +63,12 @@ const SignUpPage = () => {
                     <Auxiliary>
                         <h2>Choose a profile picture</h2>
                         <div className={classes.PictureUpload}>
-                        <label>
-                            <input type="file" accept='image/*' onChange={pictureUploadChangeHandler}/>
-                            Upload a picture
-                            <ImageIcon/>
-                        </label>
-                        <span>{fileUploaded.name}</span>
+                            <label>
+                                <input type="file" accept='image/*' onChange={pictureUploadChangeHandler}/>
+                                Upload a picture
+                                <ImageIcon/>
+                            </label>
+                            <span>{fileUploaded.name}</span>
                         </div>
                         <div className={classes.PictureButtons}>
                             <Button btnType='primary-form' click={pictureUploadHandler}>Confirm</Button>

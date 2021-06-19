@@ -157,7 +157,14 @@ const userSlice = createSlice({
             }
         },
         createGroupChatSuccess(state, action) {
+            state.isLoading = false;
             state.selectedConv = action.payload.conv;
+        },
+        updateProfileSuccess(state, action) {
+            state.isLoading = false;
+            for (const key in action.payload.userInfos) {
+                state[key] = action.payload.userInfos[key];
+            }
         }
     }
 });

@@ -7,7 +7,10 @@ const FormInput = (props) => {
     let input;
 
     if (props.select) {
-        input = (<select className={`${classes.FormInput} ${classes.FormSelect}`}>{props.children}</select>);
+        input = (<select 
+                    ref={props.inputRef} 
+                    className={`${classes.FormInput} ${classes.FormSelect}`} >{props.children}</select>
+                );
     } else {
         input = (
             <input 
