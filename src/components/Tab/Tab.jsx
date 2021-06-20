@@ -264,7 +264,7 @@ const Tab = (props) => {
                     </div>
                     <div className={`${classes.TabBody} ${classes.ProfileTab}` }>
                         <div className={classes.ProfilePic}>
-                            <img src={`http://192.168.1.7:4444/users/${user._id}/picture?${Date.now()}`} alt="Profile pic" />
+                            <img src={`http://192.168.1.8:4444/users/${user._id}/picture?${Date.now()}`} alt="Profile pic" loading='lazy' />
                             <h1>{user.username}</h1>
                             <label className={classes.PictureUpload}>
                                 <input type="file" accept='image/*' onChange={pictureChangeHandler}/>
@@ -273,7 +273,7 @@ const Tab = (props) => {
                             </label>
                         </div>
                         <form className={classes.ProfileForm}>
-                            <h3>Update profile Infos:</h3>
+                            <h3> - Update profile Infos:</h3>
                             <div>
                                 <label>Online status:</label>
                                 <FormInput select inputRef={statusSelect}>
@@ -294,7 +294,7 @@ const Tab = (props) => {
                                 <label>Last name:</label>
                                 <FormInput type="text" placeholder={user.lastName} inputRef={lastNameInput}/>
                             </div>
-                            <h3>Change account password:</h3>
+                            <h3> - Change account password:</h3>
                             <div>
                                 <label>Old Password:</label>
                                 <FormInput type="password"  inputRef={oldPasswordInput}/>

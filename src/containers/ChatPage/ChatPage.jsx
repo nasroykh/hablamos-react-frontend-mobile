@@ -39,6 +39,7 @@ const ChatPage = (props) => {
         let query = location.search;
         console.log(history.location);
         query = query.replace('?', '').split('=');
+
         
         let _id = '';
         let friendId = '';

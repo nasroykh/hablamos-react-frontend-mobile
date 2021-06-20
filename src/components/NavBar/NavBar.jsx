@@ -10,11 +10,11 @@ const NavBar = (props) => {
     const _id = useSelector(state => state.user._id);
     
     // let pictureUrl = `http://localhost:4444/users/${_id}/picture`;
-    let pictureUrl = `http://192.168.1.7:4444/users/${_id}/picture?${Date.now()}`;
+    let pictureUrl = `http://192.168.1.8:4444/users/${_id}/picture?${Date.now()}`;
     
     return (
         <div className={classes.NavBar}>
-            {props.chat ? <Button btnType='chat-back-btn' to='/'/> : <Button btnType='profile-pic' to='/main/profile'><img src={pictureUrl} alt="Profile pic"/></Button>}
+            {props.chat ? <Button btnType='chat-back-btn' to='/'/> : <Button btnType='profile-pic' to='/main/profile'><img src={pictureUrl} alt="Profile pic" loading='lazy'/></Button>}
             <Logo/>
             <Button btnType='menu-btn' click={props.sdToggleHandler}/>
         </div>

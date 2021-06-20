@@ -9,7 +9,7 @@
 
 .Conv > a {
     display: grid;
-    grid-template-columns: 2fr 6fr 1fr;
+    grid-template-columns: 2fr 5fr 1fr;
     column-gap: .5em;
     align-items: center;
     justify-items: flex-start;
@@ -25,9 +25,13 @@
     }
 
     span {
-        grid-row: 1/2;
+        grid-row: 1/3;
         grid-column: 3/4;
         font-size: .85rem;
+    }
+
+    p {
+        word-break: break-all;
     }
 
     * {

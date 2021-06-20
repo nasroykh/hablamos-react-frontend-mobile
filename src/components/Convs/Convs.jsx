@@ -15,8 +15,7 @@ const Convs = (props) => {
                 friendId={conv.participants[0]._id} 
                 name={conv.participants[0].username}
                 groupName={conv.groupName} 
-                message='wee' 
-                time='2:20pm' />
+                lastMessage={conv.messages[0]} />
             ))
         } else {
             console.log('no convs')

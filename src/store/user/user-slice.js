@@ -45,6 +45,7 @@ const userSlice = createSlice({
         fetchFriendsSuccess(state, action) {
             state.isLoading = false;
             state.friends = action.payload.friends;
+            state.pictureUploaded = false;
         },
         fetchRequestsSuccess(state, action) {
             state.isLoading = false;

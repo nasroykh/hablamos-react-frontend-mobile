@@ -22,7 +22,7 @@ const Contact = (props) => {
             break;
     }
 
-    let pictureUrl = `http://192.168.1.7:4444/users/${props.id}/picture?${Date.now()}`;
+    let pictureUrl = `http://192.168.1.8:4444/users/${props.id}/picture?${Date.now()}`;
     // let pictureUrl = `http://localhost:4444/users/${props.id}/picture`;
 
     const selectedFriends = useSelector(state => state.user.selectedFriends);
@@ -31,7 +31,7 @@ const Contact = (props) => {
 
     let contact = (
             <Link to={`/chat?friendId=${props.id}`} onClick={props.openConvHandler}>
-                <img src={pictureUrl} alt="Profile pic"/>
+                <img src={pictureUrl} alt="Profile pic" loading='lazy'/>
                 <h3>{props.name}</h3>
                 <span className={`${classes.StatusDot} ${statusClass}`}></span>
             </Link>
@@ -40,7 +40,7 @@ const Contact = (props) => {
     if (props.search) {
         contact = (
             <Link to="#">
-                <img src={pictureUrl} alt="Profile pic"/>
+                <img src={pictureUrl} alt="Profile pic" loading='lazy'/>
                 <h3>{props.name}</h3>
                 {props.sent ? <Button click={props.cancelAddContactHandler} cancel id={props.id} btnType={'add-contact-btn'}/> : <Button click={props.addContactHandler} id={props.id} btnType='add-contact-btn'/>}
             </Link>
@@ -48,7 +48,7 @@ const Contact = (props) => {
     } else if (props.group) {
         contact = (
             <Link to="#" id={props.id} className={`${isSelected ? classes.Selected : ''}`} onClick={props.addToGroupHandler}>
-                <img src={pictureUrl} alt="Profile pic"/>
+                <img src={pictureUrl} alt="Profile pic" loading='lazy'/>
                 <h3>{props.name}</h3>
                 <span className={`${classes.StatusDot} ${statusClass}`}></span>
             </Link>
@@ -56,7 +56,7 @@ const Contact = (props) => {
     } else if (props.requests) {
         contact = (
             <Link to="#">
-                <img src={pictureUrl} alt="Profile pic"/>
+                <img src={pictureUrl} alt="Profile pic" loading='lazy'/>
                 <h3>{props.name}</h3>
                 <Button click={props.acceptContactHandler} id={props.id} btnType='add-contact-btn'/> 
                 <Button click={props.refuseContactHandler} cancel id={props.id} btnType='add-contact-btn'/> 
