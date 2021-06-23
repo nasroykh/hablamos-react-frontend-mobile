@@ -49,23 +49,32 @@ const Conv = (props) => {
             lastMessage = 'Sent you a file'
         } else {
             lastMessage = props.lastMessage.message;
-            
-            lastMessage = lastMessage.length>20 ? `${lastMessage.slice(0, 20)}...` : lastMessage 
         }
     } else {
         if (props.lastMessage.file) {
             lastMessage = 'You: Sent a file'
         } else {
             lastMessage = `You: ${props.lastMessage.message}`;
-            lastMessage = lastMessage.length>20 ? `${lastMessage.slice(0, 20)}...` : lastMessage 
         }
     }
+    
+    lastMessage = lastMessage.length>20 ? `${lastMessage.slice(0, 20)}...` : lastMessage 
+
+    let convName;
+    
+    if (props.groupName) {
+        convName = props.groupName;
+    } else {
+        convName = props.name;
+    }
+
+    convName = convName.length>15 ? `${convName.slice(0, 15)}...` : convName;
 
     return (
         <li className={classes.Conv}>
             <Link to={`/chat?_id=${props.id}`}>
                 <img src={pictureUrl} alt="Profile pic" loading='lazy'/>
-                <h3>{props.groupName ? props.groupName : props.name}</h3>
+                <h3>{convName}</h3>
                 <p>{lastMessage}</p>
                 <span>{lastMessageTime}</span>
             </Link>
