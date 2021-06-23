@@ -26,6 +26,7 @@ export const signUp = (signUpInfos) => {
                 socket.emit('socketid:save', res.data.user._id);
                 localStorage.setItem('token', res.data.token);
                 localStorage.setItem('userId', res.data.user._id);
+                localStorage.setItem('username', res.data.user.username);
             }
 
             console.log(res.data);
@@ -47,6 +48,7 @@ export const login = (loginInfos) => {
             if (res.status === 200) {
                 localStorage.setItem('token', res.data.token);
                 localStorage.setItem('userId', res.data.user._id);
+                localStorage.setItem('username', res.data.user.username);
                 dispatch(authActions.loggedIn({token: res.data.token}));
                 dispatch(userActions.loginSuccess({userInfos: res.data.user}));
                 socket.emit('socketid:save', res.data.user._id);
@@ -89,7 +91,8 @@ export const checkAuth = (token) => {
                 if (res.status === 200) {
                     localStorage.setItem('token', res.data.token);
                     localStorage.setItem('userId', res.data.user._id);
-                    dispatch(authActions.loggedIn({token: res.data.token}));
+                    localStorage.setItem('username', res.data.user.username);
+                dispatch(authActions.loggedIn({token: res.data.token}));
                     dispatch(userActions.loginSuccess({userInfos: res.data.user}));
                     socket.emit('socketid:save', res.data.user._id);
             } else {

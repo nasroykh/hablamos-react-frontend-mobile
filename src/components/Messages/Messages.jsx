@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import classes from './Messages.module.scss';
 import Message from './Message/Message';
 
@@ -7,6 +8,10 @@ const Messages = (props) => {
     let messagesList;
 
     let messagesRef = useRef();
+
+    let isSeen;
+
+    let friends = useSelector(state => state.user.friends);
 
     useEffect(() => {
         if (props.messages) {
@@ -53,7 +58,22 @@ const Messages = (props) => {
             
             
             
-            
+
+            if (message.sender===props.userId && (message.seenBy ? message.seenBy.length : false)) {
+                if (props.friendId.length > 1) {
+                    isSeen = 'Seen by '
+                    for (let i = 0; i < props.friendId.length; i++) {
+                        if (message.seenBy.includes(props.friendId[i]._id)) {
+                            isSeen += `${props.friendId[i].username}, `;
+                        }
+                    }
+                    isSeen = isSeen.slice(0, isSeen.length-2)
+                } else {
+                    isSeen = 'Seen';
+                }
+            }  else {
+                isSeen = '';
+            }
 
             return (
             <Message 
@@ -64,7 +84,8 @@ const Messages = (props) => {
                 time={formattedTime}
                 id={message._id}
                 isFile={message.file ? true : false}
-                sender={message.sender}/>
+                sender={message.sender}
+                seen={message.seenBy ? message.seenBy.length : false}/>
         )})
     } else {
         messagesList = <li key='notfound' className={classes.NoMessage}>Start a conversation by saying 'Hi!'</li>
@@ -73,8 +94,9 @@ const Messages = (props) => {
     return (
         <ul className={classes.Messages} ref={messagesRef}>
             {messagesList}
+            <span className={classes.Seen}>{isSeen}</span>
         </ul>
     )
 }
 
-export default Messages
+export default Messages;

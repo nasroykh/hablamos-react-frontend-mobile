@@ -44,14 +44,37 @@ const App = () => {
 					time: payload.time,
 					file: true
 				}));
+				if (localStorage.getItem('userId') !== payload.sender) {
+					socket.emit('message:seen', {
+						_id: payload.lastMessageId,
+						userId: localStorage.getItem('userId'),
+						username: localStorage.getItem('username')
+					})
+				}
+
 			} else {
 				dispatch(userActions.receiveMessage({
 					message: payload.message,
 					sender: payload.sender,
 					time: payload.time
 				}));
+				if (localStorage.getItem('userId') !== payload.sender) {
+					socket.emit('message:seen', {
+						_id: payload.lastMessageId,
+						userId: localStorage.getItem('userId'),
+						username: localStorage.getItem('username')
+					})
+				}
 			}
         });
+
+        socket.on('message:isseen', (payload) => {
+			console.log('seen');
+			if (localStorage.getItem('userId') !== payload._id) {
+				dispatch(userActions.messageSeen({_id: payload._id, username: payload.username}));
+			}
+		});
+
     }, [dispatch]);
 
 	useEffect(() => {

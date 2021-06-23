@@ -38,7 +38,12 @@ const userSlice = createSlice({
             state.isLoading = false;
             for (let i = 0; i < action.payload.convs.length; i++) {
                 action.payload.convs[i].participants = action.payload.convs[i].participants.filter(el => el._id !== state._id);
+
+                action.payload.convs[i].lastMessage = action.payload.convs[i].messages;
+                
+                action.payload.convs[i].messages = undefined;
             }
+
             state.convs = action.payload.convs;
             state.pictureUploaded = false;
         },
@@ -165,6 +170,13 @@ const userSlice = createSlice({
             state.isLoading = false;
             for (const key in action.payload.userInfos) {
                 state[key] = action.payload.userInfos[key];
+            }
+        },
+        messageSeen(state, action) {
+            if (state.selectedConv.messages[state.selectedConv.messages.length-1].seenBy) {
+                state.selectedConv.messages[state.selectedConv.messages.length-1].seenBy.push(action.payload._id);
+            } else {
+                state.selectedConv.messages[state.selectedConv.messages.length-1].seenBy = [action.payload._id];
             }
         }
     }

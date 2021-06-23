@@ -4,9 +4,14 @@
     display: grid;
     grid-template-columns: 1fr 8fr;
     grid-template-rows: auto 1fr;
-    margin: auto 0 2em;
+    margin: 1em 0 ;
     column-gap: .5em;
     margin-right: 10%;
+
+    &:first-child {
+        margin-top: auto;
+        padding-top: .5em;
+    }
 
     & > img {
         grid-column: 1/2;
@@ -47,6 +52,7 @@
         background-color: $secondaryColor;
         color: $whiteColor;
         padding: .5em;
+        justify-self: flex-end;
     }
 
     & > span:last-of-type {
