@@ -1,3 +1,94 @@
+@import '../../scss/variables';
+
 .MainPage {
     height: 100%;
+}
+
+.LightMode {
+    & > div:nth-of-type(3) {
+
+        & > div:first-of-type {
+            background-color: $primaryColor;
+            color: $bgColor;
+            border-bottom: 1px solid $tertiaryColor;
+            
+
+            path, circle {
+                fill: $bgColor;
+            }
+
+            rect {
+                fill: $primaryColor;
+            }
+
+            span {
+                background-color: $bgColor;
+            }
+
+            a[id] {
+                path, circle, rect {
+                    fill: $bgColor;
+
+                }
+                path {
+                    stroke: $primaryColor;
+                }
+                ellipse {
+                    fill: $bgColor;
+                }
+            }
+
+            ul {
+                background-color: $primaryColor;
+                border-color: $tertiaryColor;
+
+                li {
+                    border-color: $tertiaryColor;
+                }
+
+                a {
+                    color: $bgColor;
+
+                }
+            }
+        }
+
+        & > div:last-of-type {
+            background-color: $primaryColor;
+
+            input, select, label {
+                color: $bgColor;
+                border-color: $bgColor;
+
+                option {
+                    color: $whiteColor;
+                }
+
+                path {
+                    fill: $bgColor;
+                }
+            }
+
+            h3 {
+                color: $bgColor;
+            }
+
+            ul li, ul li a {
+                color: $bgColor;
+
+                path, circle {
+                    fill: $bgColor;
+                }
+
+                ellipse {
+                    fill: $bgColor;
+                }
+
+                rect {
+                    fill: $primaryColor;
+                }
+            }
+        }
+
+    }
 }

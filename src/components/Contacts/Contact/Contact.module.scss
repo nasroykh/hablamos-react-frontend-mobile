@@ -62,3 +62,7 @@
     transition: all 250ms ease-in-out;
     border-radius: 10px;
 }
+
+.LightMode .Selected {
+    background-color: rgba($bgColor, 0.2);
+}

@@ -67,8 +67,10 @@ const Tab = (props) => {
                 break;
         }
 
-        if (selectedConv._id) {
-            history.push(`/chat?_id=${selectedConv._id}`);
+        if (selectedConv) {
+            if (selectedConv._id && props.tabName==='creategroup') {
+                history.push(`/chat?_id=${selectedConv._id}`);
+            }
         }
     }, [dispatch, history, props.tabName, selectedConv])
 
@@ -233,7 +235,7 @@ const Tab = (props) => {
                         <Button to='/main/friends' btnType='back-btn'/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.GroupTab}` }>
-                        <Contacts friends={friends} group addToGroupHandler={addToGroupHandler}/>
+                        <Contacts friends={friends} group addToGroupHandler={addToGroupHandler} isDarkMode={props.isDarkMode}/>
                         <Button btnType='primary' to='/main/friends/group/confirm'>Confirm</Button>
                     </div>
                 </Auxiliary>
@@ -306,6 +308,22 @@ const Tab = (props) => {
                             <Button btnType='primary-form' click={profileUpdateHandler}>Confirm</Button>
                             <Button to='/main/convs' btnType='secondary-form'>Cancel</Button>
                         </form>
+                    </div>
+                </Auxiliary>
+            );
+            break;
+
+        case 'settings':
+            tab = (
+                <Auxiliary>
+                    <div className={classes.TabHeader}>
+                        <h2>Settings</h2>
+                    </div>
+                    <div className={`${classes.TabBody} ${classes.SettingsTab}` }>
+                        <div>
+                            <h3>Dark/Light Mode</h3>
+                            <Button btnType='primary-form' click={props.switchDarkLightMode}>Toggle</Button>
+                        </div>
                     </div>
                 </Auxiliary>
             );

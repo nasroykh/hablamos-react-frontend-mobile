@@ -67,7 +67,7 @@ const Contact = (props) => {
     
 
     return (
-        <li className={classes.Contact}>
+        <li className={`${classes.Contact} ${props.group ? (props.isDarkMode ? '' : classes.LightMode) : ''}`}>
             {contact}
         </li>
     )

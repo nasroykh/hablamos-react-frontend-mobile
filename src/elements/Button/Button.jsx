@@ -46,7 +46,7 @@ const Button = (props) => {
             break;
 
         case 'back-btn':
-            btn = <Link to={props.to} className={classes.TabHeaderBtn}><BackBtn/></Link>;
+            btn = <Link to={props.to} id='backbtn' className={classes.TabHeaderBtn}><BackBtn/></Link>;
             break;
 
         case 'add-contact':

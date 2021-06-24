@@ -69,8 +69,11 @@ export const logout = (token) => {
 
             if (res.status === 200) {
                 dispatch(authActions.loggedOut());
+                dispatch(userActions.logoutSuccess());
                 socket.emit('socketid:remove', localStorage.getItem('userId'));
                 localStorage.setItem('token', '');
+                localStorage.setItem('username', '');
+                localStorage.setItem('userId', '');
             }
 
             console.log(res.data);

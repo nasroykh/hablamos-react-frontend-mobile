@@ -3,7 +3,6 @@
 .SideDrawer {
     position: fixed;
     background-color: $bgColor;
-    color: $primaryColor;
     width: 80%;
     height: 70%;
     margin-top: 15vh;
@@ -68,4 +67,35 @@
 
 .Show {
     transform: translateX(0%);
+}
+
+.LightMode {
+    background-color: $primaryColor;
+    
+    .Active {
+        color: $primaryColor;
+        background-color: $bgColor;
+        path {
+            fill: $primaryColor;
+        }
+    }
+
+    li:last-child {
+        background-color: $tertiaryColor;
+        a {
+            color: $whiteColor;
+        }
+                
+        path {
+            fill: $whiteColor;
+        }
+    }
+    
+    li a {
+        color: $bgColor;
+    }
+    
+    li path {
+        fill: $bgColor;
+    }
 }

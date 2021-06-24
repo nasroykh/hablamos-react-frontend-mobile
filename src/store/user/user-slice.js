@@ -30,6 +30,11 @@ const userSlice = createSlice({
                 state[key] = action.payload.userInfos[key];
             }
         },
+        logoutSuccess(state) {
+            for (const key in state) {
+                state[key] = initialState[key];
+            }
+        },
         setError(state, action) {
             state.isLoading = false;
             state.dialogText = action.payload.error;

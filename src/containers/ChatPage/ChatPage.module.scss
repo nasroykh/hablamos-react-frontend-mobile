@@ -38,3 +38,17 @@
         display: none;
     }
 }
+
+.LightMode .ChatForm {
+    background-color: $primaryColor;
+
+    label:first-of-type path {
+        fill: $bgColor;
+    }
+
+    input {
+        background-color: $primaryColor;
+        color: $bgColor;
+        border-color: $bgColor;
+    }
+}

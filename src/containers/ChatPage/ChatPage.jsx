@@ -101,9 +101,9 @@ const ChatPage = (props) => {
 
 
     return (
-        <div className={classes.ChatPage}>
+        <div className={`${classes.ChatPage} ${props.isDarkMode ? '' : classes.LightMode}`}>
             <BackDrop bdShow={props.bdShow} click={props.sdToggleHandler}/>
-            <SideDrawer sdShow={props.sdShow} sdToggleHandler={() => setTimeout(props.sdToggleHandler,300)} logoutHandler={props.logoutHandler}/>
+            <SideDrawer isDarkMode={props.isDarkMode} sdShow={props.sdShow} sdToggleHandler={() => setTimeout(props.sdToggleHandler,300)} logoutHandler={props.logoutHandler}/>
             <NavBar chat sdToggleHandler={props.sdToggleHandler}/>
             <div className={classes.ChatHeader}>
                 <h2>{conv.groupName ? conv.groupName : conv.friendUsername}</h2>

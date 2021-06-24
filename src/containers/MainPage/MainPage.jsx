@@ -62,9 +62,9 @@ const MainPage = (props) => {
     }, [])
     
     return (
-        <div className={classes.MainPage}>
+        <div className={`${classes.MainPage} ${props.isDarkMode ? '' : classes.LightMode}`}>
             <BackDrop bdShow={props.bdShow} click={props.bdClickHandler}/>
-            <SideDrawer sdShow={props.sdShow} sdToggleHandler={() => setTimeout(props.sdToggleHandler,300)} logoutHandler={props.logoutHandler}/>
+            <SideDrawer isDarkMode={props.isDarkMode} sdShow={props.sdShow} sdToggleHandler={() => setTimeout(props.sdToggleHandler,300)} logoutHandler={props.logoutHandler}/>
             <NavBar sdToggleHandler={props.sdToggleHandler}/>
             <Notif notifShow={notifShow} notifLink={notifLink}>{notifMessage}</Notif>
             
@@ -90,7 +90,7 @@ const MainPage = (props) => {
                 </Route>
 
                 <Route exact path='/main/friends/group'>
-                    <Tab tabName='addtogroup'/>
+                    <Tab tabName='addtogroup' isDarkMode={props.isDarkMode}/>
                 </Route>
 
                 <Route exact path='/main/friends/group/confirm'>
@@ -103,6 +103,10 @@ const MainPage = (props) => {
 
                 <Route exact path='/main/contact'>
                     <Tab tabName='contact'/>
+                </Route>
+
+                <Route exact path='/main/settings'>
+                    <Tab tabName='settings' switchDarkLightMode={props.switchDarkLightMode}/>
                 </Route>
             </Switch>
         </div>

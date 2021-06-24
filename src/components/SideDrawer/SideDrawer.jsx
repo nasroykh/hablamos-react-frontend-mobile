@@ -9,7 +9,7 @@ import {NavLink} from 'react-router-dom'
 
 const SideDrawer = (props) => {
     return (
-        <nav className={`${classes.SideDrawer} ${props.sdShow ? classes.Show : ''}`}>
+        <nav className={`${classes.SideDrawer} ${props.sdShow ? classes.Show : ''} ${props.isDarkMode ? '' : classes.LightMode}`}>
             <ul>
                 <li onClick={props.sdToggleHandler}>
                     <NavLink to='/main/convs' activeClassName={classes.Active}>
@@ -30,7 +30,7 @@ const SideDrawer = (props) => {
                     </NavLink>
                 </li>
                 <li onClick={props.sdToggleHandler}>
-                    <NavLink to='#' /* activeClassName={classes.Active} */>
+                    <NavLink to='/main/settings' activeClassName={classes.Active}>
                         <NavSet/>
                         <span>Settings</span>
                     </NavLink>

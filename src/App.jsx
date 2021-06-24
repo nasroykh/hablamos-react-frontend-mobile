@@ -34,7 +34,8 @@ const App = () => {
 	const [sdShow, setSdShow] = useState(false);
 	const [bdShow, setBdShow] = useState(false);
 	const [tabMenuShow, setTabMenuShow] = useState(false);
-
+	const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('isDarkMode')==='true' ? true : false);
+	
 	useEffect(() => {
         socket.on('message:receive', (payload) => {
 			if (payload.file) {
@@ -117,6 +118,16 @@ const App = () => {
         history.push('/');
     }
 
+	const switchDarkLightMode = () => {
+		if (localStorage.getItem('isDarkMode') === 'true') {
+			localStorage.setItem('isDarkMode', 'false');
+			setIsDarkMode(false);
+		} else {
+			localStorage.setItem('isDarkMode', 'true');
+			setIsDarkMode(true);
+		}
+	}
+
  	return (
 		 <div className={classes.App}>
 			<DialogBox/>
@@ -130,7 +141,8 @@ const App = () => {
 							sdShow={sdShow}
 							bdShow={bdShow}
 							sdToggleHandler={sdToggleHandler}
-							logoutHandler={logoutHandler}/> : <Redirect to='/'/>}
+							logoutHandler={logoutHandler}
+							isDarkMode={isDarkMode}/> : <Redirect to='/'/>}
 				</Route>
 
 				<Route path='/main'>
@@ -142,7 +154,9 @@ const App = () => {
 						tabMenuToggleHandler={tabMenuToggleHandler}
 						tabMenuShow={tabMenuShow}
 						bdClickHandler={bdClickHandler}
-						logoutHandler={logoutHandler}/> : <Redirect to='/'/>}
+						logoutHandler={logoutHandler}
+						switchDarkLightMode={switchDarkLightMode}
+						isDarkMode={isDarkMode}/> : <Redirect to='/'/>}
 				</Route>
 
 				<Route path='/signin'>
@@ -156,7 +170,7 @@ const App = () => {
 
 				<Route path='/'>
 					{/* <LoadingPage/> */}
-					{isAuth ? <Redirect to='/main/convs'/> : <LandingPage/>}
+					{isAuth ? <Redirect to='/main/settings'/> : <LandingPage/>}
 				</Route>
 
 			</Switch>
