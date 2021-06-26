@@ -41,6 +41,7 @@ const userSlice = createSlice({
         },
         fetchConvsSuccess(state, action) {
             state.isLoading = false;
+
             for (let i = 0; i < action.payload.convs.length; i++) {
                 action.payload.convs[i].participants = action.payload.convs[i].participants.filter(el => el._id !== state._id);
 
@@ -48,6 +49,18 @@ const userSlice = createSlice({
                 
                 action.payload.convs[i].messages = undefined;
             }
+
+            action.payload.convs.sort((a, b) => {
+                if (a.lastMessage[0].sentAt > b.lastMessage[0].sentAt) {
+                    return -1;
+                }
+
+                if (a.lastMessage[0].sentAt < b.lastMessage[0].sentAt) {
+                    return 1;
+                }
+
+                return 0;
+            });
 
             state.convs = action.payload.convs;
             state.pictureUploaded = false;
@@ -183,6 +196,53 @@ const userSlice = createSlice({
             } else {
                 state.selectedConv.messages[state.selectedConv.messages.length-1].seenBy = [action.payload._id];
             }
+        },
+        updateConvWithLastMessage(state, action) {
+            for (let i = 0; i < state.convs.length; i++) {
+                if (state.convs[i]._id === action.payload.convId) {
+                    state.convs[i].lastMessage[0] = {
+                        seenBy: [],
+                        _id: Date.now(),
+                        sender: action.payload._id,
+                        sentAt: action.payload.sentAt,
+                        message: action.payload.message ? action.payload.message : undefined,
+                        file: action.payload.file ? action.payload.file : undefined
+                    }
+                    break;
+                } else {
+                    state.convs.push({
+                        _id: action.payload.convId,
+                        participants: [
+                            {
+                                _id: action.payload._id,
+                                username: action.payload.username
+                            }
+                        ],
+                        lastMessage: [{
+                            seenBy: [],
+                            _id: Date.now(),
+                            sender: action.payload._id,
+                            sentAt: action.payload.sentAt,
+                            message: action.payload.message ? action.payload.message : undefined,
+                            file: action.payload.file ? action.payload.file : undefined
+                        }]
+                    });
+
+                    break;
+                }
+            }
+
+            state.convs.sort((a, b) => {
+                if (a.lastMessage[0].sentAt > b.lastMessage[0].sentAt) {
+                    return -1;
+                }
+
+                if (a.lastMessage[0].sentAt < b.lastMessage[0].sentAt) {
+                    return 1;
+                }
+
+                return 0;
+            });
         }
     }
 });

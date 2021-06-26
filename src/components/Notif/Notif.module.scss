@@ -18,6 +18,7 @@
     font-family: $primaryFont;
     transform: translateY(100%);
     transition: all 500ms ease-in-out;
+    z-index: 5;
 }
 
 .Show {

@@ -44,7 +44,7 @@ const Conv = (props) => {
         lastMessageTime = `${hours}:${minutes} - ${day}/${month}`;
     }
 
-    if (props.lastMessage.sender === props.friendId ) {
+    if ((props.lastMessage.sender === props.friendId) || props.groupName ) {
         if (props.lastMessage.file) {
             lastMessage = 'Sent you a file'
         } else {
@@ -77,6 +77,7 @@ const Conv = (props) => {
                 <h3>{convName}</h3>
                 <p>{lastMessage}</p>
                 <span>{lastMessageTime}</span>
+                {props.seen ? null : <span className={classes.NewMessage}></span>}
             </Link>
         </li>
     )

@@ -8,6 +8,7 @@ import SideDrawer from '../../components/SideDrawer/SideDrawer';
 import BackDrop from '../../elements/BackDrop/BackDrop';
 import Notif from '../../components/Notif/Notif';
 import {socket} from '../../App';
+import { userActions } from '../../store/user/user-slice';
 
 const MainPage = (props) => {
 
@@ -31,14 +32,14 @@ const MainPage = (props) => {
             }, 3000);
         };
 
-		socket.on("notify:message", (sender) => {
+		socket.on("notify:message", (payload) => {
             if (history.location.pathname !== '/chat') {
                 setNotifShow(true);
-                setNotifMessage(`New message from ${sender.username}`)
+                setNotifMessage(`New message from ${payload.username}`)
                 setNotifLink('/');
+                dispatch(userActions.updateConvWithLastMessage(payload))
                 clearNotif();
             }
-            
 		});
 
         socket.on('notify:request', (sender) => {
