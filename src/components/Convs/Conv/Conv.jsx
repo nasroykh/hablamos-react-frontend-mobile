@@ -5,9 +5,9 @@ import {Link} from 'react-router-dom';
 
 const Conv = (props) => {
 
-    // let pictureUrl = `http://localhost:4444/users/${props.friendId}/picture`;
-    let pictureUrl = `http://192.168.1.8:4444/users/${props.groupName ? props.id : props.friendId}/picture?${Date.now()}`;
-
+    // let pictureUrl = `http://192.168.1.8:4444/users/${props.groupName ? props.id : props.friendId}/picture?${Date.now()}`;
+    let pictureUrl = `https://fierce-inlet-31066.herokuapp.com/users/${props.groupName ? props.id : props.friendId}/picture?${Date.now()}`;
+    
     let lastMessage;
 
     let currentDate = new Date().getDate().toString();

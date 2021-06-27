@@ -266,7 +266,8 @@ const Tab = (props) => {
                     </div>
                     <div className={`${classes.TabBody} ${classes.ProfileTab}` }>
                         <div className={classes.ProfilePic}>
-                            <img src={`http://192.168.1.8:4444/users/${user._id}/picture?${Date.now()}`} alt="Profile pic" loading='lazy' />
+                            {/* <img src={`http://192.168.1.8:4444/users/${user._id}/picture?${Date.now()}`} alt="Profile pic" loading='lazy' /> */}
+                            <img src={`https://fierce-inlet-31066.herokuapp.com/users/${user._id}/picture?${Date.now()}`} alt="Profile pic" loading='lazy' />
                             <h1>{user.username}</h1>
                             <label className={classes.PictureUpload}>
                                 <input type="file" accept='image/*' onChange={pictureChangeHandler}/>

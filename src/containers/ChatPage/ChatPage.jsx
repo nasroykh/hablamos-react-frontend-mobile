@@ -37,7 +37,6 @@ const ChatPage = (props) => {
 
     useEffect(() => {
         let query = location.search;
-        console.log(history.location);
         query = query.replace('?', '').split('=');
 
         

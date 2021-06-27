@@ -14,11 +14,11 @@ export const fetchConvs = () => {
                 }));
             }
 
-            console.log(res.data);
+            
 
         } catch (e) {
             dispatch(userActions.setLoadingDone());
-            console.log(e);
+            
         }
     }
 }
@@ -36,10 +36,10 @@ export const fetchFriends = () => {
                 }));
             }
 
-            console.log(res.data);
+            
 
         } catch (e) {
-            console.log(e);
+            
             dispatch(userActions.setLoadingDone());
         }
     }
@@ -58,7 +58,7 @@ export const fetchRequests = () => {
                 }));
             }
 
-            console.log(res.data);
+            
 
         } catch (e) {
             dispatch(userActions.setLoadingDone());
@@ -84,13 +84,13 @@ export const contactSearch = (username) => {
                     dispatch(userActions.contactSearchError());
                 }
     
-                console.log(res.data);
+                
             } else {
                 dispatch(userActions.contactSearchError());
             }
         } catch (e) {
             dispatch(userActions.contactSearchError());
-            console.log(e);
+            
         }
     }
 }
@@ -107,10 +107,10 @@ export const addContact = (_id) => {
                 }));
             }
 
-            console.log(res.data);
+            
 
         } catch (e) {
-            dispatch(userActions.setError({error: 'Unable to add contact'}));
+            dispatch(userActions.setError({error: e.response.data}));
         }
     }
 }
@@ -127,10 +127,10 @@ export const cancelAddContact = (_id) => {
                 }));
             }
 
-            console.log(res.data);
+            
 
         } catch (e) {
-            dispatch(userActions.setError({error: 'Unable to cancel add contact'}));
+            dispatch(userActions.setError({error: e.response.data}));
         }
     }
 }
@@ -145,10 +145,10 @@ export const acceptContact = (_id) => {
                 dispatch(userActions.contactAcceptSuccess({_id}));
             }
 
-            console.log(res.data);
+            
 
         } catch (e) {
-            dispatch(userActions.setError({error: 'Unable to accept contact'}));
+            dispatch(userActions.setError({error: e.response.data}));
         }
     }
 }
@@ -163,10 +163,10 @@ export const refuseContact = (_id) => {
                 dispatch(userActions.contactRefuseSuccess({_id}));
             }
 
-            console.log(res.data);
+            
 
         } catch (e) {
-            dispatch(userActions.setError({error: 'Unable to accept contact'}));
+            dispatch(userActions.setError({error: e.response.data}));
         }
     }
 }
@@ -183,11 +183,11 @@ export const fetchMessages = (_id, friendId) => {
                 }));
             }
 
-            console.log(res.data);
+            
 
         } catch (e) {
             dispatch(userActions.setLoadingDone());
-            console.log(e);
+            
         }
     }
 }
@@ -205,10 +205,10 @@ export const sendMessage = (message, _id, friendId) => {
                 }));
             }
 
-            console.log(res.data);
+            
 
         } catch (e) {
-            dispatch(userActions.setError({error: 'Unable to send message, please refresh the page and retry'}));
+            dispatch(userActions.setError({error: e.response.data}));
         }
     }
 }
@@ -220,21 +220,15 @@ export const sendFile = (file, _id, friendId) => {
             let res = await axios.post('/convs/file', file, {params: {_id, friendId}, headers: {Authorization: localStorage.getItem('token')}});
             
             if (res.status === 201) {
-                console.log(res)
                 dispatch(userActions.sendFileSuccess({
                     file: true,
                     conv: res.data.conv ? res.data.conv : '',
                     lastMessageId: res.data.lastMessageId
                 }));
-            } else {
-                console.log(res)
             }
 
-            console.log(res.data);
-
         } catch (e) {
-            console.log(e)
-            dispatch(userActions.setError({error: 'Unable to send file, please refresh the page and retry'}));
+            dispatch(userActions.setError({error: e.response.data}));
         }
     }
 }
@@ -249,10 +243,10 @@ export const uploadPicture = (picture) => {
                 dispatch(userActions.uploadPictureSuccess());
             }
 
-            console.log(res.data);
+            
 
         } catch (e) {
-            dispatch(userActions.setError({error: 'Unable to upload image'}));
+            dispatch(userActions.setError({error: e.response.data}));
         }
     }
 }
@@ -269,10 +263,10 @@ export const createGroupChat = (groupName, participants) => {
                 }));
             }
 
-            console.log(res.data);
+            
 
         } catch (e) {
-            dispatch(userActions.setError({error: 'Unable to create a group chat'}));
+            dispatch(userActions.setError({error: e.response.data}));
         }
     }
 }
@@ -289,10 +283,10 @@ export const updateProfile = (firstName, lastName, username, status, oldPassword
                 }));
             }
 
-            console.log(res.data);
+            
 
         } catch (e) {
-            dispatch(userActions.setError({error: 'Unable to update profile'}));
+            dispatch(userActions.setError({error: e.response.data}));
         }
     }
 }

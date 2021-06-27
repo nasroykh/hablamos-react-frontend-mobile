@@ -22,9 +22,10 @@ const Contact = (props) => {
             break;
     }
 
-    let pictureUrl = `http://192.168.1.8:4444/users/${props.id}/picture?${Date.now()}`;
+    let pictureUrl = `https://fierce-inlet-31066.herokuapp.com/users/${props.id}/picture?${Date.now()}`;
+    // let pictureUrl = `http://192.168.1.8:4444/users/${props.id}/picture?${Date.now()}`;
     // let pictureUrl = `http://localhost:4444/users/${props.id}/picture`;
-
+    
     const selectedFriends = useSelector(state => state.user.selectedFriends);
 
     let isSelected = selectedFriends.includes(props.id);

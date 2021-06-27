@@ -11,7 +11,15 @@ export const signUp = (signUpInfos) => {
             dispatch(userActions.setIsLoading());
             
             let {username, email, password, firstName, lastName} = signUpInfos;
-            
+
+            if (username) {
+                username = username.trim();
+            }
+
+            if (!password.trim()) {
+                password = password.trim();
+            }
+
             let res = await axios.post('/users/signup', {
                 username,
                 email, 
@@ -29,9 +37,8 @@ export const signUp = (signUpInfos) => {
                 localStorage.setItem('username', res.data.user.username);
             }
 
-            console.log(res.data);
         } catch (e) {
-            dispatch(userActions.setError({error: 'Unable to signup, please verify your infos.'}));
+            dispatch(userActions.setError({error: e.response.data}));
         }
     }
 }
@@ -55,7 +62,7 @@ export const login = (loginInfos) => {
             }
 
         } catch (e) {
-            dispatch(userActions.setError({error: 'Unable to login, please verify your email/password.'}));
+            dispatch(userActions.setError({error: e.response.data}));
         }
     }
 }
@@ -76,7 +83,6 @@ export const logout = (token) => {
                 localStorage.setItem('userId', '');
             }
 
-            console.log(res.data);
         } catch (e) {
             dispatch(userActions.setError({error: 'Unable to logout, please refresh the page'}));
         }
@@ -102,11 +108,10 @@ export const checkAuth = (token) => {
                     throw new Error();
                 }
     
-                console.log(res.data);
             } 
 
         } catch (e) {
-            console.log('Error');
+        
         }
     }
 }

@@ -16,7 +16,6 @@ const Messages = (props) => {
     useEffect(() => {
         if (props.messages) {
             messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
-            console.log(messagesRef.current.scrollTop);
         }
     }, [props.messages]);
 

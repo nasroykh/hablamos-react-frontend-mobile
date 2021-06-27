@@ -30,7 +30,6 @@ const Convs = (props) => {
                 )
             })
         } else {
-            console.log('no convs')
             convsList = <li key='null' className={classes.NoConv}>No conversations</li>
         }
     } 

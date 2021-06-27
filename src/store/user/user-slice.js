@@ -198,6 +198,9 @@ const userSlice = createSlice({
             }
         },
         updateConvWithLastMessage(state, action) {
+
+            let convFound = false;
+
             for (let i = 0; i < state.convs.length; i++) {
                 if (state.convs[i]._id === action.payload.convId) {
                     state.convs[i].lastMessage[0] = {
@@ -208,28 +211,29 @@ const userSlice = createSlice({
                         message: action.payload.message ? action.payload.message : undefined,
                         file: action.payload.file ? action.payload.file : undefined
                     }
-                    break;
-                } else {
-                    state.convs.push({
-                        _id: action.payload.convId,
-                        participants: [
-                            {
-                                _id: action.payload._id,
-                                username: action.payload.username
-                            }
-                        ],
-                        lastMessage: [{
-                            seenBy: [],
-                            _id: Date.now(),
-                            sender: action.payload._id,
-                            sentAt: action.payload.sentAt,
-                            message: action.payload.message ? action.payload.message : undefined,
-                            file: action.payload.file ? action.payload.file : undefined
-                        }]
-                    });
-
-                    break;
                 }
+
+                convFound = true;
+            }
+
+            if (!convFound) {
+                state.convs.push({
+                    _id: action.payload.convId,
+                    participants: [
+                        {
+                            _id: action.payload._id,
+                            username: action.payload.username
+                        }
+                    ],
+                    lastMessage: [{
+                        seenBy: [],
+                        _id: Date.now(),
+                        sender: action.payload._id,
+                        sentAt: action.payload.sentAt,
+                        message: action.payload.message ? action.payload.message : undefined,
+                        file: action.payload.file ? action.payload.file : undefined
+                    }]
+                });
             }
 
             state.convs.sort((a, b) => {
