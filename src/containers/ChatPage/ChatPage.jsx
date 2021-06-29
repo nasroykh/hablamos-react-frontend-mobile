@@ -24,6 +24,7 @@ const ChatPage = (props) => {
 
     let conv = useSelector(state => state.user.selectedConv);
     let userId = useSelector(state => state.user._id);
+    let baseUrl = useSelector(state => state.user.baseUrl);
 
     const [convId, setConvId] = useState('');
     const [friendId, setFriendId] = useState('');
@@ -37,6 +38,7 @@ const ChatPage = (props) => {
 
     useEffect(() => {
         let query = location.search;
+        console.log(location)
         query = query.replace('?', '').split('=');
 
         
@@ -107,7 +109,7 @@ const ChatPage = (props) => {
             <div className={classes.ChatHeader}>
                 <h2>{conv.groupName ? conv.groupName : conv.friendUsername}</h2>
             </div>
-            <Messages messages={conv.messages} friendId={conv.participants} userId={userId}/>
+            <Messages baseUrl={baseUrl} messages={conv.messages} friendId={conv.participants} userId={userId}/>
             <form className={classes.ChatForm} onSubmit={sendMessageHandler}>
                 <label className={classes.FileSend}>
                     <FileIcon/>

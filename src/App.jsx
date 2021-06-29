@@ -4,7 +4,7 @@ import socketIOClient from "socket.io-client";
 import {Switch, Route, Redirect, useHistory} from 'react-router-dom'
 import { isMobile } from "react-device-detect";
 import {useSelector, useDispatch} from 'react-redux';
-import LoadingPage from './containers/LoadingPage/LoadingPage';
+// import LoadingPage from './containers/LoadingPage/LoadingPage';
 import LandingPage from './containers/LandingPage/LandingPage';
 import SignUpPage from './containers/SignUpPage/SignUpPage';
 import SignInPage from './containers/SignInPage/SignInPage';
@@ -15,10 +15,9 @@ import {userActions} from './store/user/user-slice';
 import DialogBox from './components/DialogBox/DialogBox';
 import LoadingSpinner from './elements/LoadingSpinner/LoadingSpinner';
 import BackDrop from './elements/BackDrop/BackDrop';
+import axios from 'axios';
 
-const ENDPOINT = "https://fierce-inlet-31066.herokuapp.com"; 
-// const ENDPOINT = "ws://localhost:4444"; 
-// const ENDPOINT = "ws://192.168.1.8:4444"; 
+const ENDPOINT = axios.defaults.baseURL; 
 export const socket = socketIOClient(ENDPOINT);
 
 const App = () => {
@@ -31,7 +30,7 @@ const App = () => {
 
 	const history = useHistory();
 
-	const [pageLoaded, setPageLoaded] = useState(false);
+	// const [pageLoaded, setPageLoaded] = useState(false);
 	const [sdShow, setSdShow] = useState(false);
 	const [bdShow, setBdShow] = useState(false);
 	const [tabMenuShow, setTabMenuShow] = useState(false);
@@ -79,11 +78,11 @@ const App = () => {
     }, [dispatch]);
 
 	useEffect(() => {
-		// if (!isMobile) {
-		// 	window.location.href = 'https://hablamos.me';
-		// } 
+		if (!isMobile) {
+			window.location.href = 'https://hablamos.me';
+		} 
 
-		window.addEventListener('load', pageLoadHandler);
+		// window.addEventListener('load', pageLoadHandler);
 
 		dispatch(checkAuth(localStorage.getItem('token')));
 
@@ -93,9 +92,9 @@ const App = () => {
 		
 	}, [dispatch])
 
-	const pageLoadHandler = () => {
-		setPageLoaded(true);
-	}
+	// const pageLoadHandler = () => {
+	// 	setPageLoaded(true);
+	// }
 
     const sdToggleHandler = () => {
         setBdShow(!bdShow);
@@ -174,7 +173,8 @@ const App = () => {
 				</Route>
 
 				<Route path='/'>
-					{pageLoaded ? (isAuth ? <Redirect to='/main/convs'/> : <LandingPage/>) : (<LoadingPage/>) }
+					{isAuth ? <Redirect to='/main/convs'/> : <LandingPage/>}
+					{/* {pageLoaded ? (isAuth ? <Redirect to='/main/convs'/> : <LandingPage/>) : (<LoadingPage/>) } */}
 				</Route>
 
 			</Switch>

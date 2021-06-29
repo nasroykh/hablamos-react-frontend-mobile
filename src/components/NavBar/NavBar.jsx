@@ -8,10 +8,9 @@ import pic from '../../assets/default-profile-pic.png';
 const NavBar = (props) => {
 
     const _id = useSelector(state => state.user._id);
+    const baseUrl = useSelector(state => state.user.baseUrl);
     
-    // let pictureUrl = `http://localhost:4444/users/${_id}/picture`;
-    // let pictureUrl = `http://192.168.1.8:4444/users/${_id}/picture?${Date.now()}`;
-    let pictureUrl = `https://fierce-inlet-31066.herokuapp.com/users/${_id}/picture?${Date.now()}`;
+    let pictureUrl = `${baseUrl}/users/${_id}/picture?${Date.now()}`;
     
     return (
         <div className={classes.NavBar}>

@@ -1,4 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
+import axios from '../../axios';
+
 
 const initialState = {
     _id: '',
@@ -17,7 +19,8 @@ const initialState = {
     isLoading: false,
     pictureUploaded: false,
     selectedFriends: [],
-    groupName: ''
+    groupName: '',
+    baseUrl: axios.defaults.baseURL
 }
 
 const userSlice = createSlice({

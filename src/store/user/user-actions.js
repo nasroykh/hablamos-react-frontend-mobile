@@ -14,8 +14,6 @@ export const fetchConvs = () => {
                 }));
             }
 
-            
-
         } catch (e) {
             dispatch(userActions.setLoadingDone());
             
@@ -208,7 +206,7 @@ export const sendMessage = (message, _id, friendId) => {
             
 
         } catch (e) {
-            dispatch(userActions.setError({error: e.response.data}));
+            dispatch(userActions.setError({error: e.response.data.toString()}));
         }
     }
 }

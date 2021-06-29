@@ -26,7 +26,8 @@ const Convs = (props) => {
                     name={conv.participants[0].username}
                     groupName={conv.groupName} 
                     lastMessage={conv.lastMessage[0]}
-                    seen={seen} />
+                    seen={seen}
+                    baseUrl={props.baseUrl} />
                 )
             })
         } else {

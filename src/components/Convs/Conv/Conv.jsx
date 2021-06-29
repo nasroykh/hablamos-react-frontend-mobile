@@ -5,8 +5,7 @@ import {Link} from 'react-router-dom';
 
 const Conv = (props) => {
 
-    // let pictureUrl = `http://192.168.1.8:4444/users/${props.groupName ? props.id : props.friendId}/picture?${Date.now()}`;
-    let pictureUrl = `https://fierce-inlet-31066.herokuapp.com/users/${props.groupName ? props.id : props.friendId}/picture?${Date.now()}`;
+    let pictureUrl = `${props.baseUrl}/users/${props.groupName ? props.id : props.friendId}/picture?${Date.now()}`;
     
     let lastMessage;
 

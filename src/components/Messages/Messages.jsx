@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
 import classes from './Messages.module.scss';
 import Message from './Message/Message';
 
@@ -10,8 +9,6 @@ const Messages = (props) => {
     let messagesRef = useRef();
 
     let isSeen;
-
-    let friends = useSelector(state => state.user.friends);
 
     useEffect(() => {
         if (props.messages) {
@@ -84,7 +81,8 @@ const Messages = (props) => {
                 id={message._id}
                 isFile={message.file ? true : false}
                 sender={message.sender}
-                seen={message.seenBy ? message.seenBy.length : false}/>
+                seen={message.seenBy ? message.seenBy.length : false}
+                baseUrl={props.baseUrl}/>
         )})
     } else {
         messagesList = <li key='notfound' className={classes.NoMessage}>Start a conversation by saying 'Hi!'</li>

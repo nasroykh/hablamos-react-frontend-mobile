@@ -45,7 +45,8 @@ const Tab = (props) => {
     let requests = useSelector(state => state.user.friendRequests);
     let selectedFriends = useSelector(state => state.user.selectedFriends);
     let selectedConv = useSelector(state => state.user.selectedConv);
-    let user = useSelector(state => state.user)
+    let user = useSelector(state => state.user);
+    let baseUrl = useSelector(state => state.user.baseUrl);
     
     useEffect(() => {
         switch (props.tabName) {
@@ -143,7 +144,7 @@ const Tab = (props) => {
                         <Button to='/main/convs/add' btnType='add-conv'/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.ConvsTab}` }>
-                        <Convs convs={convs}/>
+                        <Convs baseUrl={baseUrl} convs={convs}/>
                     </div>
                 </Auxiliary>
             );
@@ -158,7 +159,7 @@ const Tab = (props) => {
                         <Button to='/main/convs' btnType='back-btn'/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.ConvsTab}` }>
-                        <Contacts friends={friends} addConv />
+                        <Contacts baseUrl={baseUrl} friends={friends} addConv />
                     </div>
                 </Auxiliary>
             );
@@ -174,7 +175,7 @@ const Tab = (props) => {
                         <TabMenu friends tabMenuShow={props.tabMenuShow} tabMenuToggleHandler={props.tabMenuToggleHandler}/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.FriendsTab}` }>
-                        <Contacts friends={friends} />
+                        <Contacts baseUrl={baseUrl} friends={friends} />
                     </div>
                 </Auxiliary>
             );
@@ -189,7 +190,7 @@ const Tab = (props) => {
                     </div>
                     <div className={`${classes.TabBody} ${classes.AddContactTab}` }>
                         <FormInput type='search' placeholder='Enter username...' onChange={contactSearchHandler}/>
-                        <Contacts search friends={contacts} addContactHandler={addContactHandler} cancelAddContactHandler={cancelAddContactHandler}/>
+                        <Contacts baseUrl={baseUrl} search friends={contacts} addContactHandler={addContactHandler} cancelAddContactHandler={cancelAddContactHandler}/>
                     </div>
                 </Auxiliary>
             );
@@ -204,7 +205,7 @@ const Tab = (props) => {
                         <Button to='/main/friends' btnType='back-btn'/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.FriendsTab}` }>
-                        <Contacts friends={requests} requests acceptContactHandler={acceptContactHandler} refuseContactHandler={refuseContactHandler}/>
+                        <Contacts baseUrl={baseUrl} friends={requests} requests acceptContactHandler={acceptContactHandler} refuseContactHandler={refuseContactHandler}/>
                     </div>
                 </Auxiliary>
             );
@@ -235,7 +236,7 @@ const Tab = (props) => {
                         <Button to='/main/friends' btnType='back-btn'/>
                     </div>
                     <div className={`${classes.TabBody} ${classes.GroupTab}` }>
-                        <Contacts friends={friends} group addToGroupHandler={addToGroupHandler} isDarkMode={props.isDarkMode}/>
+                        <Contacts baseUrl={baseUrl} friends={friends} group addToGroupHandler={addToGroupHandler} isDarkMode={props.isDarkMode}/>
                         <Button btnType='primary' to='/main/friends/group/confirm'>Confirm</Button>
                     </div>
                 </Auxiliary>
@@ -266,8 +267,8 @@ const Tab = (props) => {
                     </div>
                     <div className={`${classes.TabBody} ${classes.ProfileTab}` }>
                         <div className={classes.ProfilePic}>
-                            {/* <img src={`http://192.168.1.8:4444/users/${user._id}/picture?${Date.now()}`} alt="Profile pic" loading='lazy' /> */}
-                            <img src={`https://fierce-inlet-31066.herokuapp.com/users/${user._id}/picture?${Date.now()}`} alt="Profile pic" loading='lazy' />
+                            <img src={`http://localhost:4444/users/${user._id}/picture?${Date.now()}`} alt="Profile pic" loading='lazy' />
+                            {/* <img src={`https://fierce-inlet-31066.herokuapp.com/users/${user._id}/picture?${Date.now()}`} alt="Profile pic" loading='lazy' /> */}
                             <h1>{user.username}</h1>
                             <label className={classes.PictureUpload}>
                                 <input type="file" accept='image/*' onChange={pictureChangeHandler}/>

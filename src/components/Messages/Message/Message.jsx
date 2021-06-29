@@ -4,17 +4,10 @@ import pic from '../../../assets/default-profile-pic.png';
 
 const Message = (props) => {
 
-    // let pictureUrl = `http://localhost:4444/users/${props.sender}/picture`;
-    // let pictureUrl = `http://192.168.1.8:4444/users/${props.sender}/picture?${Date.now()}`;
-    let pictureUrl = `https://fierce-inlet-31066.herokuapp.com/users/${props.sender}/picture?${Date.now()}`;
+    let pictureUrl = `${props.baseUrl}/users/${props.sender}/picture?${Date.now()}`;
 
-    // let fileUrl = `http://192.168.1.8:4444/convs/${props.id}/file`;
-    let fileUrl = `https://fierce-inlet-31066.herokuapp.com/convs/${props.id}/file`;
-    // let fileUrl = `http://localhost:4444/convs/${props.id}/file`;
+    let fileUrl = `${props.baseUrl}/convs/${props.id}/file`;
     
-
-    
-
     return (
         <li className={`${classes.Message} ${props.user ? classes.UserMessage : ''} ${props.isFile ? classes.FileMessage : ''}`}>
             {props.user ? null : <img src={pictureUrl} alt="Profile pic" loading='lazy'/>}

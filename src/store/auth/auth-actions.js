@@ -93,25 +93,25 @@ export const checkAuth = (token) => {
     return async (dispatch) => {
         try {
             let res;
-            // dispatch(userActions.setIsLoading());
-
+            
             if (token) {
+                dispatch(userActions.setIsLoading());
                 res = await axios.get('/users/check', {headers: {Authorization: localStorage.getItem('token')}});
                 if (res.status === 200) {
                     localStorage.setItem('token', res.data.token);
                     localStorage.setItem('userId', res.data.user._id);
                     localStorage.setItem('username', res.data.user.username);
-                dispatch(authActions.loggedIn({token: res.data.token}));
+                    dispatch(authActions.loggedIn({token: res.data.token}));
                     dispatch(userActions.loginSuccess({userInfos: res.data.user}));
                     socket.emit('socketid:save', res.data.user._id);
-            } else {
+                } else {
                     throw new Error();
                 }
     
             } 
 
         } catch (e) {
-        
+            dispatch(userActions.setLoadingDone());
         }
     }
 }

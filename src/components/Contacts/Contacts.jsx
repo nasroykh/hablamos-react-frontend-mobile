@@ -38,7 +38,8 @@ const Contacts = (props) => {
                     sent={friend.sent}
                     group={props.group}
                     addToGroupHandler={props.addToGroupHandler}
-                    isDarkMode={props.isDarkMode}/>
+                    isDarkMode={props.isDarkMode}
+                    baseUrl={props.baseUrl}/>
             )})
         } else {
             if (props.search) {
