@@ -15,7 +15,7 @@ import {userActions} from './store/user/user-slice';
 import DialogBox from './components/DialogBox/DialogBox';
 import LoadingSpinner from './elements/LoadingSpinner/LoadingSpinner';
 import BackDrop from './elements/BackDrop/BackDrop';
-import axios from 'axios';
+import axios from './axios';
 
 const ENDPOINT = axios.defaults.baseURL; 
 export const socket = socketIOClient(ENDPOINT);
